@@ -2,9 +2,9 @@
 
 Based off a fork from [osztenkurden](https://github.com/osztenkurden)
 
-## IMPORTANT
+# IMPORTANT
 
-# Hud and script changes are made for the school tournament, before starting change config.json
+## Hud and script changes are made for the school tournament, before starting change config.json
 
 # Examples
 
