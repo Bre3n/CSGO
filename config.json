@@ -1,0 +1,23 @@
+{
+  "GameStateIntegrationPort": 1337,
+  "ServerPort": 2626,
+  "SteamApiKey": "INSERT KEY HERE",
+  "PrintPlayerData": false,
+  "DisplayAvatars": true,
+  "DisplayPlayerAvatars": true,
+  "DisplayTeamFlags": false,
+  "DisplayPlayerFlags": true,
+  "AvatarDirectory": "./public/files/avatars/",
+  "SpecialEvent": "SHOWMATCH",
+  "LeftImage": "/files/league/miceklogo.png",
+  "LeftImage2": "/files/league/supearmiceklogo.png",
+  "LeftImage3": "/files/league/turniej_logo.png",
+  "LeftImage4": "/files/league/transparent.png",
+  "LeftImage5": "/files/league/transparent.png",
+  "LeftPrimary": "",
+  "LeftSecondary": "",
+  "RightImage": "/files/league/transparent.png",
+  "RightPrimary": "",
+  "RightSecondary": "",
+  "GSIToken": "120987"
+}
