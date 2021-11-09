@@ -555,7 +555,7 @@ function updateStatePaused(phase, type, previously) {
     $("#alert_middle #pole_1_middle").css("background-color", COLOR_NEW_T);
     $("#alert_middle #pole_2_middle").css("background-color", COLOR_NEW_T);
     $("#alert_middle #alert_text_middle")
-      .text(teams.left.side == "t" ? " PRZERWA" + teams.left.name.toUpperCase() : " PRZERWA" + teams.right.name.toUpperCase())
+      .text(teams.left.side == "t" ? " PRZERWA: " + teams.left.name.toUpperCase() : " PRZERWA: " + teams.right.name.toUpperCase())
       .css("color", COLOR_NEW_T);
     showAlertSlide("#left_team", teams.left.side == "t" ? COLOR_NEW_T : COLOR_NEW_CT, "Pozostałe przerwy: " + teams.left.timeouts_remaining);
     showAlertSlide("#right_team", teams.right.side == "t" ? COLOR_NEW_T : COLOR_NEW_CT, "Pozostałe przerwy: " + teams.right.timeouts_remaining);
@@ -574,7 +574,7 @@ function updateStatePaused(phase, type, previously) {
     $("#alert_middle #pole_1_middle").css("background-color", COLOR_NEW_CT);
     $("#alert_middle #pole_2_middle").css("background-color", COLOR_NEW_CT);
     $("#alert_middle #alert_text_middle")
-      .text(teams.left.side == "ct" ? " PRZERWA" + teams.left.name.toUpperCase() : " PRZERWA" + teams.right.name.toUpperCase())
+      .text(teams.left.side == "ct" ? " PRZERWA: " + teams.left.name.toUpperCase() : " PRZERWA: " + teams.right.name.toUpperCase())
       .css("color", COLOR_NEW_CT);
     showAlertSlide("#left_team", teams.left.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T, "Pozostały czas: " + teams.left.timeouts_remaining);
     showAlertSlide("#right_team", teams.right.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T, "Pozostały czas: " + teams.right.timeouts_remaining);
