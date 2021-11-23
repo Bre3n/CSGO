@@ -11,9 +11,9 @@
   "SpecialEvent": "SHOWMATCH",
   "LeftImage": "/files/league/miceklogo.png",
   "LeftImage2": "/files/league/supearmiceklogo.png",
-  "LeftImage3": "/files/league/turniej_logo.png",
-  "LeftImage4": "/files/league/transparent.png",
-  "LeftImage5": "/files/league/transparent.png",
+  "LeftImage3": "/files/league/kazik.png",
+  "LeftImage4": "/files/league/turniej_logo.png",
+
   "LeftPrimary": "",
   "LeftSecondary": "",
   "RightImage": "/files/league/transparent.png",

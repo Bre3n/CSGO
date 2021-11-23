@@ -974,7 +974,7 @@ body {
 }
 
 #players_left > #box_section > #box_top > #box_img > #box_image {
-  right: 15px;
+  right: 20px;
 }
 
 #box_image2 {
@@ -986,7 +986,7 @@ body {
 }
 
 #players_left > #box_section > #box_top > #box_img2 > #box_image2 {
-  right: 25px;
+  right: 50px;
 }
 
 #box_image3 {
@@ -998,7 +998,7 @@ body {
 }
 
 #players_left > #box_section > #box_top > #box_img3 > #box_image3 {
-  right: 35px;
+  right: 80px;
 }
 
 #box_image4 {
@@ -1010,19 +1010,7 @@ body {
 }
 
 #players_left > #box_section > #box_top > #box_img4 > #box_image4 {
-  right: 45px;
-}
-
-#box_image5 {
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  top: 10px;
-  opacity: 0.5;
-}
-
-#players_left > #box_section > #box_top > #box_img5 > #box_image5 {
-  right: 55px;
+  right: 110px;
 }
 
 #box_main {

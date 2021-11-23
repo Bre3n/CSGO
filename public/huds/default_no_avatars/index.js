@@ -173,7 +173,6 @@ function updateLeague() {
   $("#players_left #box_image2").attr("src", _left_image2);
   $("#players_left #box_image3").attr("src", _left_image3);
   $("#players_left #box_image4").attr("src", _left_image4);
-  $("#players_left #box_image5").attr("src", _left_image5);
   $("#players_left #main_primary").text(_left_primary);
   $("#players_left #main_secondary").text(_left_secondary);
   $("#players_right #box_image").attr("src", _right_image);

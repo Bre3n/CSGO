@@ -26,7 +26,6 @@ module.exports = {
       config.LeftImage2 = "";
       config.LeftImage3 = "";
       config.LeftImage4 = "";
-      config.LeftImage5 = "";
       config.LeftPrimary = "";
       config.LeftSecondary = "";
       config.RightImage = "";
@@ -164,7 +163,6 @@ module.exports = {
         left_image2: config.LeftImage2,
         left_image3: config.LeftImage3,
         left_image4: config.LeftImage4,
-        left_image5: config.LeftImage5,
         left_primary: config.LeftPrimary,
         left_secondary: config.LeftSecondary,
         right_image: config.RightImage,
