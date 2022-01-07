@@ -6,7 +6,7 @@ body {
   padding: 0;
   font-family: "Manjari", sans-serif;
   color: #fafafa;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: #808080;
 }
 
 #top_panel {
@@ -974,7 +974,7 @@ body {
 }
 
 #players_left > #box_section > #box_top > #box_img > #box_image {
-  right: 20px;
+  right: 60px;
 }
 
 #box_image2 {
@@ -986,7 +986,7 @@ body {
 }
 
 #players_left > #box_section > #box_top > #box_img2 > #box_image2 {
-  right: 50px;
+  right: 105px;
 }
 
 #box_image3 {
@@ -998,19 +998,7 @@ body {
 }
 
 #players_left > #box_section > #box_top > #box_img3 > #box_image3 {
-  right: 80px;
-}
-
-#box_image4 {
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  top: 10px;
-  opacity: 0.5;
-}
-
-#players_left > #box_section > #box_top > #box_img4 > #box_image4 {
-  right: 110px;
+  right: 140px;
 }
 
 #box_main {

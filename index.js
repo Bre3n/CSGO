@@ -215,4 +215,5 @@ server = http.createServer((req, res) => {
 function update(json) {
   io.emit("update", json);
 }
+
 server.listen(config.GameStateIntegrationPort);
