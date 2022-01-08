@@ -4,7 +4,7 @@ Based off a fork from [osztenkurden](https://github.com/osztenkurden)
 
 # IMPORTANT
 
-## Hud and script changes are made for the school tournament, before starting change config.json
+## Before starting change config.json
 
 # Examples
 
