@@ -1,7 +1,7 @@
-const COLOR_CT = "rgba(87, 136, 168, 1.0)";
-const COLOR_T = "rgba(193, 149, 17, 1.0)";
-const COLOR_NEW_CT = "rgba(90, 184, 244, 1.0)";
-const COLOR_NEW_T = "rgba(240, 201, 65, 1.0)";
+const COLOR_CT = "rgba(60, 137, 253, 1.0)";
+const COLOR_T = "rgba(255, 53, 134, 1.0)";
+const COLOR_NEW_CT = "rgba(0, 102, 255, 1.0)";
+const COLOR_NEW_T = "rgba(255, 0, 102, 1.0)";
 const COLOR_RED = "rgba(242, 34, 34, 1.0)";
 const COLOR_MAIN_PANEL = "rgba(12, 15, 18, 0.75)";
 const COLOR_SUB_PANEL = "rgba(12, 15, 18, 0.6)";

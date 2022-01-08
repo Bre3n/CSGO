@@ -17,6 +17,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   background-color: var(--main-panel-color);
+  border-radius: 12px;
 }
 
 #left_team {
@@ -47,6 +48,7 @@ body {
   overflow: hidden;
   white-space: nowrap;
   color: var(--dev-purple);
+  border-radius: 10px;
 }
 
 #left_team #main {
@@ -137,7 +139,7 @@ body {
   text-align: center;
   vertical-align: text-bottom;
   line-height: 80px;
-  font-size: 30px;
+  font-size: 50px;
   font-weight: bold;
 }
 
@@ -168,6 +170,7 @@ body {
   height: 10px;
   background-color: var(--white-dull);
   opacity: 0;
+  border-radius: 3px;
 }
 
 .block1 {
@@ -905,6 +908,7 @@ body {
   width: 100%;
   height: 70px;
   background-color: var(--main-panel-color);
+  border-radius: 10px;
 }
 
 #box_img {
@@ -1059,6 +1063,7 @@ body {
   margin-top: 5px;
   background-color: var(--main-panel-color);
   display: none;
+  border-radius: 10px;
 }
 
 .box_heading {
@@ -1295,6 +1300,7 @@ body {
   margin-top: 5px;
   background-color: var(--main-panel-color);
   display: none;
+  border-radius: 10px;
 }
 
 .box_equip_value {
@@ -1420,32 +1426,24 @@ body {
 }
 
 .loss_1 {
-  width: 10px;
-  height: 14px;
   top: 10px;
   position: relative;
   background-color: var(--white-dull);
 }
 
 .loss_2 {
-  width: 10px;
-  height: 14px;
   top: 8px;
   position: relative;
   background-color: var(--white-dull);
 }
 
 .loss_3 {
-  width: 10px;
-  height: 14px;
   top: 6px;
   position: relative;
   background-color: var(--white-dull);
 }
 
 .loss_4 {
-  width: 10px;
-  height: 14px;
   top: 4px;
   position: relative;
   background-color: var(--white-dull);
@@ -1455,14 +1453,20 @@ body {
 #players_left .loss_2,
 #players_left .loss_3,
 #players_left .loss_4 {
-  left: 0px;
+  left: 10px;
+  border-radius: 2px;
+  width: 14px;
+  height: 14px;
 }
 
 #players_right .loss_1,
 #players_right .loss_2,
 #players_right .loss_3,
 #players_right .loss_4 {
-  left: 10px;
+  left: 0px;
+  border-radius: 2px;
+  width: 14px;
+  height: 14px;
 }
 
 #player1,
@@ -1507,10 +1511,13 @@ body {
 
 #players_left .player_section_top {
   left: 5px;
+  border-radius: 0px 10px 0px 0px;
+
 }
 
 #players_right .player_section_top {
   right: 5px;
+  border-radius: 10px 0px 0px 0px;
 }
 
 .player_health_bar {
@@ -1521,10 +1528,12 @@ body {
 
 #players_right .player_health_bar {
   float: right;
+  border-radius: 10px 0px 0px 00px;
 }
 
 #players_left .player_health_bar {
   float: left;
+  border-radius: 0px 10px 0px 0px;
 }
 
 .player_health {
@@ -1642,11 +1651,11 @@ body {
 }
 
 #players_left #player_weapon_primary_img {
-  right: 0;
+  right: 10;
 }
 
 #players_right #player_weapon_primary_img {
-  left: 0;
+  left: 10;
 }
 
 .player_section_bottom {
@@ -1659,10 +1668,12 @@ body {
 
 #players_left .player_section_bottom {
   left: 5px;
+  border-radius: 0px 0px 10px 0px;
 }
 
 #players_right .player_section_bottom {
   left: 5px;
+  border-radius: 0px 0px 0px 10px;
 }
 
 .player_armor {
@@ -1886,11 +1897,11 @@ body {
 }
 
 #players_left #player_weapon_secondary_img {
-  right: 0;
+  right: 10;
 }
 
 #players_right #player_weapon_secondary_img {
-  left: 0;
+  left: 10;
 }
 
 .player_hindered {
