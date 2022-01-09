@@ -268,6 +268,7 @@ body {
   width: 355px;
   height: 40px;
   background-color: var(--sub-panel-color);
+  border-radius: 0px 0px 15px 15px;
 }
 
 #left_team > #alert {
@@ -308,13 +309,22 @@ body {
   float: right;
 }
 
-#alert_pole_left,
+#alert_pole_left {
+  position: absolute;
+  width: 5px;
+  height: 25px;
+  top: 0px;
+  background-color: var(--dev-purple);
+  border-radius: 0px 0px 0px 5px;
+}
+
 #alert_pole_right {
   position: absolute;
   width: 5px;
-  height: 30px;
-  top: 5px;
+  height: 25px;
+  top: 0px;
   background-color: var(--dev-purple);
+  border-radius: 0px 0px 5px 0px;
 }
 
 #right_team > #alert > #alert_pole_left {
