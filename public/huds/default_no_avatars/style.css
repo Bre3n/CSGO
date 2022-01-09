@@ -216,6 +216,7 @@ body {
   float: left;
   width: 120;
   height: 70px;
+  background-color: rgba(12, 15, 18, 0.4);
 }
 
 #round_timer {
