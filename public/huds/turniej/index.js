@@ -605,11 +605,12 @@ function fillObserved(obs) {
   $("#obs_lane3_left_pole").css("background-color", team_color);
   $("#obs_lane3_right_pole").css("background-color", team_color);
   //#endregion
-  if (obs.name >= 13) {
-    var bufor = obs.name
-    obs.name = bufor.match(/.{1,3}/g)
+  var bufor = obs.name
+  if (bufor.length >= 13) {
+    
+    bufor = bufor.substring(0, 13) + "...";
   }
-  $("#obs_alias_text").text(obs.name);
+  $("#obs_alias_text").text(bufor.toUpperCase());
   $("#obs_alias_text").css("color", team_color);
   if (obs.real_name && obs.real_name != obs.name) {
     $("#obs_realname_text").text(obs.real_name);
@@ -818,12 +819,12 @@ function fillPlayer(player, nr, side, observed, phase, previously) {
   $top.find("#player_alias_text").css("color", dead ? COLOR_WHITE_HALF : COLOR_WHITE);
 
   if (slot >= 1 && slot <= 5) {
-    $top.find("#player_alias_text").text(player.name);
+    $top.find("#player_alias_text").text(player.name.toUpperCase());
   } else {
     if (slot == 10) {
-      $top.find("#player_alias_text").text(player.name);
+      $top.find("#player_alias_text").text(player.name.toUpperCase());
     } else {
-      $top.find("#player_alias_text").text(player.name);
+      $top.find("#player_alias_text").text(player.name.toUpperCase());
     }
   }
 
