@@ -6,7 +6,7 @@ body {
   padding: 0;
   font-family: "Manjari", sans-serif;
   color: #fafafa;
-  background-color: rgba(128,128,128,0);
+  background-color: rgba(128, 128, 128, 0);
 }
 
 #top_panel {
@@ -597,7 +597,7 @@ body {
   position: absolute;
   left: 0px;
   background-color: var(--main-panel-color);
-  border-radius: 8px 0px 0px 8px;
+  border-radius: 7px 0px 0px 7px;
 }
 
 #obs_health_section {
@@ -810,7 +810,7 @@ body {
   position: absolute;
   left: 480px;
   background-color: var(--main-panel-color);
-  border-radius: 0px 8px 8px 0px;
+  border-radius: 0px 7px 7px 0px;
 }
 
 #obs_bullets_section {
@@ -1523,13 +1523,12 @@ body {
 
 #players_left .player_section_top {
   left: 5px;
-  border-radius: 0px 10px 0px 0px;
-
+  border-radius: 7px 10px 0px 0px;
 }
 
 #players_right .player_section_top {
   right: 5px;
-  border-radius: 10px 0px 0px 0px;
+  border-radius: 10px 7px 0px 0px;
 }
 
 .player_health_bar {
@@ -1540,12 +1539,12 @@ body {
 
 #players_right .player_health_bar {
   float: right;
-  border-radius: 10px 0px 0px 00px;
+  border-radius: 10px 7px 0px 0px;
 }
 
 #players_left .player_health_bar {
   float: left;
-  border-radius: 0px 10px 0px 0px;
+  border-radius: 7px 10px 0px 0px;
 }
 
 .player_health {
@@ -1680,12 +1679,12 @@ body {
 
 #players_left .player_section_bottom {
   left: 5px;
-  border-radius: 0px 0px 10px 0px;
+  border-radius: 0px 0px 10px 7px;
 }
 
 #players_right .player_section_bottom {
   left: 5px;
-  border-radius: 0px 0px 0px 10px;
+  border-radius: 0px 0px 7px 10px;
 }
 
 .player_armor {
@@ -2742,7 +2741,7 @@ body {
 }
 
 :root {
-  --main-panel-color: rgba(12, 15, 18, 0.6);
+  --main-panel-color: rgba(12, 15, 18, 0.7);
   --sub-panel-color: rgba(12, 15, 18, 0.6);
   --white-dull: rgba(250, 250, 250, 0.25);
   --white-full: rgba(250, 250, 250, 1);
