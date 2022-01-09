@@ -4,7 +4,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   color: #fafafa;
   background-color: rgba(128, 128, 128, 0);
 }
@@ -38,7 +38,8 @@ body {
   position: relative;
   width: 310px;
   height: 70px;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 1px;
   text-align: center;
   vertical-align: text-bottom;
   line-height: 80px;
@@ -136,7 +137,7 @@ body {
   position: relative;
   width: 70px;
   height: 70px;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: center;
   vertical-align: text-bottom;
   line-height: 80px;
@@ -234,7 +235,7 @@ body {
   position: relative;
   width: 120px;
   height: 70px;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Exo 2', sans-serif;
   text-align: center;
   vertical-align: text-bottom;
   line-height: 70px;
@@ -254,7 +255,7 @@ body {
   float: left;
   width: 120px;
   height: 20px;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Exo 2', sans-serif;
   text-align: center;
   vertical-align: text-bottom;
   line-height: 24px;
@@ -293,7 +294,7 @@ body {
   position: relative;
   width: 355px;
   height: 40px;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: center;
   vertical-align: text-bottom;
   line-height: 44px;
@@ -477,7 +478,7 @@ body {
   float: left;
   width: 260px;
   height: 40px;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: center;
   vertical-align: text-bottom;
   line-height: 46px;
@@ -575,11 +576,11 @@ body {
   height: 32px;
   position: relative;
   left: 5px;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Roboto', sans-serif;
   text-align: center;
   vertical-align: text-bottom;
   line-height: 56px;
-  font-size: 22px;
+  font-size: 25px;
   font-weight: bold;
   text-overflow: ellipsis;
   overflow: visible;
@@ -592,7 +593,7 @@ body {
   height: 18px;
   position: relative;
   left: 5px;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: center;
   vertical-align: text-bottom;
   line-height: 28px;
@@ -668,7 +669,7 @@ body {
   position: relative;
   left: 34px;
   top: -20px;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Roboto', sans-serif;
   text-align: left;
   vertical-align: text-bottom;
   line-height: 36px;
@@ -698,7 +699,7 @@ body {
   position: relative;
   left: 32px;
   top: -20px;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Roboto', sans-serif;
   text-align: left;
   vertical-align: text-bottom;
   line-height: 36px;
@@ -745,7 +746,7 @@ body {
   position: absolute;
   top: 0px;
   left: 20px;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: left;
   vertical-align: text-bottom;
   line-height: 36px;
@@ -785,7 +786,7 @@ body {
   height: 30px;
   position: relative;
   top: 10px;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Roboto', sans-serif;
   text-align: right;
   vertical-align: text-bottom;
   line-height: 36px;
@@ -802,7 +803,7 @@ body {
   position: relative;
   left: 24px;
   top: -20px;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: left;
   vertical-align: text-bottom;
   line-height: 36px;
@@ -881,8 +882,7 @@ body {
   height: 30px;
   position: absolute;
   left: 15px;
-
-  font-family: "Manjari", sans-serif;
+  font-family: 'Roboto', sans-serif;
   text-align: right;
   vertical-align: text-bottom;
   line-height: 36px;
@@ -896,8 +896,7 @@ body {
   height: 30px;
   position: absolute;
   left: 48px;
-
-  font-family: "Manjari", sans-serif;
+  font-family: 'Roboto', sans-serif;
   text-align: left;
   vertical-align: text-bottom;
   line-height: 36px;
@@ -1068,7 +1067,7 @@ body {
   height: 50%;
   left: 10px;
   position: relative;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: left;
   vertical-align: text-bottom;
   line-height: 48px;
@@ -1089,7 +1088,7 @@ body {
   height: 50%;
   left: 10px;
   position: relative;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: left;
   vertical-align: text-bottom;
   line-height: 34px;
@@ -1100,7 +1099,7 @@ body {
 
 #players_right > #box_section > #box_top > #box_main {
   right: 10px;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: center;
   vertical-align: text-bottom;
   line-height: 76px;
@@ -1125,7 +1124,7 @@ body {
 }
 
 #box_heading_text {
-  font-family: "Manjari", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: center;
   vertical-align: text-bottom;
   line-height: 23px;
@@ -1136,7 +1135,7 @@ body {
 }
 
 #box_heading_subtext {
-  font-family: "Manjari", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: left;
   vertical-align: text-bottom;
   line-height: 23px;
@@ -1250,7 +1249,7 @@ body {
 #util_nade_1_count {
   height: 50px;
   width: 45px;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: left;
   vertical-align: text-bottom;
   line-height: 56px;
@@ -1281,7 +1280,7 @@ body {
 #util_nade_2_count {
   height: 50px;
   width: 45px;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: left;
   vertical-align: text-bottom;
   line-height: 56px;
@@ -1312,7 +1311,7 @@ body {
 #util_nade_3_count {
   height: 50px;
   width: 45px;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: left;
   vertical-align: text-bottom;
   line-height: 56px;
@@ -1343,7 +1342,7 @@ body {
 #util_nade_4_count {
   height: 50px;
   width: 45px;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: left;
   vertical-align: text-bottom;
   line-height: 56px;
@@ -1378,7 +1377,7 @@ body {
 }
 
 #equip_text {
-  font-family: "Manjari", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: center;
   vertical-align: text-bottom;
   line-height: 40px;
@@ -1389,7 +1388,7 @@ body {
 }
 
 #equip_value {
-  font-family: "Manjari", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: center;
   vertical-align: text-bottom;
   line-height: 20px;
@@ -1400,7 +1399,7 @@ body {
 }
 
 #money_text {
-  font-family: "Manjari", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: center;
   vertical-align: text-bottom;
   line-height: 40px;
@@ -1411,7 +1410,7 @@ body {
 }
 
 #money_value {
-  font-family: "Manjari", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: center;
   vertical-align: text-bottom;
   line-height: 20px;
@@ -1616,7 +1615,7 @@ body {
 }
 
 #player_health_text {
-  font-family: "Manjari", sans-serif;
+  font-family: 'Roboto', sans-serif;
   vertical-align: text-bottom;
   line-height: 40px;
   font-size: 20px;
@@ -1663,7 +1662,7 @@ body {
 }
 
 #player_alias_text {
-  font-family: "Manjari", sans-serif;
+  font-family: 'Roboto', sans-serif;
   vertical-align: text-bottom;
   line-height: 40px;
   font-size: 20px;
@@ -1795,7 +1794,7 @@ body {
 }
 
 #player_current_money_text {
-  font-family: "Manjari", sans-serif;
+  font-family: 'Roboto', sans-serif;
   vertical-align: text-bottom;
   line-height: 42px;
   font-size: 18px;
@@ -1844,10 +1843,10 @@ body {
 }
 
 #player_round_kills_text {
-  font-family: "Manjari", sans-serif;
+  font-family: 'Roboto', sans-serif;
   vertical-align: text-bottom;
   line-height: 42px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: normal;
   position: relative;
   color: var(--white-full);
@@ -2093,7 +2092,7 @@ body {
   width: 32px;
   height: 35px;
   position: relative;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Roboto', sans-serif;
   text-align: center;
   vertical-align: text-bottom;
   line-height: 42px;
@@ -2108,7 +2107,7 @@ body {
   width: 32px;
   height: 35px;
   position: relative;
-  font-family: "Manjari", sans-serif;
+  font-family: 'Roboto', sans-serif;
   text-align: center;
   vertical-align: text-bottom;
   line-height: 40px;
