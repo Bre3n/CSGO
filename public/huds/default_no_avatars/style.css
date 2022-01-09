@@ -590,6 +590,7 @@ body {
   left: -5px;
   bottom: 5px;
   background-color: var(--dev-purple);
+  border-radius: 10px 0px 0px 10px;
 }
 
 #obs_left_section {
@@ -867,6 +868,7 @@ body {
   left: 620px;
   bottom: 5px;
   background-color: var(--dev-purple);
+  border-radius: 0px 10px 10px 0px;
 }
 
 #players_left {
@@ -1513,6 +1515,11 @@ body {
 
 #players_right .player_side_bar {
   left: 400px;
+  border-radius: 0px 10px 10px 0px;
+}
+
+#players_left .player_side_bar {
+  border-radius: 10px 0px 0px 10px;
 }
 
 .player_section_top {
