@@ -463,6 +463,7 @@ body {
 
   animation-duration: 0.5s;
   animation-iteration-count: 1;
+  border-radius: 7px;
 }
 
 #pole_1_middle {
@@ -520,7 +521,6 @@ body {
   background-position: center;
 
   animation: headShake 1.7s;
-
   animation-iteration-count: infinite;
 }
 
@@ -1656,6 +1656,7 @@ body {
   position: relative;
   left: 3px;
   top: 5px;
+  animation-iteration-count: infinite;
 }
 
 #players_right #player_health_img {
@@ -1665,6 +1666,7 @@ body {
   position: relative;
   right: 3px;
   top: 5px;
+  animation-iteration-count: infinite;
 }
 
 .player_alias {
@@ -2448,6 +2450,8 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+  animation: heartBeat 0.5s;
+  animation-iteration-count: infinite;
 }
 
 .health_CT {
@@ -2457,6 +2461,8 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+  animation: heartBeat 0.5s;
+  animation-iteration-count: infinite;
 }
 
 .health_T {
@@ -2466,6 +2472,8 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+  animation: heartBeat 0.5s;
+  animation-iteration-count: infinite;
 }
 
 .health_full_default {
