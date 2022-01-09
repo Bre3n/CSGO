@@ -552,6 +552,7 @@ function updateStatePaused(phase, type, previously) {
         .css("color", COLOR_NEW_T);
     }
     $("#alert_middle #pole_1_middle").css("background-color", COLOR_NEW_T);
+    $("#alert_middle #pole_2_middle").css("background-color", COLOR_NEW_T);
     $("#alert_middle #alert_text_middle_2_middle").css("background-color", COLOR_NEW_T);
     $("#alert_middle #alert_text_middle #pole_1_middle_img").css("background-image", "url(/files/img/elements/icon_timer_default.png)");
     $("#alert_middle #alert_text_middle #alert_text_middle_2")
@@ -572,6 +573,7 @@ function updateStatePaused(phase, type, previously) {
         .css("color", COLOR_NEW_CT);
     }
     $("#alert_middle #pole_1_middle").css("background-color", COLOR_NEW_CT);
+    $("#alert_middle #pole_2_middle").css("background-color", COLOR_NEW_CT);
     $("#alert_middle #alert_text_middle #pole_1_middle_img").css("background-image", "url(/files/img/elements/icon_timer_default.png)");
     $("#alert_middle #pole_2_middle").css("background-color", COLOR_NEW_CT);
     $("#alert_middle #alert_text_middle #alert_text_middle_2")
@@ -895,13 +897,13 @@ function fillPlayer(player, nr, side, observed, phase, previously) {
     $player.find("#player_spec_bar").css("opacity", 0);
   }
 
-  // let desired = "linear-gradient(to " + side.substr(8) + ", " + health_color + ", " + alt_health_color + ")";
+  //let desired = "linear-gradient(to " + side.substr(8) + ", " + health_color + ", " + alt_health_color + ")";
   // ! gradient_double works in browser but not on the overlay
-  // let gradient_double = "linear-gradient(to " + side.substr(8) + ", rgba(0,0,0,0) " + (100 - stats.health) + "%, " + health_color + "0% " + (50 - stats.health) + "%" + ", " + alt_health_color + " 100%)";
+  let gradient_double = "linear-gradient(to " + side.substr(8) + ", rgba(0,0,0,0) " + (100 - stats.health) + "%, " + health_color + "0% " + (50 - stats.health) + "%" + ", " + alt_health_color + " 100%)";
   // ! gradient_single works in browser and on the overlay
-  let gradient_single = "linear-gradient(to " + side.substr(8) + ", rgba(0,0,0,0) " + (100 - stats.health) + "%, " + alt_health_color + " " + (100 - stats.health) + "%)";
+  //let gradient_single = "linear-gradient(to " + side.substr(8) + ", rgba(0,0,0,0) " + (100 - stats.health) + "%, " + alt_health_color + " " + (100 - stats.health) + "%)";
 
-  $top.find(".player_health_bar").css("background", gradient_single);
+  $top.find(".player_health_bar").css("background", gradient_double);
   $top.find("#player_health_text").text(stats.health);
   $top.find("#player_health_img").removeClass();
   if (stats.health < 40) {
