@@ -584,7 +584,11 @@ body {
   width: 100%;
   height: 50px;
   background-color: rgba(12, 15, 18, 0.5);
+<<<<<<< HEAD
   border-radius: 7px 7px 7px 7px;
+=======
+  border-radius: 7px;
+>>>>>>> bb62ce0c8c2258324795cf12068df9d88d551e77
 }
 
 #obs_lane3_left_pole {
@@ -2118,10 +2122,12 @@ body {
 
 #players_left .player_stats_holder {
   left: 405px;
+  border-radius: 0px 13px 13px 0px;
 }
 
 #players_right .player_stats_holder {
   right: 405px;
+  border-radius: 13px 0px 0px 13px;
 }
 
 .player_stats {
