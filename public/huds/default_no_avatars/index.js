@@ -1161,12 +1161,22 @@ function hideAlertSlide(side) {
 }
 
 function showMiddleAlert(pole_left_color, pole_right_color, text, text_color) {
-  $("#alert_middle #pole_1_middle").css("background-color", pole_left_color);
-  $("#alert_middle #pole_2_middle").css("background-color", pole_right_color);
-  $("#alert_middle #alert_text_middle")
-    .text(text)
-    .css("color", text_color);
-  executeAnim("#alert_middle", "fadeInUp", 3000, "fadeOut");
+  if (text == "BOMBA PODŁOŻONA") {
+    $("#bomb_planted").css("background-color", rgba(0, 0, 0, 0));
+    $("#alert_middle #pole_1_middle").css("background-color", pole_left_color);
+    $("#alert_middle #pole_2_middle").css("background-color", pole_right_color);
+    $("#alert_middle #alert_text_middle")
+      .text(text)
+      .css("color", text_color);
+    executeAnim("#alert_middle", "fadeInUp", 5000, "fadeOut");
+  } else {
+    $("#alert_middle #pole_1_middle").css("background-color", pole_left_color);
+    $("#alert_middle #pole_2_middle").css("background-color", pole_right_color);
+    $("#alert_middle #alert_text_middle")
+      .text(text)
+      .css("color", text_color);
+    executeAnim("#alert_middle", "fadeInUp", 5000, "fadeOut");
+  }
 }
 
 function forceRemoveAlerts() {
