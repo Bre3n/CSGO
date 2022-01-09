@@ -460,6 +460,13 @@ body {
   float: left;
   width: 300px;
   height: 40px;
+}
+
+#alert_text_middle_2 {
+  position: relative;
+  float: left;
+  width: 260px;
+  height: 40px;
   font-family: "Manjari", sans-serif;
   text-align: center;
   vertical-align: text-bottom;
@@ -467,6 +474,30 @@ body {
   font-size: 18px;
   font-weight: normal;
   color: var(--dev-purple);
+}
+
+#pole_1_middle_img {
+  position: relative;
+  float: left;
+  top:2.5px;
+  width: 35px;
+  height: 35px;
+  vertical-align: text-bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  animation: headShake 1.7s;
+
+  animation-iteration-count: infinite;
+}
+
+.notransparent{
+  opacity:1;
+}
+
+.transparent {
+  opacity: 0;
 }
 
 #observed {
@@ -2762,19 +2793,6 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-}
-
-#bomb_planted {
-  background-image: url("/files/img/elements/icon_bomb_default.png");
-  max-width: 10px;
-  max-height: 10px;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-
-  animation: shakee 5s;
-
-  animation-iteration-count: infinite;
 }
 
 @keyframes shakee {

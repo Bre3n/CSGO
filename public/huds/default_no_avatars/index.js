@@ -530,12 +530,13 @@ function updateStatePaused(phase, type, previously) {
   resetBomb();
   $("#players_left #box_utility").slideDown(500);
   $("#players_right #box_utility").slideDown(500);
+  $("#alert_middle #alert_text_middle #pole_1_middle_img").css("background-image", "url(/files/img/elements/icon_timer_default.png)");
   $("#alert_middle").removeClass();
   if (type == "paused") {
     if (checkPrev(previously, "freezetime") || checkPrev(previously, "live") || checkPrev(previously, "defuse") || checkPrev(previously, "bomb")) animateRoundTimer("pause_active", false);
     $("#alert_middle #pole_1_middle").css("background-color", teams.left.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T);
     $("#alert_middle #pole_2_middle").css("background-color", teams.right.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T);
-    $("#alert_middle #alert_text_middle")
+    $("#alert_middle #alert_text_middle #alert_text_middle_2")
       .text("MATCH PAUSED")
       .css("color", COLOR_WHITE);
   } else if (type == "timeout_t") {
@@ -551,8 +552,9 @@ function updateStatePaused(phase, type, previously) {
         .css("color", COLOR_NEW_T);
     }
     $("#alert_middle #pole_1_middle").css("background-color", COLOR_NEW_T);
-    $("#alert_middle #pole_2_middle").css("background-color", COLOR_NEW_T);
-    $("#alert_middle #alert_text_middle")
+    $("#alert_middle #alert_text_middle_2_middle").css("background-color", COLOR_NEW_T);
+    $("#alert_middle #alert_text_middle #pole_1_middle_img").css("background-image", "url(/files/img/elements/icon_timer_default.png)");
+    $("#alert_middle #alert_text_middle #alert_text_middle_2")
       .text(teams.left.side == "t" ? " PRZERWA: " + teams.left.name.toUpperCase() : " PRZERWA: " + teams.right.name.toUpperCase())
       .css("color", COLOR_NEW_T);
     showAlertSlide("#left_team", teams.left.side == "t" ? COLOR_NEW_T : COLOR_NEW_CT, "Pozostałe przerwy: " + teams.left.timeouts_remaining);
@@ -570,8 +572,9 @@ function updateStatePaused(phase, type, previously) {
         .css("color", COLOR_NEW_CT);
     }
     $("#alert_middle #pole_1_middle").css("background-color", COLOR_NEW_CT);
+    $("#alert_middle #alert_text_middle #pole_1_middle_img").css("background-image", "url(/files/img/elements/icon_timer_default.png)");
     $("#alert_middle #pole_2_middle").css("background-color", COLOR_NEW_CT);
-    $("#alert_middle #alert_text_middle")
+    $("#alert_middle #alert_text_middle #alert_text_middle_2")
       .text(teams.left.side == "ct" ? " PRZERWA: " + teams.left.name.toUpperCase() : " PRZERWA: " + teams.right.name.toUpperCase())
       .css("color", COLOR_NEW_CT);
     showAlertSlide("#left_team", teams.left.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T, "Pozostały czas: " + teams.left.timeouts_remaining);
@@ -1161,23 +1164,15 @@ function hideAlertSlide(side) {
 }
 
 function showMiddleAlert(pole_left_color, pole_right_color, text, text_color) {
-  if (text == "BOMBA PODŁOŻONA") {
-    $("#bomb_planted").css("background-color", rgba(0, 0, 0, 0));
-    $("#alert_middle #pole_1_middle").css("background-color", pole_left_color);
-    $("#alert_middle #pole_2_middle").css("background-color", pole_right_color);
-    $("#alert_middle #alert_text_middle")
-      .text(text)
-      .css("color", text_color);
-    executeAnim("#alert_middle", "fadeInUp", 5000, "fadeOut");
-  } else {
-    $("#alert_middle #pole_1_middle").css("background-color", pole_left_color);
-    $("#alert_middle #pole_2_middle").css("background-color", pole_right_color);
-    $("#alert_middle #alert_text_middle")
-      .text(text)
-      .css("color", text_color);
-    executeAnim("#alert_middle", "fadeInUp", 5000, "fadeOut");
-  }
+  $("#alert_middle #alert_text_middle #pole_1_middle_img").css("background-image", "url(/files/img/elements/icon_bomb_default.png)");
+  $("#alert_middle #pole_1_middle").css("background-color", pole_left_color);
+  $("#alert_middle #pole_2_middle").css("background-color", pole_right_color);
+  $("#alert_middle #alert_text_middle #alert_text_middle_2")
+    .text(text)
+    .css("color", text_color);
+  executeAnim("#alert_middle", "fadeInUp", 3000, "fadeOut");
 }
+
 
 function forceRemoveAlerts() {
   if ($("#left_team #alert").css("opacity") == 1) {
