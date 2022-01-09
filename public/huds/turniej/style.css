@@ -230,7 +230,7 @@ body {
   margin-left: 10px;
   width: 110px;
   height: 70px;
-  background-color: rgba(12, 15, 18, 0.5);
+  background-color: rgba(12, 15, 18, 0.6);
   transform: skew(-20deg);
   border: solid 5px;
   border-image: linear-gradient(to right, #0066ff, #ff0066) 1;
@@ -1656,7 +1656,6 @@ body {
   position: relative;
   left: 3px;
   top: 5px;
-  animation-iteration-count: infinite;
 }
 
 #players_right #player_health_img {
@@ -1666,7 +1665,6 @@ body {
   position: relative;
   right: 3px;
   top: 5px;
-  animation-iteration-count: infinite;
 }
 
 .player_alias {
@@ -2381,6 +2379,7 @@ body {
   max-height: 40px;
   width: auto;
   top: 8px;
+  left:3px;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -2391,6 +2390,7 @@ body {
   max-height: 40px;
   width: auto;
   top: 8px;
+  left:3px;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -2450,8 +2450,9 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  animation: heartBeat 0.5s;
+  animation: heartBeat 0.8s;
   animation-iteration-count: infinite;
+  transition: background-image 0.2s ease-in-out;
 }
 
 .health_CT {
@@ -2461,8 +2462,9 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  animation: heartBeat 0.5s;
+  animation: heartBeat 0.8s;
   animation-iteration-count: infinite;
+  transition: background-image 0.2s ease-in-out;
 }
 
 .health_T {
@@ -2472,8 +2474,9 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  animation: heartBeat 0.5s;
+  animation: heartBeat 0.8s;
   animation-iteration-count: infinite;
+  transition: background-image 0.2s ease-in-out;
 }
 
 .health_full_default {
@@ -2483,6 +2486,7 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+  transition: background-image 0.2s ease-in-out;
 }
 
 .health_full_CT {
@@ -2492,6 +2496,7 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+  transition: background-image 0.2s ease-in-out;
 }
 
 .health_full_T {
@@ -2501,6 +2506,7 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+  transition: background-image 0.2s ease-in-out;
 }
 
 .armor_none_default {

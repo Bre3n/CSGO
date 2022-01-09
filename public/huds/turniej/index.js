@@ -605,7 +605,10 @@ function fillObserved(obs) {
   $("#obs_lane3_left_pole").css("background-color", team_color);
   $("#obs_lane3_right_pole").css("background-color", team_color);
   //#endregion
-
+  if (obs.name >= 13) {
+    var bufor = obs.name
+    obs.name = bufor.match(/.{1,3}/g)
+  }
   $("#obs_alias_text").text(obs.name);
   $("#obs_alias_text").css("color", team_color);
   if (obs.real_name && obs.real_name != obs.name) {
