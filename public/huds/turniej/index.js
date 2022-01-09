@@ -300,15 +300,15 @@ function updateStateOver(phase, round, previously) {
     if (round.win_team == "CT") {
       if (teams.left.side == "ct") {
         // * CT alert on Left
-        showAlertSlide("#left_team", COLOR_NEW_CT, "WYGRYWAJĄ RUNDĘ");
+        showAlertSlide("#left_team", COLOR_NEW_CT, "WYGRYWA RUNDĘ");
       } else {
         // * CT alert on Right
-        showAlertSlide("#right_team", COLOR_NEW_CT, "WYGRYWAJĄ RUNDĘ");
+        showAlertSlide("#right_team", COLOR_NEW_CT, "WYGRYWA RUNDĘ");
       }
     } else if (round.win_team == "T") {
       if (teams.left.side == "t") {
         // * T alert on Left
-        showAlertSlide("#left_team", COLOR_NEW_T, "WYGRYWAJĄ RUNDĘ");
+        showAlertSlide("#left_team", COLOR_NEW_T, "WYGRYWA RUNDĘ");
         if (checkPrev(previously, "defuse")) {
           $("#right_team #alert")
             .css("opacity", 0)
@@ -316,7 +316,7 @@ function updateStateOver(phase, round, previously) {
         }
       } else {
         // * T alert on Right
-        showAlertSlide("#right_team", COLOR_NEW_T, "WYGRYWAJĄ RUNDĘ");
+        showAlertSlide("#right_team", COLOR_NEW_T, "WYGRYWA RUNDĘ");
         if (checkPrev(previously, "defuse")) {
           $("#left_team #alert")
             .css("opacity", 0)

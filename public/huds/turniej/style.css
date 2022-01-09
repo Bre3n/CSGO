@@ -2315,7 +2315,7 @@ body {
 }
 
 .bomb_active {
-  background-image: url("/files/img/elements/icon_c4_default.gif");
+  background-image: url("/files/img/elements/icon_c4_T.gif");
   max-height: 40px;
   width: auto;
   top: 8px;
@@ -2376,21 +2376,22 @@ body {
 
 .players_eliminated_T {
   background-image: url("/files/img/elements/icon_skull_default.png");
-  max-height: 40px;
+  max-height: 35px;
   width: auto;
-  top: 8px;
-  left:3px;
+  top: 6px;
+  left: 6px;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+  opacity:0.8;
 }
 
 .players_eliminated_CT {
   background-image: url("/files/img/elements/icon_skull_default.png");
   max-height: 40px;
   width: auto;
-  top: 8px;
-  left:3px;
+  top: 6px;
+  left: 6px;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -2450,7 +2451,7 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  animation: heartBeat 0.8s;
+  animation: heartBeat 1.3s;
   animation-iteration-count: infinite;
   transition: background-image 0.2s ease-in-out;
 }
@@ -2462,7 +2463,7 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  animation: heartBeat 0.8s;
+  animation: heartBeat 1.3s;
   animation-iteration-count: infinite;
   transition: background-image 0.2s ease-in-out;
 }
@@ -2474,7 +2475,7 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  animation: heartBeat 0.8s;
+  animation: heartBeat 1.3s;
   animation-iteration-count: infinite;
   transition: background-image 0.2s ease-in-out;
 }
