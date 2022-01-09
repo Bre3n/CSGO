@@ -17,7 +17,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   background-color: var(--main-panel-color);
-  border-radius: 12px;
+  border-radius: 12px 12px 0px 0px;
 }
 
 #left_team {
@@ -507,6 +507,7 @@ body {
   position: absolute;
   left: 0px;
   background-color: var(--main-panel-color);
+  border-radius: 12px 0px 0px 0px;
 }
 
 #obs_team_img {
@@ -565,6 +566,7 @@ body {
   position: absolute;
   left: 295px;
   background-color: var(--main-panel-color);
+  border-radius: 0px 12px 0px 0px;
 }
 
 #obs_country_img {
@@ -595,6 +597,7 @@ body {
   position: absolute;
   left: 0px;
   background-color: var(--main-panel-color);
+  border-radius: 8px 0px 0px 8px;
 }
 
 #obs_health_section {
@@ -807,6 +810,7 @@ body {
   position: absolute;
   left: 480px;
   background-color: var(--main-panel-color);
+  border-radius: 0px 8px 8px 0px;
 }
 
 #obs_bullets_section {
@@ -1116,12 +1120,14 @@ body {
 }
 
 .util_smokegrenade_T {
-  background-image: url("/files/img/grenades/weapon_smokegrenade_T.png");
+  background-image: url("/files/img/grenades/weapon_smokegrenade.png");
+  filter: brightness(0) invert(1);
   left: 8px;
 }
 
 .util_smokegrenade_CT {
-  background-image: url("/files/img/grenades/weapon_smokegrenade_CT.png");
+  background-image: url("/files/img/grenades/weapon_smokegrenade.png");
+  filter: brightness(0) invert(1);
   left: 8px;
 }
 
@@ -1132,7 +1138,8 @@ body {
 }
 
 .util_incgrenade_CT {
-  background-image: url("/files/img/grenades/weapon_incgrenade_CT.png");
+  background-image: url("/files/img/grenades/weapon_incgrenade.png");
+  filter: brightness(0) invert(1);
   left: 8px;
 }
 
@@ -1143,7 +1150,8 @@ body {
 }
 
 .util_molotov_T {
-  background-image: url("/files/img/grenades/weapon_molotov_T.png");
+  background-image: url("/files/img/grenades/weapon_molotov.png");
+  filter: brightness(0) invert(1);
   left: 8px;
 }
 
@@ -1154,12 +1162,14 @@ body {
 }
 
 .util_hegrenade_T {
-  background-image: url("/files/img/grenades/weapon_hegrenade_T.png");
+  background-image: url("/files/img/grenades/weapon_hegrenade.png");
+  filter: brightness(0) invert(1);
   left: 4px;
 }
 
 .util_hegrenade_CT {
-  background-image: url("/files/img/grenades/weapon_hegrenade_CT.png");
+  background-image: url("/files/img/grenades/weapon_hegrenade.png");
+  filter: brightness(0) invert(1);
   left: 4px;
 }
 
@@ -1169,11 +1179,13 @@ body {
 }
 
 .util_flashbang_T {
-  background-image: url("/files/img/grenades/weapon_flashbang_T.png");
+  background-image: url("/files/img/grenades/weapon_flashbang.png");
+  filter: brightness(0) invert(1);
 }
 
 .util_flashbang_CT {
-  background-image: url("/files/img/grenades/weapon_flashbang_CT.png");
+  background-image: url("/files/img/grenades/weapon_flashbang.png");
+  filter: brightness(0) invert(1);
 }
 
 #util_nade_1 {
@@ -2219,7 +2231,7 @@ body {
 }
 
 .bomb_active {
-  background-image: url("/files/img/elements/icon_c4_T.gif");
+  background-image: url("/files/img/elements/icon_c4_default.gif");
   max-height: 40px;
   width: auto;
   top: 8px;
@@ -2229,7 +2241,7 @@ body {
 }
 
 .bomb_exploded {
-  background-image: url("/files/img/elements/icon_bomb_explosion_T.png");
+  background-image: url("/files/img/elements/icon_bomb_explosion_default.png");
   max-height: 40px;
   width: auto;
   top: 8px;
@@ -2239,7 +2251,7 @@ body {
 }
 
 .bomb_defused {
-  background-image: url("/files/img/elements/icon_defuse_CT.png");
+  background-image: url("/files/img/elements/icon_defuse_default.png");
   max-height: 40px;
   width: auto;
   top: 8px;
@@ -2259,7 +2271,7 @@ body {
 }
 
 .pause_active_T {
-  background-image: url("/files/img/elements/icon_pause_T.png");
+  background-image: url("/files/img/elements/icon_pause_default.png");
   max-height: 40px;
   width: auto;
   top: 8px;
@@ -2269,7 +2281,7 @@ body {
 }
 
 .pause_active_CT {
-  background-image: url("/files/img/elements/icon_pause_CT.png");
+  background-image: url("/files/img/elements/icon_pause_default.png");
   max-height: 40px;
   width: auto;
   top: 8px;
@@ -2279,7 +2291,7 @@ body {
 }
 
 .players_eliminated_T {
-  background-image: url("/files/img/elements/icon_skull_T.png");
+  background-image: url("/files/img/elements/icon_skull_default.png");
   max-height: 40px;
   width: auto;
   top: 8px;
@@ -2289,7 +2301,7 @@ body {
 }
 
 .players_eliminated_CT {
-  background-image: url("/files/img/elements/icon_skull_CT.png");
+  background-image: url("/files/img/elements/icon_skull_default.png");
   max-height: 40px;
   width: auto;
   top: 8px;
@@ -2299,7 +2311,7 @@ body {
 }
 
 .round_time_reached {
-  background-image: url("/files/img/elements/icon_timer_CT.png");
+  background-image: url("/files/img/elements/icon_timer_default.png");
   max-height: 40px;
   width: auto;
   top: 8px;
@@ -2328,7 +2340,7 @@ body {
 }
 
 .obs_skull_T {
-  background-image: url("/files/img/elements/icon_skull_T.png");
+  background-image: url("/files/img/elements/icon_skull_default.png");
   max-height: 18px;
   max-width: 18px;
   background-repeat: no-repeat;
@@ -2337,7 +2349,7 @@ body {
 }
 
 .obs_skull_CT {
-  background-image: url("/files/img/elements/icon_skull_CT.png");
+  background-image: url("/files/img/elements/icon_skull_default.png");
   max-height: 18px;
   max-width: 18px;
   background-repeat: no-repeat;
@@ -2355,7 +2367,7 @@ body {
 }
 
 .health_CT {
-  background-image: url("/files/img/elements/icon_health_CT.png");
+  background-image: url("/files/img/elements/icon_health_default.png");
   max-height: 30px;
   max-width: 30px;
   background-repeat: no-repeat;
@@ -2364,7 +2376,7 @@ body {
 }
 
 .health_T {
-  background-image: url("/files/img/elements/icon_health_T.png");
+  background-image: url("/files/img/elements/icon_health_default.png");
   max-height: 30px;
   max-width: 30px;
   background-repeat: no-repeat;
@@ -2382,7 +2394,7 @@ body {
 }
 
 .health_full_CT {
-  background-image: url("/files/img/elements/icon_health_full_CT.png");
+  background-image: url("/files/img/elements/icon_health_full_default.png");
   max-height: 30px;
   max-width: 30px;
   background-repeat: no-repeat;
@@ -2391,7 +2403,7 @@ body {
 }
 
 .health_full_T {
-  background-image: url("/files/img/elements/icon_health_full_T.png");
+  background-image: url("/files/img/elements/icon_health_full_default.png");
   max-height: 30px;
   max-width: 30px;
   background-repeat: no-repeat;
@@ -2409,7 +2421,7 @@ body {
 }
 
 .armor_none_CT {
-  background-image: url("/files/img/elements/icon_armor_none_CT.png");
+  background-image: url("/files/img/elements/icon_armor_none_default.png");
   max-height: 30px;
   max-width: 30px;
   background-repeat: no-repeat;
@@ -2418,7 +2430,7 @@ body {
 }
 
 .armor_none_T {
-  background-image: url("/files/img/elements/icon_armor_none_T.png");
+  background-image: url("/files/img/elements/icon_armor_none_default.png");
   max-height: 30px;
   max-width: 30px;
   background-repeat: no-repeat;
@@ -2436,7 +2448,7 @@ body {
 }
 
 .armor_helm_CT {
-  background-image: url("/files/img/elements/icon_armor_helmet_CT.png");
+  background-image: url("/files/img/elements/icon_armor_helmet_default.png");
   max-height: 30px;
   max-width: 30px;
   background-repeat: no-repeat;
@@ -2445,7 +2457,7 @@ body {
 }
 
 .armor_helm_T {
-  background-image: url("/files/img/elements/icon_armor_helmet_T.png");
+  background-image: url("/files/img/elements/icon_armor_helmet_default.png");
   max-height: 30px;
   max-width: 30px;
   background-repeat: no-repeat;
@@ -2463,7 +2475,7 @@ body {
 }
 
 .armor_kev_CT {
-  background-image: url("/files/img/elements/icon_armor_full_CT.png");
+  background-image: url("/files/img/elements/icon_armor_full_default.png");
   max-height: 30px;
   max-width: 30px;
   background-repeat: no-repeat;
@@ -2472,7 +2484,7 @@ body {
 }
 
 .armor_kev_T {
-  background-image: url("/files/img/elements/icon_armor_full_T.png");
+  background-image: url("/files/img/elements/icon_armor_full_default.png");
   max-height: 30px;
   max-width: 30px;
   background-repeat: no-repeat;
@@ -2490,7 +2502,7 @@ body {
 }
 
 .armor_half_CT {
-  background-image: url("/files/img/elements/icon_armor_half_CT.png");
+  background-image: url("/files/img/elements/icon_armor_half_default.png");
   max-height: 30px;
   max-width: 30px;
   background-repeat: no-repeat;
@@ -2499,7 +2511,7 @@ body {
 }
 
 .armor_half_T {
-  background-image: url("/files/img/elements/icon_armor_half_T.png");
+  background-image: url("/files/img/elements/icon_armor_half_default.png");
   max-height: 30px;
   max-width: 30px;
   background-repeat: no-repeat;
@@ -2517,7 +2529,7 @@ body {
 }
 
 .armor_half_helm_CT {
-  background-image: url("/files/img/elements/icon_armor_half_helmet_CT.png");
+  background-image: url("/files/img/elements/icon_armor_half_helmet_default.png");
   max-height: 30px;
   max-width: 30px;
   background-repeat: no-repeat;
@@ -2526,7 +2538,7 @@ body {
 }
 
 .armor_half_helm_T {
-  background-image: url("/files/img/elements/icon_armor_half_helmet_T.png");
+  background-image: url("/files/img/elements/icon_armor_half_helmet_default.png");
   max-height: 30px;
   max-width: 30px;
   background-repeat: no-repeat;
@@ -2544,7 +2556,7 @@ body {
 }
 
 .bullets_CT {
-  background-image: url("/files/img/elements/icon_bullets_CT.png");
+  background-image: url("/files/img/elements/icon_bullets_default.png");
   max-height: 30px;
   max-width: 30px;
   background-repeat: no-repeat;
@@ -2553,7 +2565,7 @@ body {
 }
 
 .bullets_T {
-  background-image: url("/files/img/elements/icon_bullets_T.png");
+  background-image: url("/files/img/elements/icon_bullets_default.png");
   max-height: 30px;
   max-width: 30px;
   background-repeat: no-repeat;
@@ -2658,7 +2670,7 @@ body {
 }
 
 .player_bomb_selected {
-  background-image: url("/files/img/elements/icon_bomb_T.png");
+  background-image: url("/files/img/elements/icon_bomb_default.png");
   max-height: 25px;
   max-width: 25px;
   background-repeat: no-repeat;
