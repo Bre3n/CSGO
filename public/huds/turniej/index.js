@@ -47,8 +47,8 @@ function updatePage(data) {
 
     teams.left.name = team_one.team_name || teams.left.name;
     teams.right.name = team_two.team_name || teams.right.name;
-    teams.left.short_name = team_one.short_name;
-    teams.right.short_name = team_two.short_name;
+    teams.left.short_name = team_one.short_name || teams.left.short_name;
+    teams.right.short_name = team_two.short_name || teams.right.short_name;
     teams.left.logo = team_one.logo || null;
     teams.right.logo = team_two.logo || null;
     teams.left.flag = team_one.country_code || null;
@@ -185,6 +185,8 @@ function updateRoundNow(round, map) {
   if ((round.phase == "freezetime" && !freezetime) || round_now != last_round) {
     start_money = {};
   }
+  $("#left_team #logo #team_logo").removeClass("animated flip")
+  $("#right_team #logo #team_logo").removeClass("animated flip")
 }
 
 function updateRoundState(phase, round, map, previously, bomb, players) {
@@ -301,14 +303,17 @@ function updateStateOver(phase, round, previously) {
       if (teams.left.side == "ct") {
         // * CT alert on Left
         showAlertSlide("#left_team", COLOR_NEW_CT, "WYGRYWA RUNDĘ");
+        $("#left_team #logo #team_logo").addClass("animated flip")
       } else {
         // * CT alert on Right
         showAlertSlide("#right_team", COLOR_NEW_CT, "WYGRYWA RUNDĘ");
+        $("#right_team #logo #team_logo").addClass("animated flip")
       }
     } else if (round.win_team == "T") {
       if (teams.left.side == "t") {
         // * T alert on Left
         showAlertSlide("#left_team", COLOR_NEW_T, "WYGRYWA RUNDĘ");
+        $("#left_team #logo #team_logo").addClass("animated flip")
         if (checkPrev(previously, "defuse")) {
           $("#right_team #alert")
             .css("opacity", 0)
@@ -317,6 +322,7 @@ function updateStateOver(phase, round, previously) {
       } else {
         // * T alert on Right
         showAlertSlide("#right_team", COLOR_NEW_T, "WYGRYWA RUNDĘ");
+        $("#right_team #logo #team_logo").addClass("animated flip")
         if (checkPrev(previously, "defuse")) {
           $("#left_team #alert")
             .css("opacity", 0)
@@ -519,7 +525,11 @@ function updateStateLive(phase, bomb, players, previously) {
           }
         });
         // 13 characters for name
-        showAlertSlide(side, COLOR_NEW_T, planter.name + " podkłada bombę");
+        var bufor = planter.name
+        if(bufor.length >= 11){
+          bufor = bufor.substring(0, 11) + "...";
+        }
+        showAlertSlide(side, COLOR_NEW_T, bufor + " podkłada bombę");
       }
     }
   }
@@ -537,7 +547,7 @@ function updateStatePaused(phase, type, previously) {
     $("#alert_middle #pole_1_middle").css("background-color", teams.left.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T);
     $("#alert_middle #pole_2_middle").css("background-color", teams.right.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T);
     $("#alert_middle #alert_text_middle #alert_text_middle_2")
-      .text("MATCH PAUSED")
+      .text("MECZ WSTRZYMANY")
       .css("color", COLOR_WHITE);
   } else if (type == "timeout_t") {
     if (phase.phase_ends_in) {
@@ -556,7 +566,7 @@ function updateStatePaused(phase, type, previously) {
     $("#alert_middle #alert_text_middle_2_middle").css("background-color", COLOR_NEW_T);
     $("#alert_middle #alert_text_middle #pole_1_middle_img").css("background-image", "url(/files/img/elements/icon_timer_default.png)");
     $("#alert_middle #alert_text_middle #alert_text_middle_2")
-      .text(teams.left.side == "t" ? " PRZERWA: " + teams.left.name.toUpperCase() : " PRZERWA: " + teams.right.name.toUpperCase())
+      .text(teams.left.side == "t" ? " PRZERWA: " + "[" + teams.left.short_name.toUpperCase() + "]" : " PRZERWA: " + "[" + teams.right.short_name.toUpperCase() + "]")
       .css("color", COLOR_NEW_T);
     showAlertSlide("#left_team", teams.left.side == "t" ? COLOR_NEW_T : COLOR_NEW_CT, "Pozostałe przerwy: " + teams.left.timeouts_remaining);
     showAlertSlide("#right_team", teams.right.side == "t" ? COLOR_NEW_T : COLOR_NEW_CT, "Pozostałe przerwy: " + teams.right.timeouts_remaining);
@@ -577,7 +587,7 @@ function updateStatePaused(phase, type, previously) {
     $("#alert_middle #alert_text_middle #pole_1_middle_img").css("background-image", "url(/files/img/elements/icon_timer_default.png)");
     $("#alert_middle #pole_2_middle").css("background-color", COLOR_NEW_CT);
     $("#alert_middle #alert_text_middle #alert_text_middle_2")
-      .text(teams.left.side == "ct" ? " PRZERWA: " + teams.left.name.toUpperCase() : " PRZERWA: " + teams.right.name.toUpperCase())
+      .text(teams.left.side == "ct" ? " PRZERWA: " + "[" + teams.left.short_name.toUpperCase() + "]" : " PRZERWA: " + "[" + teams.right.short_name.toUpperCase() + "]")
       .css("color", COLOR_NEW_CT);
     showAlertSlide("#left_team", teams.left.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T, "Pozostały czas: " + teams.left.timeouts_remaining);
     showAlertSlide("#right_team", teams.right.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T, "Pozostały czas: " + teams.right.timeouts_remaining);
@@ -607,7 +617,7 @@ function fillObserved(obs) {
   //#endregion
   var bufor = obs.name
   if (bufor.length >= 13) {
-    
+
     bufor = bufor.substring(0, 13) + "...";
   }
   $("#obs_alias_text").text(bufor.toUpperCase());
