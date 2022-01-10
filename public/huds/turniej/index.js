@@ -185,8 +185,8 @@ function updateRoundNow(round, map) {
   if ((round.phase == "freezetime" && !freezetime) || round_now != last_round) {
     start_money = {};
   }
-  $("#left_team #logo #team_logo").removeClass("animated flip")
-  $("#right_team #logo #team_logo").removeClass("animated flip")
+  $("#left_team #logo #team_logo").removeClass("animated fadeIn")
+  $("#right_team #logo #team_logo").removeClass("animated fadeIn")
 }
 
 function updateRoundState(phase, round, map, previously, bomb, players) {
@@ -303,17 +303,17 @@ function updateStateOver(phase, round, previously) {
       if (teams.left.side == "ct") {
         // * CT alert on Left
         showAlertSlide("#left_team", COLOR_NEW_CT, "WYGRYWA RUNDĘ");
-        $("#left_team #logo #team_logo").addClass("animated flip")
+        $("#left_team #logo #team_logo").addClass("animated fadeIn")
       } else {
         // * CT alert on Right
         showAlertSlide("#right_team", COLOR_NEW_CT, "WYGRYWA RUNDĘ");
-        $("#right_team #logo #team_logo").addClass("animated flip")
+        $("#right_team #logo #team_logo").addClass("animated fadeIn")
       }
     } else if (round.win_team == "T") {
       if (teams.left.side == "t") {
         // * T alert on Left
         showAlertSlide("#left_team", COLOR_NEW_T, "WYGRYWA RUNDĘ");
-        $("#left_team #logo #team_logo").addClass("animated flip")
+        $("#left_team #logo #team_logo").addClass("animated fadeIn")
         if (checkPrev(previously, "defuse")) {
           $("#right_team #alert")
             .css("opacity", 0)
@@ -322,7 +322,7 @@ function updateStateOver(phase, round, previously) {
       } else {
         // * T alert on Right
         showAlertSlide("#right_team", COLOR_NEW_T, "WYGRYWA RUNDĘ");
-        $("#right_team #logo #team_logo").addClass("animated flip")
+        $("#right_team #logo #team_logo").addClass("animated fadeIn")
         if (checkPrev(previously, "defuse")) {
           $("#left_team #alert")
             .css("opacity", 0)
@@ -526,7 +526,7 @@ function updateStateLive(phase, bomb, players, previously) {
         });
         // 13 characters for name
         var bufor = planter.name
-        if(bufor.length >= 11){
+        if (bufor.length >= 11) {
           bufor = bufor.substring(0, 11) + "...";
         }
         showAlertSlide(side, COLOR_NEW_T, bufor + " podkłada bombę");

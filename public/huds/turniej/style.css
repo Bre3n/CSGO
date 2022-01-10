@@ -54,12 +54,22 @@ body {
 
 #left_team #main {
   float: left;
-  background: linear-gradient(120deg, rgba(12,15,18,0) 0%, rgba(12,15,18,0) 85%, rgba(255,255,255,0.2) 100%);
+  background: linear-gradient(
+    120deg,
+    rgba(12, 15, 18, 0) 0%,
+    rgba(12, 15, 18, 0) 85%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
 }
 
 #right_team #main {
   float: right;
-  background: linear-gradient(240deg, rgba(12,15,18,0) 0%, rgba(12,15,18,0) 85%, rgba(255,255,255,0.2) 100%);
+  background: linear-gradient(
+    240deg,
+    rgba(12, 15, 18, 0) 0%,
+    rgba(12, 15, 18, 0) 85%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
 }
 
 #logo {
@@ -435,8 +445,12 @@ body {
   opacity: 0;
   left: 50%;
   transform: translateX(-50%);
-  background: rgb(0,102,255);
-  background: linear-gradient(90deg, rgba(0,102,255,1) 0%, rgba(255,0,102,1) 100%);
+  background: rgb(0, 102, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 102, 255, 1) 0%,
+    rgba(255, 0, 102, 1) 100%
+  );
 }
 
 #defuse_bar {
@@ -601,7 +615,7 @@ body {
   width: 240px;
   height: 32px;
   position: relative;
-  top:-5px;
+  top: -5px;
   left: 5px;
   font-family: "Roboto", sans-serif;
   text-align: center;
@@ -619,7 +633,7 @@ body {
   width: 240px;
   height: 18px;
   position: relative;
-  top:-5px;
+  top: -5px;
   left: 5px;
   font-family: "Quicksand", sans-serif;
   text-align: center;
@@ -2373,7 +2387,7 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  opacity:0.8;
+  opacity: 0.8;
 }
 
 .players_eliminated_CT {
