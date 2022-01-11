@@ -162,7 +162,6 @@ module.exports = {
         left_image: config.LeftImage,
         left_image2: config.LeftImage2,
         left_image3: config.LeftImage3,
-        left_image4: config.LeftImage4,
         left_primary: config.LeftPrimary,
         left_secondary: config.LeftSecondary,
         right_image: config.RightImage,

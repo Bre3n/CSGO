@@ -1,7 +1,114 @@
-const COLOR_CT = "rgba(60, 137, 253, 1.0)";
-const COLOR_T = "rgba(255, 53, 134, 1.0)";
-const COLOR_NEW_CT = "rgba(0, 102, 255, 1.0)";
-const COLOR_NEW_T = "rgba(255, 0, 102, 1.0)";
+/**
+ * REQUIRED
+ */
+const { href } = window.location;
+
+const segment = href.substr(href.indexOf('/huds/') + 6);
+const HUDName = segment.substr(0, segment.lastIndexOf('/'));
+
+io.on("readyToRegister", () => {
+  io.emit("register", HUDName, false);
+});
+
+io.on("refreshHUD", window.top.location.reload);
+
+/**
+ * ADDITIONAL FEATURES
+ */
+
+const configs = new ConfigManager();
+const actions = new ActionManager();
+
+io.on("hud_config", configs.save);
+
+io.on("hud_action", ({ data, action }) => {
+  actions.execute(action, data);
+});
+
+io.on("keybindAction", actions.execute);
+
+const GSI = new CSGOGSI();
+
+io.on("update", data => {
+  GSI.digest(data);
+});
+
+io.on("update_mirv", data => {
+  GSI.digestMIRV(data)
+});
+
+const killIcon = (iconName, show) => `<div class="kill-icon ${show ? 'show' : ''}"><img src="./elements/${iconName}.png" /></div>`;
+
+const killfeedEntry = kill => {
+  const assistHTML = kill.assister ? `
+  <div class="assist-container">
+    <div class="plus">+</div>
+    ${killIcon("flashed", kill.flashed)}
+    <div class="assist-name ${kill.assister.team.side}">${kill.assister.name}</div>
+  </div>
+  `: ``
+  const html = `
+  <div class="kill-container"><div class="kill">
+    ${killIcon("attackerblind", kill.attackerblind)}
+    <div class="killer-name ${kill.killer.team.side}">${kill.killer.name}</div>
+    ${assistHTML}
+    <div class="kill-weapon">
+      <img src="/files/img/weapons/${kill.weapon}.png" />
+    </div>
+    ${killIcon("noscope", kill.noscope)}
+    ${killIcon("thrusmoke", kill.thrusmoke)}
+    ${killIcon("wallbang", kill.wallbang)}
+    ${killIcon("headshot", kill.headshot)}
+    <div class="victim-name ${kill.victim.team.side}">${kill.victim.name}</div>
+    </div> </div>  
+`;
+  return html
+}
+const addKill = kill => {
+  const killHTML = killfeedEntry(kill);
+  $("#killfeed").append($(killHTML));
+}
+
+GSI.on("kill", kill => {
+  addKill(kill);
+});
+
+const playerAvatars = {};
+
+const getAvatar = (steamid) => {
+  if (!steamid) return;
+  if (playerAvatars[steamid]) {
+    return avatars[steamid];
+  }
+  playerAvatars[steamid] = new Promise((resolve, rej) => {
+    fetch(`/api/players/avatar/steamid/${steamid}`)
+      .then(res => res.json())
+      .then(res => {
+        resolve(res);
+      })
+      .catch(() => {
+        playerAvatars[steamid] = null;
+        resolve(null);
+      });
+  });
+}
+
+const fillAvatar = (side, number, steamid) => {
+  if (!steamid) return;
+  getAvatar(steamid);
+  playerAvatars[steamid].then(avatar => {
+    if (!avatar) return;
+    if (!avatar.custom && !avatar.steam) return;
+    if ($(`#players_${side} #player${number} #player_image`).attr("src") === (avatar.custom || avatar.steam)) return;
+    $(`#players_${side} #player${number} #player_image`).attr("src", avatar.custom || avatar.steam);
+  });
+}
+
+
+const COLOR_CT = "rgba(87, 136, 168, 1.0)";
+const COLOR_T = "rgba(193, 149, 17, 1.0)";
+const COLOR_NEW_CT = "rgba(90, 184, 244, 1.0)";
+const COLOR_NEW_T = "rgba(240, 201, 65, 1.0)";
 const COLOR_RED = "rgba(242, 34, 34, 1.0)";
 const COLOR_MAIN_PANEL = "rgba(12, 15, 18, 0.75)";
 const COLOR_SUB_PANEL = "rgba(12, 15, 18, 0.6)";
@@ -38,7 +145,12 @@ function updatePage(data) {
   var round = data.round();
   var map = data.map();
   var previously = data.previously();
-  var bomb = data.bomb();
+  var bomb = data.info.bomb;
+
+  if(round && round.phase === "freezetime" && $("#killfeed").html()){
+    console.log("Killfeed cleared")
+    $("#killfeed").html('');
+  }
 
   var test_player = data.getPlayer(1);
   if (test_player) {
@@ -47,19 +159,18 @@ function updatePage(data) {
 
     teams.left.name = team_one.team_name || teams.left.name;
     teams.right.name = team_two.team_name || teams.right.name;
-    teams.left.short_name = team_one.short_name || teams.left.short_name;
-    teams.right.short_name = team_two.short_name || teams.right.short_name;
+    teams.left.short_name = team_one.short_name;
+    teams.right.short_name = team_two.short_name;
     teams.left.logo = team_one.logo || null;
     teams.right.logo = team_two.logo || null;
     teams.left.flag = team_one.country_code || null;
     teams.right.flag = team_two.country_code || null;
   }
   if (_print_player_data) {
-    printPlayerData(players);
+    //printPlayerData(players);
   }
   setupBestOf(matchup, match);
   updateTopPanel();
-  updateLeague();
   updateRoundNow(round, map);
   updateRoundState(phase, round, map, previously, bomb, players);
   updateObserved(observed);
@@ -150,8 +261,8 @@ function updateTopPanel() {
   if (!teams.right.logo) {
     teams.right.logo = "logo_" + teams.right.side.toLowerCase() + "_default.png";
   }
-  $("#left_team #team_logo").attr("src", "/storage/" + teams.left.logo);
-  $("#right_team #team_logo").attr("src", "/storage/" + teams.right.logo);
+  $("#left_team #team_logo").attr("src", teams.left.logo);
+  $("#right_team #team_logo").attr("src", teams.right.logo);
   //#endregion
 
   //#region Team Flag
@@ -168,25 +279,13 @@ function updateTopPanel() {
   //#endregion
 }
 
-function updateLeague() {
-  $("#players_left #box_image").attr("src", _left_image);
-  $("#players_left #box_image2").attr("src", _left_image2);
-  $("#players_left #box_image3").attr("src", _left_image3);
-  $("#players_left #main_primary").text(_left_primary);
-  $("#players_left #main_secondary").text(_left_secondary);
-  $("#players_right #box_image").attr("src", _right_image);
-  $("#players_right #main_primary").text(_right_primary);
-  $("#players_right #main_secondary").text(_right_secondary);
-}
 
 function updateRoundNow(round, map) {
   round_now = map.round + (round.phase == "over" || round.phase == "intermission" ? 0 : 1);
-  $("#round_number").text("Runda " + round_now + " / 30");
+  $("#round_number").text("Round " + round_now + " / 30");
   if ((round.phase == "freezetime" && !freezetime) || round_now != last_round) {
     start_money = {};
   }
-  $("#left_team #logo #team_logo").removeClass("animated fadeIn")
-  $("#right_team #logo #team_logo").removeClass("animated fadeIn")
 }
 
 function updateRoundState(phase, round, map, previously, bomb, players) {
@@ -302,18 +401,15 @@ function updateStateOver(phase, round, previously) {
     if (round.win_team == "CT") {
       if (teams.left.side == "ct") {
         // * CT alert on Left
-        showAlertSlide("#left_team", COLOR_NEW_CT, "WYGRYWA RUNDĘ");
-        $("#left_team #logo #team_logo").addClass("animated fadeIn")
+        showAlertSlide("#left_team", COLOR_NEW_CT, "WINS THE ROUND");
       } else {
         // * CT alert on Right
-        showAlertSlide("#right_team", COLOR_NEW_CT, "WYGRYWA RUNDĘ");
-        $("#right_team #logo #team_logo").addClass("animated fadeIn")
+        showAlertSlide("#right_team", COLOR_NEW_CT, "WINS THE ROUND");
       }
     } else if (round.win_team == "T") {
       if (teams.left.side == "t") {
         // * T alert on Left
-        showAlertSlide("#left_team", COLOR_NEW_T, "WYGRYWA RUNDĘ");
-        $("#left_team #logo #team_logo").addClass("animated fadeIn")
+        showAlertSlide("#left_team", COLOR_NEW_T, "WINS THE ROUND");
         if (checkPrev(previously, "defuse")) {
           $("#right_team #alert")
             .css("opacity", 0)
@@ -321,8 +417,7 @@ function updateStateOver(phase, round, previously) {
         }
       } else {
         // * T alert on Right
-        showAlertSlide("#right_team", COLOR_NEW_T, "WYGRYWA RUNDĘ");
-        $("#right_team #logo #team_logo").addClass("animated fadeIn")
+        showAlertSlide("#right_team", COLOR_NEW_T, "WINS THE ROUND");
         if (checkPrev(previously, "defuse")) {
           $("#left_team #alert")
             .css("opacity", 0)
@@ -340,7 +435,7 @@ function updateStateOver(phase, round, previously) {
           animateRoundTimer("players_eliminated_T", false);
         }
       } else if (round.win_team == "CT") {
-        //var t_alive = checkAliveTerrorists(team_t.players);
+        // var t_alive = checkAliveTerrorists(team_t.players);
         var t_alive = checkAliveTerrorists(teams.left.side == "t" ? teams.left.players : teams.right.players);
         if (checkPrev(previously, "live"))
           if (t_alive) {
@@ -410,7 +505,7 @@ function updateStatePlanted(phase, round, previously) {
         if ($("#round_timer_text").hasClass("animated")) $("#round_timer_text").removeClass("animated");
         if ($("#round_timer_text").hasClass("flash")) $("#round_timer_text").removeClass("flash");
         animateRoundTimer("bomb_active", false);
-        showMiddleAlert(COLOR_NEW_T, COLOR_NEW_T, "BOMBA PODŁOŻONA", COLOR_NEW_T);
+        showMiddleAlert(COLOR_NEW_T, COLOR_NEW_T, "BOMB PLANTED", COLOR_NEW_T);
         var wait = setTimeout(function () {
           $("#alert_middle")
             .css("opacity", 0)
@@ -478,7 +573,7 @@ function updateStateDefuse(phase, bomb, players) {
             }
           });
           // 13 characters for name
-          showAlertSlide(defusing_side, COLOR_NEW_CT, defuser.name + " rozbraja bombę");
+          showAlertSlide(defusing_side, COLOR_NEW_CT, defuser.name + " is defusing the bomb");
         }
       }
     }
@@ -514,10 +609,6 @@ function updateStateLive(phase, bomb, players, previously) {
         count_seconds = "0" + count_seconds;
       }
       $("#round_timer_text").text(count_minute + ":" + count_seconds);
-      var left_alive = checkAliveTerrorists2(teams.left.players);
-      var right_alive = checkAliveTerrorists2(teams.right.players);
-      $("#players_alive_bottom_left").text(left_alive)
-      $("#players_alive_bottom_right").text(right_alive)
     }
     if (bomb != null) {
       if (bomb.state == "planting") {
@@ -529,11 +620,7 @@ function updateStateLive(phase, bomb, players, previously) {
           }
         });
         // 13 characters for name
-        var bufor = planter.name
-        if (bufor.length >= 11) {
-          bufor = bufor.substring(0, 11) + "...";
-        }
-        showAlertSlide(side, COLOR_NEW_T, bufor + " podkłada bombę");
+        showAlertSlide(side, COLOR_NEW_T, planter.name + " is planting the bomb");
       }
     }
   }
@@ -544,14 +631,14 @@ function updateStatePaused(phase, type, previously) {
   resetBomb();
   $("#players_left #box_utility").slideDown(500);
   $("#players_right #box_utility").slideDown(500);
-  $("#alert_middle #alert_text_middle #pole_1_middle_img").css("background-image", "url(/files/img/elements/icon_timer_default.png)");
   $("#alert_middle").removeClass();
   if (type == "paused") {
-    if (checkPrev(previously, "freezetime") || checkPrev(previously, "live") || checkPrev(previously, "defuse") || checkPrev(previously, "bomb")) animateRoundTimer("pause_active", false);
+    if (checkPrev(previously, "freezetime") || checkPrev(previously, "live") || checkPrev(previously, "defuse") || checkPrev(previously, "bomb"))
+      animateRoundTimer("pause_active", false);
     $("#alert_middle #pole_1_middle").css("background-color", teams.left.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T);
     $("#alert_middle #pole_2_middle").css("background-color", teams.right.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T);
-    $("#alert_middle #alert_text_middle #alert_text_middle_2")
-      .text("MECZ WSTRZYMANY")
+    $("#alert_middle #alert_text_middle")
+      .text("MATCH PAUSED")
       .css("color", COLOR_WHITE);
   } else if (type == "timeout_t") {
     if (phase.phase_ends_in) {
@@ -567,13 +654,11 @@ function updateStatePaused(phase, type, previously) {
     }
     $("#alert_middle #pole_1_middle").css("background-color", COLOR_NEW_T);
     $("#alert_middle #pole_2_middle").css("background-color", COLOR_NEW_T);
-    $("#alert_middle #alert_text_middle_2_middle").css("background-color", COLOR_NEW_T);
-    $("#alert_middle #alert_text_middle #pole_1_middle_img").css("background-image", "url(/files/img/elements/icon_timer_default.png)");
-    $("#alert_middle #alert_text_middle #alert_text_middle_2")
-      .text(teams.left.side == "t" ? " PRZERWA: " + "[" + teams.left.short_name.toUpperCase() + "]" : " PRZERWA: " + "[" + teams.right.short_name.toUpperCase() + "]")
+    $("#alert_middle #alert_text_middle")
+      .text(teams.left.side == "t" ? teams.left.name.toUpperCase() + " TIMEOUT" : teams.right.name.toUpperCase() + " TIMEOUT")
       .css("color", COLOR_NEW_T);
-    showAlertSlide("#left_team", teams.left.side == "t" ? COLOR_NEW_T : COLOR_NEW_CT, "Pozostałe przerwy: " + teams.left.timeouts_remaining);
-    showAlertSlide("#right_team", teams.right.side == "t" ? COLOR_NEW_T : COLOR_NEW_CT, "Pozostałe przerwy: " + teams.right.timeouts_remaining);
+    showAlertSlide("#left_team", teams.left.side == "t" ? COLOR_NEW_T : COLOR_NEW_CT, "Timeouts Remaining: " + teams.left.timeouts_remaining);
+    showAlertSlide("#right_team", teams.right.side == "t" ? COLOR_NEW_T : COLOR_NEW_CT, "Timeouts Remaining: " + teams.right.timeouts_remaining);
   } else if (type == "timeout_ct") {
     if (phase.phase_ends_in) {
       var clock_time = Math.abs(Math.ceil(phase.phase_ends_in));
@@ -588,13 +673,11 @@ function updateStatePaused(phase, type, previously) {
     }
     $("#alert_middle #pole_1_middle").css("background-color", COLOR_NEW_CT);
     $("#alert_middle #pole_2_middle").css("background-color", COLOR_NEW_CT);
-    $("#alert_middle #alert_text_middle #pole_1_middle_img").css("background-image", "url(/files/img/elements/icon_timer_default.png)");
-    $("#alert_middle #pole_2_middle").css("background-color", COLOR_NEW_CT);
-    $("#alert_middle #alert_text_middle #alert_text_middle_2")
-      .text(teams.left.side == "ct" ? " PRZERWA: " + "[" + teams.left.short_name.toUpperCase() + "]" : " PRZERWA: " + "[" + teams.right.short_name.toUpperCase() + "]")
+    $("#alert_middle #alert_text_middle")
+      .text(teams.left.side == "ct" ? teams.left.name.toUpperCase() + " TIMEOUT" : teams.right.name.toUpperCase() + " TIMEOUT")
       .css("color", COLOR_NEW_CT);
-    showAlertSlide("#left_team", teams.left.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T, "Pozostały czas: " + teams.left.timeouts_remaining);
-    showAlertSlide("#right_team", teams.right.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T, "Pozostały czas: " + teams.right.timeouts_remaining);
+    showAlertSlide("#left_team", teams.left.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T, "Timeouts Remaining: " + teams.left.timeouts_remaining);
+    showAlertSlide("#right_team", teams.right.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T, "Timeouts Remaining: " + teams.right.timeouts_remaining);
   }
 
   $("#alert_middle")
@@ -615,16 +698,19 @@ function fillObserved(obs) {
   let stats = obs.getStats();
   let weapons = obs.weapons;
   team_color = obs.team == "CT" ? COLOR_NEW_CT : COLOR_NEW_T;
+
+  getAvatar(obs.steamid);
+  playerAvatars[obs.steamid].then(avatar => {
+    if (!avatar || (!avatar.custom && !avatar.steam)) return;
+    $("#obs_img").attr("src", avatar.custom || avatar.steam);
+  });
+
   //#region Poles
   $("#obs_lane3_left_pole").css("background-color", team_color);
   $("#obs_lane3_right_pole").css("background-color", team_color);
   //#endregion
-  var bufor = obs.name
-  if (bufor.length >= 13) {
 
-    bufor = bufor.substring(0, 13) + "...";
-  }
-  $("#obs_alias_text").text(bufor.toUpperCase());
+  $("#obs_alias_text").text(obs.name);
   $("#obs_alias_text").css("color", team_color);
   if (obs.real_name && obs.real_name != obs.name) {
     $("#obs_realname_text").text(obs.real_name);
@@ -646,26 +732,10 @@ function fillObserved(obs) {
       _img = teams.right.logo;
     }
   }
-  if (disp_avatars) {
-    if (disp_player_avatars) {
-      if (obs.hasOwnProperty("avatar")) {
-        // Custom Set Avatar
-        if (obs.avatar) $("#obs_img").attr("src", "/storage/" + obs.avatar);
-      } else {
-        // Just Use Team Logo
-        $("#obs_img").attr("src", "/storage/" + _img);
-      }
-    } else {
-      loadAvatar(obs.steamid, function () {
-        $("#obs_img").attr("src", "/av/" + obs.steamid);
-      });
-    }
-  } else {
-    $("#obs_avatar").css("opacity", 0);
-  }
+
 
   // Team Logo and Flags
-  $("#obs_team_img").attr("src", "/storage/" + _img);
+  $("#obs_team_img").attr("src", _img);
   if (disp_player_flags) {
     if (obs.hasOwnProperty("teamData")) {
       if (obs.teamData.hasOwnProperty("country_code")) {
@@ -782,6 +852,7 @@ function updatePlayers(players, observed, phase, previously) {
 function fillPlayers(teams, observed, phase, previously) {
   if (teams.left.players) {
     for (var i = 0; i < 5; i++) {
+      fillAvatar("left", i + 1, teams.left.players[i].steamid);
       if (i >= teams.left.players.length) {
         $("#players_left #player_section")
           .find("#player" + (i + 1))
@@ -796,6 +867,7 @@ function fillPlayers(teams, observed, phase, previously) {
   }
   if (teams.right.players) {
     for (var i = 0; i < 5; i++) {
+      fillAvatar("right", i + 1, teams.right.players[i].steamid);
       if (i >= teams.right.players.length) {
         $("#players_right #player_section")
           .find("#player" + (i + 1))
@@ -832,13 +904,16 @@ function fillPlayer(player, nr, side, observed, phase, previously) {
 
   $top.find("#player_alias_text").css("color", dead ? COLOR_WHITE_HALF : COLOR_WHITE);
 
+  $player.find("#player_image").removeClass("dead");
+
+
   if (slot >= 1 && slot <= 5) {
-    $top.find("#player_alias_text").text(player.name.toUpperCase());
+    $top.find("#player_alias_text").text(slot + "| " + player.name);
   } else {
     if (slot == 10) {
-      $top.find("#player_alias_text").text(player.name.toUpperCase());
+      $top.find("#player_alias_text").text(player.name + " |0");
     } else {
-      $top.find("#player_alias_text").text(player.name.toUpperCase());
+      $top.find("#player_alias_text").text(player.name + " |" + slot);
     }
   }
 
@@ -856,11 +931,7 @@ function fillPlayer(player, nr, side, observed, phase, previously) {
     $bottom.find("#player_bomb_kit_image").css("opacity", 0);
     $bottom.find("#player_armor_image").css("opacity", 0);
     $top.find("#player_health_text").css("opacity", 0);
-    $top.find("#player_health_img").css("opacity", 0);
     $player.find(".player_dead").css("opacity", 1);
-
-    $("#players_right #main_primary").text(dead)
-
     if (side.substr(8) == "left") {
       $player.find("#player_alias_text").css("left", "-35px");
       $player.find("#player_current_money_text").css("left", "-55px");
@@ -876,7 +947,6 @@ function fillPlayer(player, nr, side, observed, phase, previously) {
     $bottom.find("#player_bomb_kit_image").css("opacity", 1);
     $bottom.find("#player_armor_image").css("opacity", 1);
     $top.find("#player_health_text").css("opacity", 1);
-    $top.find("#player_health_img").css("opacity", 1);
     $player.find(".player_dead").css("opacity", 0);
     if (side.substr(8) == "left") {
       $player.find("#player_alias_text").css("left", "0px");
@@ -918,26 +988,20 @@ function fillPlayer(player, nr, side, observed, phase, previously) {
     $player.find("#player_spec_bar").css("opacity", 0);
   }
 
-  //let desired = "linear-gradient(to " + side.substr(8) + ", " + health_color + ", " + alt_health_color + ")";
+  // let desired = "linear-gradient(to " + side.substr(8) + ", " + health_color + ", " + alt_health_color + ")";
   // ! gradient_double works in browser but not on the overlay
-  let gradient_double = "linear-gradient(to " + side.substr(8) + ", rgba(0,0,0,0) " + (100 - stats.health) + "%, " + health_color + "0% " + (50 - stats.health) + "%" + ", " + alt_health_color + " 100%)";
+  // let gradient_double = "linear-gradient(to " + side.substr(8) + ", rgba(0,0,0,0) " + (100 - stats.health) + "%, " + health_color + "0% " + (50 - stats.health) + "%" + ", " + alt_health_color + " 100%)";
   // ! gradient_single works in browser and on the overlay
-  //let gradient_single = "linear-gradient(to " + side.substr(8) + ", rgba(0,0,0,0) " + (100 - stats.health) + "%, " + alt_health_color + " " + (100 - stats.health) + "%)";
+  let gradient_single = "linear-gradient(to " + side.substr(8) + ", rgba(0,0,0,0) " + (100 - stats.health) + "%, " + alt_health_color + " " + (100 - stats.health) + "%)";
 
-  $top.find(".player_health_bar").css("background", gradient_double);
+  $top.find(".player_health_bar").css("background", gradient_single);
   $top.find("#player_health_text").text(stats.health);
-  $top.find("#player_health_img").removeClass();
-  if (stats.health < 40) {
-    $top.find("#player_health_img").addClass("health_" + team);
-  } else if (stats.health > 40) {
-    $top.find("#player_health_img").addClass("health_full_" + team);
-  }
 
   let armor_icon = $bottom.find("#player_armor_image");
   armor_icon.removeClass();
   if (stats.helmet) {
     if (stats.armor == 0) {
-      armor_icon.addClass("armor_none_default");
+      // armor_icon.addClass("armor_none_default");
     } else if (stats.armor <= 50) {
       armor_icon.addClass("armor_half_helm_default");
     } else if (stats.armor <= 100) {
@@ -945,7 +1009,7 @@ function fillPlayer(player, nr, side, observed, phase, previously) {
     }
   } else {
     if (stats.armor == 0) {
-      armor_icon.addClass("armor_none_default");
+      // armor_icon.addClass("armor_none_default");
     } else if (stats.armor <= 50) {
       armor_icon.addClass("armor_half_default");
     } else if (stats.armor <= 100) {
@@ -1187,15 +1251,13 @@ function hideAlertSlide(side) {
 }
 
 function showMiddleAlert(pole_left_color, pole_right_color, text, text_color) {
-  $("#alert_middle #alert_text_middle #pole_1_middle_img").css("background-image", "url(/files/img/elements/icon_bomb_default.png)");
   $("#alert_middle #pole_1_middle").css("background-color", pole_left_color);
   $("#alert_middle #pole_2_middle").css("background-color", pole_right_color);
-  $("#alert_middle #alert_text_middle #alert_text_middle_2")
+  $("#alert_middle #alert_text_middle")
     .text(text)
     .css("color", text_color);
   executeAnim("#alert_middle", "fadeInUp", 3000, "fadeOut");
 }
-
 
 function forceRemoveAlerts() {
   if ($("#left_team #alert").css("opacity") == 1) {
@@ -1238,16 +1300,6 @@ function checkAliveTerrorists(players) {
     }
   }
   return false;
-}
-
-function checkAliveTerrorists2(players) {
-  var j = 0;
-  for (i = 0; i < players.length; i++) {
-    if (players[i].state.health > 0) {
-      j= j+1;
-    }
-  }
-  return j;
 }
 
 function checkPrev(previously, state) {
@@ -1475,53 +1527,53 @@ function countNades(left, right) {
 
   if (total_left == 0) {
     $("#players_left #box_heading_subtext")
-      .text(" - Brak")
+      .text("- None")
       .css("color", "#f21822");
   } else if (total_left <= 5) {
     $("#players_left #box_heading_subtext")
-      .text(" - Słabe")
+      .text("- Poor")
       .css("color", "#f25618");
   } else if (total_left <= 9) {
     $("#players_left #box_heading_subtext")
-      .text(" - Niskie")
+      .text("- Low")
       .css("color", "#f29318");
   } else if (total_left <= 14) {
     $("#players_left #box_heading_subtext")
-      .text(" - Dobre")
+      .text("- Good")
       .css("color", "#8ef218");
   } else if (total_left >= 15) {
     $("#players_left #box_heading_subtext")
-      .text(" - Świetne")
+      .text("- Great")
       .css("color", "#32f218");
   } else if (total_left == 20) {
     $("#players_left #box_heading_subtext")
-      .text(" - Pełne")
+      .text("- Full")
       .css("color", "#22f222");
   }
 
   if (total_right == 0) {
     $("#players_right #box_heading_subtext")
-      .text("- Brak")
+      .text("- None")
       .css("color", "#f21822");
   } else if (total_right <= 5) {
     $("#players_right #box_heading_subtext")
-      .text("- Słabe")
+      .text("- Poor")
       .css("color", "#f25618");
   } else if (total_right <= 9) {
     $("#players_right #box_heading_subtext")
-      .text("- Niskie")
+      .text("- Low")
       .css("color", "#f29318");
   } else if (total_right <= 14) {
     $("#players_right #box_heading_subtext")
-      .text("- Dobre")
+      .text("- Good")
       .css("color", "#8ef218");
   } else if (total_right >= 15) {
     $("#players_right #box_heading_subtext")
-      .text("- Świetne")
+      .text("- Great")
       .css("color", "#32f218");
   } else if (total_right == 20) {
     $("#players_right #box_heading_subtext")
-      .text("- Pełne")
+      .text("- Full")
       .css("color", "#22f222");
   }
 
