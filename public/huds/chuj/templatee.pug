@@ -7,20 +7,17 @@ html
     script.
       var ip = "#{ip}",
       port = "#{port}",
-      _print_player_data = #{print_player_data},
-      disp_avatars = #{display_avatars},
-      disp_player_avatars = #{display_player_avatars},
-      disp_team_flags = #{display_team_flags},
-      disp_player_flags = #{display_player_flags},
+      _print_player_data = "#{print_player_data}",
+      disp_avatars = "#{display_avatars}",
+      disp_player_avatars = "#{display_player_avatars}",
+      disp_team_flags = "#{display_team_flags}",
+      disp_player_flags = "#{display_player_flags}",
       _left_image = "#{left_image}",
-      _left_image2 = "#{left_image2}",
-      _left_image3 = "#{left_image3}",
       _left_primary = "#{left_primary}",
       _left_secondary = "#{left_secondary}",
       _right_image = "#{right_image}",
       _right_primary = "#{right_primary}",
       _right_secondary = "#{right_secondary}",
-      special_event = "#{special_event}",
       delay = #{delay};
     script(src="chuj/manager.js")
     script(src="/js/main.js")
@@ -34,7 +31,7 @@ html
       #killfeed
       #top_panel
         #left_team
-          #main ANTYTERRORYŚCI
+          #main TEAM NAME
           #logo
             img#team_logo
           #team_flag
@@ -55,14 +52,13 @@ html
                 .kit
               #kit_bar
         #center_section
-          #center_section_2
           #round_timer
             #round_timer_text
               |0:00
           #round_number
-            |Runda 1/30
+            |Round Number
         #right_team
-          #main TERRORYŚCI
+          #main TEAM NAME
           #logo
             img#team_logo
           #team_flag
@@ -82,13 +78,6 @@ html
               #icon
                 .kit
               #kit_bar
-      #players_alive
-        #players_alive_bottom_left
-          | 3
-        #players_alive_bottom_text
-          | vs
-        #players_alive_bottom_right
-          | 5
       #timers
         #bomb_bar
         #defuse_bar
@@ -96,21 +85,22 @@ html
         #alert_middle
           #pole_1_middle
           #alert_text_middle
-            #pole_1_middle_img
-            #alert_text_middle_2
-              |ALERT TEXT
+            |ALERT TEXT
           #pole_2_middle
       #observed
+        #obs_avatar
+          img#obs_img
         #obs_lane1
         #obs_lane2
           #obs_team
             img#obs_team_img
           #obs_alias
             #obs_alias_text
-              |NICK GRACZA
+              |PLAYER ALIAS
             #obs_realname_text
-              |PRAWDZIWE IMIE GRACZA
+              |PLAYER REAL NAME
           #obs_country
+            img#obs_country_img
         #obs_lane3
           #obs_lane3_left_pole
           #obs_left_section
@@ -160,17 +150,13 @@ html
           #box_top
             #box_img
               img#box_image
-            #box_img2
-              img#box_image2
-            #box_img3
-              img#box_image3
             #box_main
               #main_primary
               #main_secondary
           #box_utility
             .box_heading
-              #box_heading_text Wyposażenie
-              #box_heading_subtext - Słabe
+              #box_heading_text Utility Level
+              #box_heading_subtext - Poor
             .box_grenades
               .box_nade_1
                 #util_nade_1
@@ -186,10 +172,10 @@ html
                 #util_nade_4_count x0
           #box_monetary
             .box_equip_value
-              #equip_text Wartość sprzętu
+              #equip_text Equipment Value
               #equip_value $41250
             .box_team_money
-              #money_text Środki drużyny
+              #money_text Team Money
               #money_value $80000
             .loss_bonus
               .loss_boxes
@@ -197,19 +183,20 @@ html
                 .loss_3
                 .loss_2
                 .loss_1
-              #loss_text Bonus
+              #loss_text Loss Bonus
               #loss_value $1900
         #player_section
           #player1
             .player_main_holder
               .player_side_bar
+              .player_image_holder
+                img#player_image
               .player_section_top
                 .player_health_bar
                 .player_health
-                  #player_health_img
                   #player_health_text 100
                 .player_alias
-                  #player_alias_text NICK GRACZA
+                  #player_alias_text 1| Player Name Here
                 .player_weapon_primary
                   img#player_weapon_primary_img
               .player_section_bottom
@@ -262,13 +249,14 @@ html
           #player2
             .player_main_holder
               .player_side_bar
+              .player_image_holder
+                img#player_image
               .player_section_top
                 .player_health_bar
                 .player_health
-                  #player_health_img
                   #player_health_text 100
                 .player_alias
-                  #player_alias_text NICK GRACZA
+                  #player_alias_text 1| Player Name Here
                 .player_weapon_primary
                   img#player_weapon_primary_img
               .player_section_bottom
@@ -321,13 +309,14 @@ html
           #player3
             .player_main_holder
               .player_side_bar
+              .player_image_holder
+                img#player_image
               .player_section_top
                 .player_health_bar
                 .player_health
-                  #player_health_img
                   #player_health_text 100
                 .player_alias
-                  #player_alias_text NICK GRACZA
+                  #player_alias_text 1| Player Name Here
                 .player_weapon_primary
                   img#player_weapon_primary_img
               .player_section_bottom
@@ -380,13 +369,14 @@ html
           #player4
             .player_main_holder
               .player_side_bar
+              .player_image_holder
+                img#player_image
               .player_section_top
                 .player_health_bar
                 .player_health
-                  #player_health_img
                   #player_health_text 100
                 .player_alias
-                  #player_alias_text NICK GRACZA
+                  #player_alias_text 1| Player Name Here
                 .player_weapon_primary
                   img#player_weapon_primary_img
               .player_section_bottom
@@ -439,13 +429,14 @@ html
           #player5
             .player_main_holder
               .player_side_bar
+              .player_image_holder
+                img#player_image
               .player_section_top
                 .player_health_bar
                 .player_health
-                  #player_health_img
                   #player_health_text 100
                 .player_alias
-                  #player_alias_text NICK GRACZA
+                  #player_alias_text 1| Player Name Here
                 .player_weapon_primary
                   img#player_weapon_primary_img
               .player_section_bottom
@@ -505,8 +496,8 @@ html
               #main_secondary
           #box_utility
             .box_heading
-              #box_heading_text Wyposażenie
-              #box_heading_subtext - Słabe
+              #box_heading_text Utility Level
+              #box_heading_subtext - Poor
             .box_grenades
               .box_nade_1
                 #util_nade_1
@@ -522,10 +513,10 @@ html
                 #util_nade_4_count x0
           #box_monetary
             .box_equip_value
-              #equip_text Wartość sprzętu
+              #equip_text Equipment Value
               #equip_value $41250
             .box_team_money
-              #money_text Środki drużyny
+              #money_text Team Money
               #money_value $80000
             .loss_bonus
               .loss_boxes
@@ -533,19 +524,20 @@ html
                 .loss_3
                 .loss_2
                 .loss_1
-              #loss_text Bonus
+              #loss_text Loss Bonus
               #loss_value $1900
         #player_section
           #player1
             .player_main_holder
               .player_side_bar
+              .player_image_holder
+                img#player_image
               .player_section_top
                 .player_health_bar
                 .player_health
-                  #player_health_img
                   #player_health_text 100
                 .player_alias
-                  #player_alias_text NICK GRACZA
+                  #player_alias_text 1| Player Name Here
                 .player_weapon_primary
                   img#player_weapon_primary_img
               .player_section_bottom
@@ -598,13 +590,14 @@ html
           #player2
             .player_main_holder
               .player_side_bar
+              .player_image_holder
+                img#player_image
               .player_section_top
                 .player_health_bar
                 .player_health
-                  #player_health_img
                   #player_health_text 100
                 .player_alias
-                  #player_alias_text NICK GRACZA
+                  #player_alias_text 1| Player Name Here
                 .player_weapon_primary
                   img#player_weapon_primary_img
               .player_section_bottom
@@ -657,13 +650,14 @@ html
           #player3
             .player_main_holder
               .player_side_bar
+              .player_image_holder
+                img#player_image
               .player_section_top
                 .player_health_bar
                 .player_health
-                  #player_health_img
                   #player_health_text 100
                 .player_alias
-                  #player_alias_text NICK GRACZA
+                  #player_alias_text 1| Player Name Here
                 .player_weapon_primary
                   img#player_weapon_primary_img
               .player_section_bottom
@@ -716,13 +710,14 @@ html
           #player4
             .player_main_holder
               .player_side_bar
+              .player_image_holder
+                img#player_image
               .player_section_top
                 .player_health_bar
                 .player_health
-                  #player_health_img
                   #player_health_text 100
                 .player_alias
-                  #player_alias_text NICK GRACZA
+                  #player_alias_text 1| Player Name Here
                 .player_weapon_primary
                   img#player_weapon_primary_img
               .player_section_bottom
@@ -775,13 +770,14 @@ html
           #player5
             .player_main_holder
               .player_side_bar
+              .player_image_holder
+                img#player_image
               .player_section_top
                 .player_health_bar
                 .player_health
-                  #player_health_img
                   #player_health_text 100
                 .player_alias
-                  #player_alias_text NICK GRACZA
+                  #player_alias_text 1| Player Name Here
                 .player_weapon_primary
                   img#player_weapon_primary_img
               .player_section_bottom

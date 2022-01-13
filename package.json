@@ -9,12 +9,14 @@
   ],
   "dependencies": {
     "body-parser": "latest",
-    "express": "^4.13.3",
+    "csgogsi": "^2.5.1",
+    "express": "^4.17.2",
     "fs": "latest",
     "http": "latest",
     "ip": "latest",
     "multer": "latest",
     "nedb": "latest",
+    "node-csgo-gsi": "0.0.4-alpha.3",
     "pug": "latest",
     "request": "latest",
     "socket.io": "^2.4.1"

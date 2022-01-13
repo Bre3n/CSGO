@@ -1,110 +1,3 @@
-/**
- * REQUIRED
- */
-const { href } = window.location;
-
-const segment = href.substr(href.indexOf('/huds/') + 6);
-const HUDName = segment.substr(0, segment.lastIndexOf('/'));
-
-io.on("readyToRegister", () => {
-  io.emit("register", HUDName, false);
-});
-
-io.on("refreshHUD", window.top.location.reload);
-
-/**
- * ADDITIONAL FEATURES
- */
-
-const configs = new ConfigManager();
-const actions = new ActionManager();
-
-io.on("hud_config", configs.save);
-
-io.on("hud_action", ({ data, action }) => {
-  actions.execute(action, data);
-});
-
-io.on("keybindAction", actions.execute);
-
-const GSI = new CSGOGSI();
-
-io.on("update", data => {
-  GSI.digest(data);
-});
-
-io.on("update_mirv", data => {
-  GSI.digestMIRV(data)
-});
-
-const killIcon = (iconName, show) => `<div class="kill-icon ${show ? 'show' : ''}"><img src="./elements/${iconName}.png" /></div>`;
-
-const killfeedEntry = kill => {
-  const assistHTML = kill.assister ? `
-   <div class="assist-container">
-     <div class="plus">+</div>
-     ${killIcon("flashed", kill.flashed)}
-     <div class="assist-name ${kill.assister.team.side}">${kill.assister.name}</div>
-   </div>
-   `: ``
-  const html = `
-   <div class="kill-container"><div class="kill">
-     ${killIcon("attackerblind", kill.attackerblind)}
-     <div class="killer-name ${kill.killer.team.side}">${kill.killer.name}</div>
-     ${assistHTML}
-     <div class="kill-weapon">
-       <img src="/files/img/weapons/${kill.weapon}.png" />
-     </div>
-     ${killIcon("noscope", kill.noscope)}
-     ${killIcon("thrusmoke", kill.thrusmoke)}
-     ${killIcon("wallbang", kill.wallbang)}
-     ${killIcon("headshot", kill.headshot)}
-     <div class="victim-name ${kill.victim.team.side}">${kill.victim.name}</div>
-     </div> </div>  
- `;
-  return html
-}
-const addKill = kill => {
-  const killHTML = killfeedEntry(kill);
-  $("#killfeed").append($(killHTML));
-}
-
-GSI.on("kill", kill => {
-  addKill(kill);
-});
-
-const playerAvatars = {};
-
-const getAvatar = (steamid) => {
-  if (!steamid) return;
-  if (playerAvatars[steamid]) {
-    return avatars[steamid];
-  }
-  playerAvatars[steamid] = new Promise((resolve, rej) => {
-    fetch(`/api/players/avatar/steamid/${steamid}`)
-      .then(res => res.json())
-      .then(res => {
-        resolve(res);
-      })
-      .catch(() => {
-        playerAvatars[steamid] = null;
-        resolve(null);
-      });
-  });
-}
-
-const fillAvatar = (side, number, steamid) => {
-  if (!steamid) return;
-  getAvatar(steamid);
-  playerAvatars[steamid].then(avatar => {
-    if (!avatar) return;
-    if (!avatar.custom && !avatar.steam) return;
-    if ($(`#players_${side} #player${number} #player_image`).attr("src") === (avatar.custom || avatar.steam)) return;
-    $(`#players_${side} #player${number} #player_image`).attr("src", avatar.custom || avatar.steam);
-  });
-}
-
-
 const COLOR_CT = "rgba(60, 137, 253, 1.0)";
 const COLOR_T = "rgba(255, 53, 134, 1.0)";
 const COLOR_NEW_CT = "rgba(0, 102, 255, 1.0)";
@@ -677,7 +570,7 @@ function updateStatePaused(phase, type, previously) {
     $("#alert_middle #alert_text_middle_2_middle").css("background-color", COLOR_NEW_T);
     $("#alert_middle #alert_text_middle #pole_1_middle_img").css("background-image", "url(/files/img/elements/icon_timer_default.png)");
     $("#alert_middle #alert_text_middle #alert_text_middle_2")
-      .text(teams.left.side == "t" ? " PRZERWA: " + "[" + teams.left.name.toUpperCase() + "]" : " PRZERWA: " + "[" + teams.right.short_name.toUpperCase() + "]")
+      .text(teams.left.side == "t" ? " PRZERWA: " + "[" + teams.left.short_name.toUpperCase() + "]" : " PRZERWA: " + "[" + teams.right.short_name.toUpperCase() + "]")
       .css("color", COLOR_NEW_T);
     showAlertSlide("#left_team", teams.left.side == "t" ? COLOR_NEW_T : COLOR_NEW_CT, "Pozostałe przerwy: " + teams.left.timeouts_remaining);
     showAlertSlide("#right_team", teams.right.side == "t" ? COLOR_NEW_T : COLOR_NEW_CT, "Pozostałe przerwy: " + teams.right.timeouts_remaining);
@@ -698,7 +591,7 @@ function updateStatePaused(phase, type, previously) {
     $("#alert_middle #alert_text_middle #pole_1_middle_img").css("background-image", "url(/files/img/elements/icon_timer_default.png)");
     $("#alert_middle #pole_2_middle").css("background-color", COLOR_NEW_CT);
     $("#alert_middle #alert_text_middle #alert_text_middle_2")
-      .text(teams.left.side == "ct" ? " PRZERWA: " + "[" + teams.left.name.toUpperCase() + "]" : " PRZERWA: " + "[" + teams.right.short_name.toUpperCase() + "]")
+      .text(teams.left.side == "ct" ? " PRZERWA: " + "[" + teams.left.short_name.toUpperCase() + "]" : " PRZERWA: " + "[" + teams.right.short_name.toUpperCase() + "]")
       .css("color", COLOR_NEW_CT);
     showAlertSlide("#left_team", teams.left.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T, "Pozostały czas: " + teams.left.timeouts_remaining);
     showAlertSlide("#right_team", teams.right.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T, "Pozostały czas: " + teams.right.timeouts_remaining);
@@ -1351,7 +1244,7 @@ function checkAliveTerrorists2(players) {
   var j = 0;
   for (i = 0; i < players.length; i++) {
     if (players[i].state.health > 0) {
-      j = j + 1;
+      j= j+1;
     }
   }
   return j;
