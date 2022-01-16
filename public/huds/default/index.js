@@ -47,8 +47,9 @@ function updatePage(data) {
 
     teams.left.name = team_one.team_name || teams.left.name;
     teams.right.name = team_two.team_name || teams.right.name;
-    teams.left.short_name = team_one.short_name;
+    teams.left.short_name = team_one.short_name || teams.left.short_name;
     teams.right.short_name = team_two.short_name;
+    console.log(teams.left.short_name);
     teams.left.logo = team_one.logo || null;
     teams.right.logo = team_two.logo || null;
     teams.left.flag = team_one.country_code || null;

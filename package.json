@@ -1,24 +1,28 @@
 {
-  "name": "HUD",
+  "name": "CSGO-CUSTOM-HUD",
   "version": "1.0.0",
   "private": true,
-  "description": "HUD",
+  "description": "CSGO_HUD",
   "author": "osztenkurden",
   "maintainers": [
     "osztenkurden <osztenkurden@gmail.com>"
   ],
   "dependencies": {
     "body-parser": "latest",
+    "browserify": "^17.0.0",
     "csgogsi": "^2.5.1",
     "express": "^4.17.2",
     "fs": "latest",
     "http": "latest",
     "ip": "latest",
+    "json5": "^2.2.0",
     "multer": "latest",
     "nedb": "latest",
     "node-csgo-gsi": "0.0.4-alpha.3",
+    "path": "^0.12.7",
     "pug": "latest",
     "request": "latest",
-    "socket.io": "^2.4.1"
+    "socket.io": "^2.4.1",
+    "ws": "^7.2.3"
   }
 }

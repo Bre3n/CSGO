@@ -204,10 +204,8 @@ server = http.createServer((req, res) => {
   req.on("end", () => {
     body = Buffer.concat(bodyChunks);
     data = JSON.parse(body);
-    if (data.auth && data.auth.token == config.GSIToken) {
-      recent_update = data;
-      update(data);
-    }
+    recent_update = data;
+    update(data);
     res.end("");
   });
 });

@@ -165,6 +165,7 @@ var CSGOGSI = /** @class */ (function () {
             return null;
         }
         var data = raw.keys;
+        /*
         var killer = this.last.players.filter(function (player) { return player.steamid === data.attacker.xuid; })[0];
         var victim = this.last.players.filter(function (player) { return player.steamid === data.userid.xuid; })[0];
         var assister = this.last.players.filter(function (player) { return player.steamid === data.assister.xuid && data.assister.xuid !== '0'; })[0];
@@ -172,7 +173,7 @@ var CSGOGSI = /** @class */ (function () {
             return null;
         }
         var kill = {
-            killer: killer,
+            //killer: killer,
             victim: victim,
             assister: assister || null,
             flashed: data.assistedflash,
@@ -183,6 +184,8 @@ var CSGOGSI = /** @class */ (function () {
             thrusmoke: data.thrusmoke,
             noscope: data.noscope
         };
+        */
+        var kill = raw;
         this.execute("kill", kill);
         return kill;
     };

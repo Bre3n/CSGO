@@ -6,7 +6,7 @@
   "DisplayAvatars": true,
   "DisplayPlayerAvatars": true,
   "DisplayTeamFlags": false,
-  "DisplayPlayerFlags": true,
+  "DisplayPlayerFlags": false,
   "AvatarDirectory": "./public/files/avatars/",
   "SpecialEvent": "SHOWMATCH",
   "LeftImage": "/files/league/miceklogo.png",
@@ -17,6 +17,5 @@
   "LeftSecondary": "",
   "RightImage": "/files/league/miceklogo.png",
   "RightPrimary": "",
-  "RightSecondary": "",
-  "GSIToken": "120987"
+  "RightSecondary": ""
 }
