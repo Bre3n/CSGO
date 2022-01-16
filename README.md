@@ -1,15 +1,11 @@
-# CS:GO Observer Custom HUD
-
-Based off a fork from [osztenkurden](https://github.com/osztenkurden)
-
 # IMPORTANT
 
 ## Before starting change config.json
 
 # Examples
 
-![Ex1](https://i.imgur.com/u70Z8XJ.png)
-![Ex2](https://i.imgur.com/Ok5Jm1V.png)
+![Ex1](https://i.imgur.com/AjcRIqK.png)
+![Ex2](https://i.imgur.com/AjcRIqK.png)
 
 ## How does it work?
 
@@ -19,7 +15,7 @@ Basically, CS:GO is streaming data to local app-server, that transforms data and
 
 - Node.js needs to be installed
 - public/files/cfg/gamestate_integration_observerspectator.cfg needs to be placed in cfg folder in CS:GO location
-- public/files/cfg/observer.cfg needs to be placed in cfg folder in CS:GO location
+- cfg/observer.cfg needs to be placed in cfg folder in CS:GO location
 - CS:GO needs to run on Fullscreen Windowed (I know people may dislike it, but since it's only for observation, soo...)
 - After running CS:GO and connecting to match (or replaying a demo, you can use this in it too), type to console `exec observer.cfg`, it makes everything default disappear besides map and killfeed (can use `exec observer_off.cfg` to turn back to normal)
 - Ensure everything in the `config.json` file is filled out
@@ -46,7 +42,6 @@ Basically, CS:GO is streaming data to local app-server, that transforms data and
     "RightImage": "/files/img/elements/icon_microphone.png", // Right Section Image
     "RightPrimary": "Right Primary Text", // Right Section Top Words
     "RightSecondary": "Right Secondary Text", // Right Section Bottom Words
-    "GSIToken":"120987" //This must be the same as in gamestate_integration_observerspectator.cfg
 }
 ```
 
@@ -54,9 +49,10 @@ Basically, CS:GO is streaming data to local app-server, that transforms data and
 
 - Install NodeJS (nodejs.org)
 - Download this repo somewhere
-- Start RUN file (.bat for Windows, .sh for Linux)
-- Run Overlay Exe from here: [OVERLAY DOWNLOAD](https://drive.google.com/file/d/1uByNiYqkzGJ-8JftDrm29XTUM0En375_/view?usp=sharing)
+- Start RUN_HUD.bat file and RUN_RADAR.bat
+- Run Overlay Exe from here: [OVERLAY DOWNLOAD](https://drive.google.com/file/d/1uByNiYqkzGJ-8JftDrm29XTUM0En375_/view?usp=sharing) or just go to your browser [http://localhost:2626](http://localhost:2626)
 - Ensure that in the Overlay exe folder, there is a config.json file with the following:
+- Radar will be on :36364 port [http://localhost:36364](http://localhost:36364)
 
 ```javascript
 //config.json
@@ -65,6 +61,14 @@ Basically, CS:GO is streaming data to local app-server, that transforms data and
     }
 ```
 
+## How to make it work with OBS?
+- In your OBS create a new scene
+- In scene, click on plus button and add window capture and choose csgo.exe
+- Add browser and in url copy and paste your CS-GO link
+- Add second browser and paste url for radar (it should look like this)
+![Ex5](https://i.imgur.com/TFqY3fR.png)
+![Ex6](https://i.imgur.com/aqxAHXH.png)
+
 ## Admin Panel
 
 After starting the code go to address showing up in terminal/command prompt. You should see Admin Panel divided in three parts - Teams, Players, Create Match and HUDs. In here you can manage data used in HUDs during match ups.
@@ -72,29 +76,30 @@ After starting the code go to address showing up in terminal/command prompt. You
 #### Teams tab
 
 You can here define teams, their name, short names (actually short names are not use anywhere for now), their country flag and logo. Files for teams' logos are being held in `public/storage/` and their filename should start from `logo-`.
-![Ex1](https://i.imgur.com/XKkRXFR.png)
+![Ex1](https://i.imgur.com/7HPOrB0.png)
 
 #### Players tab
 
 In Players tab you can define player's real name, displayed name, country flag (can also be set to "The same as team"), their team and, to identify players, SteamID64. Files for players' avatars are being held in `public/storage/` and their filename should start from `avatar-`.
-![Ex2](https://i.imgur.com/XHJOLJ0.png)
+![Ex2](https://i.imgur.com/tiDnUPj.png)
 
 #### Create match tab
 
 Here you can set type of match - is this a map of NONE, BO1, BO3 or BO5, score for teams and which team it should load to HUD. In case players are on the wrong side (left/right) there is `SWAP` button to quickly tell the HUD to swap teams' name, logo and flag.
 Additionaly, if during the match you decide that there is a type in team's or player's information, you can change it (for example on mobile phone, if you allow Node through firewall and you are on the same local network) and then in this tab click the `Force Refresh HUD`, to make sure all the changes are applied.
-![Ex3](https://i.imgur.com/QgIbw6U.png)
+![Ex3](https://i.imgur.com/KHmwuRa.png)
 
 ### HUDS
 
 This tab shows local HUDs. They are not validated whether or not they actually work, but if any of the files is missing, it will notify you in Warnings column.
 You can enable/disable each HUD to make it accessible or not. There is also HUD URL information - if you click it, it will redirect you to local webpage, that's serving as a HUD. It is useful if streamer wants to stream HUD separately - for example it can be added in OBS as Browser Source, then you just need to set it to HUD's URL.
 It might be useful for bigger streaming workspaces, like for setups with different PC dedicated to replays - one server app will manage every HUD on local network, because all HUDs are available all the time, if they are not disabled.
-![Ex4](https://i.imgur.com/dKFmxbT.png)
+![Ex4](https://i.imgur.com/HbdH4Ia.png)
 
 ## Credits
 
-[osztenkurden](https://github.com/osztenkurden) - Original Repo Creator
+[osztenkurden](https://github.com/osztenkurden) - Original Repo Creator [link](https://github.com/osztenkurden/Custom-CSGO-HUD)
+[boldgolt](https://github.com/boltgolt) - Radar on hud [link](https://github.com/boltgolt/boltobserv)
 
 ## License
 

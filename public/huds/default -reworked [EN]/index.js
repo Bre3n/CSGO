@@ -577,7 +577,7 @@ function updateStatePaused(phase, type, previously) {
     $("#alert_middle #alert_text_middle_2_middle").css("background-color", COLOR_NEW_T);
     $("#alert_middle #alert_text_middle #pole_1_middle_img").css("background-image", "url(/files/img/elements/icon_timer_default.png)");
     $("#alert_middle #alert_text_middle #alert_text_middle_2")
-      .text(teams.left.side == "t" ? " TIMEOUT: " + "[" + teams.left.short_name.toUpperCase() + "]" : " PRZERWA: " + "[" + teams.right.short_name.toUpperCase() + "]")
+      .text(teams.left.side == "t" ? " TIMEOUT: " + "[" + teams.left.short_name.toUpperCase() + "]" : " TIMEOUT: " + "[" + teams.right.short_name.toUpperCase() + "]")
       .css("color", COLOR_NEW_T);
     showAlertSlide("#left_team", teams.left.side == "t" ? COLOR_NEW_T : COLOR_NEW_CT, "Timeouts Remaining: " + teams.left.timeouts_remaining);
     showAlertSlide("#right_team", teams.right.side == "t" ? COLOR_NEW_T : COLOR_NEW_CT, "Timeouts Remaining: " + teams.right.timeouts_remaining);
@@ -598,7 +598,7 @@ function updateStatePaused(phase, type, previously) {
     $("#alert_middle #alert_text_middle #pole_1_middle_img").css("background-image", "url(/files/img/elements/icon_timer_default.png)");
     $("#alert_middle #pole_2_middle").css("background-color", COLOR_NEW_CT);
     $("#alert_middle #alert_text_middle #alert_text_middle_2")
-      .text(teams.left.side == "ct" ? " TIMEOUT: " + "[" + teams.left.short_name.toUpperCase() + "]" : " PRZERWA: " + "[" + teams.right.short_name.toUpperCase() + "]")
+      .text(teams.left.side == "ct" ? " TIMEOUT: " + "[" + teams.left.short_name.toUpperCase() + "]" : " TIMEOUT: " + "[" + teams.right.short_name.toUpperCase() + "]")
       .css("color", COLOR_NEW_CT);
     showAlertSlide("#left_team", teams.left.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T, "Timeouts Remaining: " + teams.left.timeouts_remaining);
     showAlertSlide("#right_team", teams.right.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T, "Timeouts Remaining: " + teams.right.timeouts_remaining);
