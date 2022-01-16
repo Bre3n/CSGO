@@ -98,8 +98,8 @@ It might be useful for bigger streaming workspaces, like for setups with differe
 
 ## Credits
 
-[osztenkurden](https://github.com/osztenkurden) - Original Repo Creator [link](https://github.com/osztenkurden/Custom-CSGO-HUD)
-[boldgolt](https://github.com/boltgolt) - Radar on hud [link](https://github.com/boltgolt/boltobserv)
+- [osztenkurden](https://github.com/osztenkurden) - Original Repo Creator [link](https://github.com/osztenkurden/Custom-CSGO-HUD)
+- [boldgolt](https://github.com/boltgolt) - Radar on hud [link](https://github.com/boltgolt/boltobserv)
 
 ## License
 
