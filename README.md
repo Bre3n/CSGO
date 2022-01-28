@@ -5,7 +5,7 @@
 # Examples
 
 ![Ex1](https://i.imgur.com/AjcRIqK.png)
-![Ex2](https://i.imgur.com/AjcRIqK.png)
+![Ex2](https://i.imgur.com/WqrJQzf.png)
 
 ## How does it work?
 
