@@ -1039,6 +1039,10 @@ body {
   opacity: 1;
 }
 
+#players_right > #box_section > #box_top {
+  opacity:0;
+}
+
 #players_right > #box_section > #box_top > #box_img > #box_image {
   left: 10px;
 }

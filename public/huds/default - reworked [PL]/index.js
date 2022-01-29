@@ -633,6 +633,11 @@ function fillObserved(obs) {
   }
   $("#obs_alias_text").text(bufor.toUpperCase());
   $("#obs_alias_text").css("color", team_color);
+  if (obs.real_name && obs.real_name != obs.name) {
+    $("#obs_realname_text").text(obs.real_name);
+  } else {
+    $("#obs_realname_text").text("");
+  }
 
   // Logic for Team Image
   if (obs.team == "CT") {
