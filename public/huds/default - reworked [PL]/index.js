@@ -35,8 +35,10 @@ function updatePage(data) {
   var phase = data.phase();
   var observed = data.getObserved();
   var players = data.getPlayers();
+  console.log(players);
   var round = data.round();
   var map = data.map();
+  live_map = map
   var previously = data.previously();
   var bomb = data.bomb();
 
@@ -49,11 +51,21 @@ function updatePage(data) {
     teams.right.name = team_two.team_name || teams.right.name;
     teams.left.short_name = team_one.short_name || teams.left.short_name;
     if (teams.left.short_name === undefined || teams.left.short_name === null) {
-      teams.left.short_name = teams.left.name;
+      if (teams.left.name== "Counter-terrorists"){
+        teams.left.short_name = "CT";
+      }
+      else {
+        teams.left.short_name = "TT"
+      }
     }
     teams.right.short_name = team_two.short_name || teams.right.short_name;
     if (teams.right.short_name === undefined || teams.right.short_name === null) {
-      teams.right.short_name = teams.right.name;
+      if (teams.right.name== "Counter-terrorists"){
+        teams.right.short_name = "CT";
+      }
+      else {
+        teams.right.short_name = "TT"
+      }
     }
     teams.left.logo = team_one.logo || null;
     teams.right.logo = team_two.logo || null;
@@ -204,6 +216,7 @@ function updateRoundState(phase, round, map, previously, bomb, players) {
   var right_alive = checkAlivePlayers(teams.right.players);
   $("#players_alive_bottom_left").text(left_alive);
   $("#players_alive_bottom_right").text(right_alive);
+  updateScoreboard();
 
   switch (phase.phase) {
     case "warmup":
@@ -234,6 +247,23 @@ function updateRoundState(phase, round, map, previously, bomb, players) {
       updateStatePaused(phase, "timeout_ct", previously);
       break;
   }
+}
+
+function updateScoreboard() {
+  var today = new Date();
+  var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var dateTime = date + ' ' + time;
+  console.log(dateTime);
+  $("#s_top_datetime").text(dateTime);
+  $("#s_top_left #s_top_team").text(teams.left.name + " [" + teams.left.short_name.toUpperCase() + "]")
+  $("#s_top_right #s_top_team").text(teams.right.name + " [" + teams.right.short_name.toUpperCase() + "]")
+  $("#s_top_mid #s_top_map").text(live_map.name);
+  $("#s_top_left #s_top_score").text(teams.left.score)
+    .css("color", teams.left.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T);
+  $("#s_top_right #s_top_score")
+    .text(teams.right.score)
+    .css("color", teams.right.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T);
 }
 
 function updateStateWarmup(phase) {
@@ -308,6 +338,18 @@ function updateStateFreezetime(phase, previously) {
 
 function updateStateOver(phase, round, previously) {
   if (phase) {
+    if ($("#live_page").hasClass("animated fadeIn")){
+      $("#live_page").removeClass("animated fadeIn");
+    } 
+    $("#live_page").addClass("animated fadeOut");
+    
+    if ($("#scoreboard").hasClass("animated fadeOut")){
+      $("#scoreboard").removeClass("animated fadeOut");
+    } 
+    $("#scoreboard").addClass("animated fadeIn");
+    
+    $("#scoreboard").css("opacity", 1);
+
     $("#round_timer_text").css("color", COLOR_GRAY);
     //#region Which Team Won
     if (round.win_team == "CT") {
@@ -498,6 +540,14 @@ function updateStateDefuse(phase, bomb, players) {
 
 function updateStateLive(phase, bomb, players, previously) {
   if (phase) {
+    if ($("#live_page").hasClass("animated fadeOut")){
+      $("#live_page").removeClass("animated fadeOut");
+      $("#live_page").addClass("animated fadeIn");
+    } 
+    if ($("#scoreboard").hasClass("animated fadeIn")){
+      $("#scoreboard").removeClass("animated fadeIn");
+    } 
+    $("#scoreboard").addClass("animated fadeOut");
     removeRoundTimeGraphics();
     forceRemoveAlerts();
     resetBomb();
@@ -547,6 +597,8 @@ function updateStateLive(phase, bomb, players, previously) {
 }
 
 function updateStatePaused(phase, type, previously) {
+
+
   removeRoundTimeGraphics();
   resetBomb();
   $("#players_left #box_utility").slideDown(500);
@@ -673,6 +725,14 @@ function fillObserved(obs) {
 
   // Team Logo and Flags
   $("#obs_team_img").attr("src", "/storage/" + _img);
+
+
+
+  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+
   if (disp_player_flags) {
     if (obs.hasOwnProperty("teamData")) {
       if (obs.teamData.hasOwnProperty("country_code")) {
@@ -829,13 +889,20 @@ function fillPlayer(player, nr, side, observed, phase, previously) {
   let alt_health_color = stats.health <= 20 ? COLOR_RED : team == "ct" ? COLOR_CT : COLOR_T;
   let side_color = team == "ct" ? COLOR_NEW_CT : COLOR_NEW_T;
 
-  let $player = $("#" + side).find("#player" + (nr + 1));
+  let $player = $("#live_page " + "#" + side).find("#player" + (nr + 1));
 
   $player.find(".player_side_bar").css("background-color", dead ? COLOR_MAIN_PANEL : side_color);
 
   let $top = $player.find(".player_section_top");
   let $bottom = $player.find(".player_section_bottom");
   let $kda_money = $player.find(".player_stats_holder");
+  if (side == "players_left") {
+    var scoreboard_side = "s_team";
+  }
+  else {
+    var scoreboard_side = "s_team2";
+  }
+  let $scoreboard = $("#scoreboard " + "#s_teams "+ "#" + scoreboard_side + " #s_player" + (nr + 1));
 
   $top.find("#player_alias_text").css("color", dead ? COLOR_WHITE_HALF : COLOR_WHITE);
 
@@ -852,12 +919,20 @@ function fillPlayer(player, nr, side, observed, phase, previously) {
   $kda_money.find("#player_kills_k").css("color", side_color);
   $kda_money.find("#player_kills_text").text(stats.kills);
   $player.find("#player_dead_kills_text").text(stats.kills);
+  $scoreboard.find("#s_p_kills").text(stats.kills);
   $kda_money.find("#player_assists_a").css("color", side_color);
   $kda_money.find("#player_assists_text").text(stats.assists);
   $player.find("#player_dead_assists_text").text(stats.assists);
+  $scoreboard.find("#s_p_assists").text(stats.assists);
   $kda_money.find("#player_deaths_d").css("color", side_color);
   $kda_money.find("#player_deaths_text").text(stats.deaths);
   $player.find("#player_dead_deaths_text").text(stats.deaths);
+  $scoreboard.find("#s_p_deaths").text(stats.deaths);
+  $scoreboard.find("#s_p_killdeath").text((stats.kills / stats.deaths).toFixed(1));
+  $scoreboard.find("#s_p_mvps").text(stats.mvps);
+  $scoreboard.find("#s_p_score").text(stats.score);
+  $scoreboard.find("#s_p_nickname").text(player.name.toUpperCase());
+  console.log(stats)
 
   if (dead) {
     $bottom.find("#player_bomb_kit_image").css("opacity", 0);

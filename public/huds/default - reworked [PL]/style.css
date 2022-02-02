@@ -9,6 +9,177 @@ body {
   background-color: rgba(128, 128, 128, 0);
 }
 
+
+#scoreboard {
+  opacity:0;
+  background-color: var(--main-panel-color);
+  width:90%;
+  height:90%;
+  top:5%;
+  left:5%;
+  position:fixed;
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 1px;
+  text-align: left;
+  vertical-align: text-bottom;
+  font-size: 30px;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  border-radius: 10px;
+}
+
+#scoreboard #s_top
+{
+  width:100%;
+  height:15%;
+}
+
+#s_top_left {
+  width:40%;
+  height:100%;
+  float: left;
+}
+
+#s_top_mid {
+  width:20%;
+  height:100%;
+  float: left;
+}
+
+#s_top_right {
+  width:40%;
+  height:100%;
+  float: left;
+}
+
+#s_top_team {
+  height:20%;
+  margin-top:5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#s_top_map {
+  font-size: 20px;
+  text-align: center;
+  margin-top:10%;
+  color: rgba(128, 128, 128, 0.6);
+}
+
+#s_top_left #s_top_score {
+  height:60%;
+  font-size: 70px;
+  text-align: right;
+  padding-right:10%;
+}
+
+#s_top_right #s_top_score {
+  height:60%;
+  font-size: 70px;
+  text-align: left;
+  padding-left:10%;
+}
+
+#s_top_datetime {
+  font-size: 25px;
+  text-align: center;
+  margin-top:4%;
+  color: rgba(128, 128, 128, 0.6);
+}
+
+#s_p_nickname_text {
+  height:100%;
+  width:40%;
+  float: left; 
+  text-indent: 5%;
+}
+
+#s_scores {
+  height:5%;
+  width:100%;
+}
+
+#s_p_kills_text,
+#s_p_assists_text,
+#s_p_deaths_text,
+#s_p_killdeath_text,
+#s_p_mvps_text,
+#s_p_score_text {
+  height:5%;
+  width:10%;
+  float: left;
+}
+
+#s_teams {
+  width:100%;
+  height:80%;
+  font-size: 20px;
+  padding-top: auto;
+  padding-bottom: auto;
+}
+
+#s_team {
+  width:100%;
+  height:49%;
+}
+
+#s_team2 {
+  top:60%;
+  width:100%;
+  height:49%;
+}
+
+#s_player1,
+#s_player2,
+#s_player3,
+#s_player4,
+#s_player5 {
+  width:100%;
+  height:19%;
+  border-top:1px solid black;
+}
+
+#s_player1,
+#s_player3,
+#s_player5,
+#s_player7,
+#s_player9 {
+  background-color: var(--main-panel-color);
+  opacity:0.5;
+}
+
+#s_player2,
+#s_player4,
+#s_player6,
+#s_player8,
+#s_player10 {
+  background-color: var(--main-panel-color);
+  opacity:0.8;
+}
+
+#s_p_nickname {
+  margin-top: 1%;
+  height:30%;
+  width:40%;
+  float: left;
+  text-indent: 5%;
+}
+
+#s_p_kills,
+#s_p_assists,
+#s_p_deaths,
+#s_p_killdeath,
+#s_p_mvps,
+#s_p_score {
+  margin-top: 1%;
+  height:20%;
+  width:10%;
+  float: left;
+}
+
 #top_panel {
   width: 1100px;
   height: 70px;
@@ -2325,6 +2496,8 @@ body {
   vertical-align: text-bottom;
   font-size: 35px;
   line-height: 45px;
+  color: var(--main-panel-color);
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
 #players_alive #players_alive_bottom_right {

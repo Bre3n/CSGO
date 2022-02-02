@@ -1,0 +1,7 @@
+$("#live_page").addClass("animated fadeOut");
+
+
+if ($("#live_page").hasClass("animated fadeOut")){
+      $("#live_page").removeClass("animated fadeOut");
+      $("#live_page").addClass("animated fadeIn");
+    } 
