@@ -3564,6 +3564,13 @@ table span.badge {
   right: auto;
 }
 
+.row .col.s3_2 {
+  width: 20%;
+  margin-left: auto;
+  left: auto;
+  right: auto;
+}
+
 .row .col.s4 {
   width: 33.3333333333%;
   margin-left: auto;

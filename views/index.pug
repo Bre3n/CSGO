@@ -22,14 +22,16 @@ html
 				.row
 					.col.s12
 						ul.tabs
-							li.tab.col.s3
+							li.tab.col.s3_2
 								a.active(href='#team_panel') Teams
-							li.tab.col.s3
+							li.tab.col.s3_2
 								a(href='#player_panel') Players
-							li.tab.col.s3
+							li.tab.col.s3_2
 								a(href='#match') Create match
-							li.tab.col.s3
+							li.tab.col.s3_2
 								a(href='#huds') HUDs
+							li.tab.col.s3_2
+								a(href='#live') Live Page
 					#team_panel.col.s12
 						include teams.pug
 					#player_panel.col.s12
@@ -38,6 +40,8 @@ html
 						include panel.pug
 					#huds.col.s12
 						include huds.pug
+					#live.col.s12
+						include live.pug
 	script.
 		$('select').formSelect();
 		$('.dropdown-button').dropdown({

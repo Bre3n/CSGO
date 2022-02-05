@@ -16,6 +16,22 @@ const PLAYER_YELLOW = "rgba(230, 241, 61, 1.0)";
 const PLAYER_PURPLE = "rgba(128, 60, 161, 1.0)";
 const DEV_PURPLE = "rgba(200, 0, 255, 1.0)";
 
+var scoreboard_players_left = [
+  ["Nickname", "3", "4", "2", "2.13", "1", 11],
+  ["Nickname", "3", "4", "2", "2.13", "1", 12],
+  ["Nickname", "3", "4", "2", "2.13", "1", 13],
+  ["Nickname", "3", "4", "2", "2.13", "1", 14],
+  ["Nickname", "3", "4", "2", "2.13", "1", 15]
+]
+
+var scoreboard_players_right = [
+  ["Nickname", "3", "4", "2", "2.13", "1", 11],
+  ["Nickname", "3", "4", "2", "2.13", "1", 12],
+  ["Nickname", "3", "4", "2", "2.13", "1", 13],
+  ["Nickname", "3", "4", "2", "2.13", "1", 14],
+  ["Nickname", "3", "4", "2", "2.13", "1", 15]
+]
+
 var teams = {
   left: {},
   right: {}
@@ -35,7 +51,6 @@ function updatePage(data) {
   var phase = data.phase();
   var observed = data.getObserved();
   var players = data.getPlayers();
-  console.log(players);
   var round = data.round();
   var map = data.map();
   live_map = map
@@ -51,7 +66,7 @@ function updatePage(data) {
     teams.right.name = team_two.team_name || teams.right.name;
     teams.left.short_name = team_one.short_name || teams.left.short_name;
     if (teams.left.short_name === undefined || teams.left.short_name === null) {
-      if (teams.left.name== "Counter-terrorists"){
+      if (teams.left.name == "Counter-terrorists") {
         teams.left.short_name = "CT";
       }
       else {
@@ -60,7 +75,7 @@ function updatePage(data) {
     }
     teams.right.short_name = team_two.short_name || teams.right.short_name;
     if (teams.right.short_name === undefined || teams.right.short_name === null) {
-      if (teams.right.name== "Counter-terrorists"){
+      if (teams.right.name == "Counter-terrorists") {
         teams.right.short_name = "CT";
       }
       else {
@@ -208,15 +223,15 @@ function updateRoundNow(round, map) {
 }
 
 function updateRoundState(phase, round, map, previously, bomb, players) {
-  console.log(phase.phase); // * freezetime/live/over/bomb/defuse/paused/timeout_t/timeout_ct
+  //console.log(phase.phase); // * freezetime/live/over/bomb/defuse/paused/timeout_t/timeout_ct
   // console.log(round.bomb); // * exploded/defused/planted NULL
   // console.log(round.win_team); // * CT/T
 
   var left_alive = checkAlivePlayers(teams.left.players);
   var right_alive = checkAlivePlayers(teams.right.players);
-  $("#players_alive_bottom_left").text(left_alive);
-  $("#players_alive_bottom_right").text(right_alive);
-  updateScoreboard();
+  $("#players_alive_bottom_left").text(left_alive).css("color", teams.left.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T);
+  $("#players_alive_bottom_right").text(right_alive).css("color", teams.right.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T);
+  $("#radar_border").css("border-image", teams.left.side == "ct" ? "linear-gradient(to right, " + COLOR_NEW_CT + ", " + COLOR_NEW_T + ") 1" : "linear-gradient(to right, " + COLOR_NEW_T + ", " + COLOR_NEW_CT + ") 1");
 
   switch (phase.phase) {
     case "warmup":
@@ -229,7 +244,7 @@ function updateRoundState(phase, round, map, previously, bomb, players) {
       updateStateLive(phase, bomb, players, previously);
       break;
     case "over":
-      updateStateOver(phase, round, previously);
+      updateStateOver(phase, map, round, previously);
       break;
     case "bomb":
       updateStatePlanted(phase, round, previously);
@@ -249,12 +264,46 @@ function updateRoundState(phase, round, map, previously, bomb, players) {
   }
 }
 
+function sortFunctionScoreboard(a, b) {
+  if (a[6] === b[6]) {
+    return 0;
+  }
+  else {
+    return (a[6] > b[6]) ? -1 : 1;
+  }
+}
+
+function toggleScoreboard(toggle) {
+  if (toggle == true) {
+    updateScoreboard();
+    if ($("#live_page").hasClass("animated fadeIn")) {
+      $("#live_page").removeClass("animated fadeIn");
+    }
+    $("#live_page").addClass("animated fadeOut");
+
+    if ($("#scoreboard").hasClass("animated fadeOut")) {
+      $("#scoreboard").removeClass("animated fadeOut");
+    }
+    $("#scoreboard").addClass("animated fadeIn");
+
+    $("#scoreboard").css("opacity", 1);
+  } else {
+    if ($("#live_page").hasClass("animated fadeOut")) {
+      $("#live_page").removeClass("animated fadeOut");
+      $("#live_page").addClass("animated fadeIn");
+    }
+    if ($("#scoreboard").hasClass("animated fadeIn")) {
+      $("#scoreboard").removeClass("animated fadeIn");
+    }
+    $("#scoreboard").addClass("animated fadeOut");
+  }
+}
+
 function updateScoreboard() {
   var today = new Date();
   var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
   var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   var dateTime = date + ' ' + time;
-  console.log(dateTime);
   $("#s_top_datetime").text(dateTime);
   $("#s_top_left #s_top_team").text(teams.left.name + " [" + teams.left.short_name.toUpperCase() + "]")
   $("#s_top_right #s_top_team").text(teams.right.name + " [" + teams.right.short_name.toUpperCase() + "]")
@@ -264,6 +313,72 @@ function updateScoreboard() {
   $("#s_top_right #s_top_score")
     .text(teams.right.score)
     .css("color", teams.right.side == "ct" ? COLOR_NEW_CT : COLOR_NEW_T);
+  $("#s_top_left #s_team_logo").css("background-image", "url(" + "/storage/" + teams.left.logo + ")")
+  $("#s_top_right #s_team_logo").css("background-image", "url(" + "/storage/" + teams.right.logo + ")")
+  if (teams.left.side == "ct") {
+
+    $("#s_team #s_player1").css("background-color", "rgba(0, 102, 255, 0.35)");
+    $("#s_team #s_player3").css("background-color", "rgba(0, 102, 255, 0.35)");
+    $("#s_team #s_player5").css("background-color", "rgba(0, 102, 255, 0.35)");
+    $("#s_team2 #s_player1").css("background-color", "rgba(255, 0, 102, 0.35)");
+    $("#s_team2 #s_player3").css("background-color", "rgba(255, 0, 102, 0.35)");
+    $("#s_team2 #s_player5").css("background-color", "rgba(255, 0, 102, 0.35)");
+  }
+  else {
+    $("#s_team #s_player1").css("background-color", "rgba(255, 0, 102, 0.35)");
+    $("#s_team #s_player3").css("background-color", "rgba(255, 0, 102, 0.35)");
+    $("#s_team #s_player5").css("background-color", "rgba(255, 0, 102, 0.35)");
+    $("#s_team2 #s_player1").css("background-color", "rgba(0, 102, 255, 0.35)");
+    $("#s_team2 #s_player3").css("background-color", "rgba(0, 102, 255, 0.35)");
+    $("#s_team2 #s_player5").css("background-color", "rgba(0, 102, 255, 0.35)");
+  }
+
+  scoreboard_players_left.sort(sortFunctionScoreboard);
+  scoreboard_players_right.sort(sortFunctionScoreboard);
+
+  if (teams.left.players) {
+    for (var i = 0; i < 5; i++) {
+      if (i >= teams.left.players.length) {
+        let $scoreboard = $("#scoreboard " + "#s_teams " + "#s_team" + " #s_player" + (i + 1));
+        $scoreboard.find("#s_p_nickname").text("UNCONNECTED");
+
+        $scoreboard.css("color", "rgb(169,169,169)");
+      } else {
+        let $scoreboard = $("#scoreboard " + "#s_teams " + "#s_team" + " #s_player" + (i + 1));
+        $scoreboard.find("#s_p_nickname").text(scoreboard_players_left[i][0]);
+        $scoreboard.find("#s_p_kills").text(scoreboard_players_left[i][1]);
+        $scoreboard.find("#s_p_assists").text(scoreboard_players_left[i][2]);
+        $scoreboard.find("#s_p_deaths").text(scoreboard_players_left[i][3]);
+        $scoreboard.find("#s_p_killdeath").text(scoreboard_players_left[i][4]);
+        $scoreboard.find("#s_p_mvps").text(scoreboard_players_left[i][5]);
+        $scoreboard.find("#s_p_score").text(scoreboard_players_left[i][6]);
+
+        $scoreboard.css("color", "white");
+      }
+    }
+  }
+  if (teams.right.players) {
+    for (var i = 0; i < 5; i++) {
+      if (i >= teams.right.players.length) {
+        let $scoreboard = $("#scoreboard " + "#s_teams " + "#s_team2" + " #s_player" + (i + 1));
+        $scoreboard.find("#s_p_nickname").text("UNCONNECTED");
+
+        $scoreboard.css("color", "rgb(169,169,169)");
+      } else {
+        let $scoreboard = $("#scoreboard " + "#s_teams " + "#s_team2" + " #s_player" + (i + 1));
+
+        $scoreboard.find("#s_p_nickname").text(scoreboard_players_right[i][0]);
+        $scoreboard.find("#s_p_kills").text(scoreboard_players_right[i][1]);
+        $scoreboard.find("#s_p_assists").text(scoreboard_players_right[i][2]);
+        $scoreboard.find("#s_p_deaths").text(scoreboard_players_right[i][3]);
+        $scoreboard.find("#s_p_killdeath").text(scoreboard_players_right[i][4]);
+        $scoreboard.find("#s_p_mvps").text(scoreboard_players_right[i][5]);
+        $scoreboard.find("#s_p_score").text(scoreboard_players_right[i][6]);
+
+        $scoreboard.css("color", "white");
+      }
+    }
+  }
 }
 
 function updateStateWarmup(phase) {
@@ -336,19 +451,12 @@ function updateStateFreezetime(phase, previously) {
   }
 }
 
-function updateStateOver(phase, round, previously) {
+function updateStateOver(phase, map, round, previously) {
   if (phase) {
-    if ($("#live_page").hasClass("animated fadeIn")){
-      $("#live_page").removeClass("animated fadeIn");
-    } 
-    $("#live_page").addClass("animated fadeOut");
-    
-    if ($("#scoreboard").hasClass("animated fadeOut")){
-      $("#scoreboard").removeClass("animated fadeOut");
-    } 
-    $("#scoreboard").addClass("animated fadeIn");
-    
-    $("#scoreboard").css("opacity", 1);
+    round_now = map.round + (round.phase == "over" || round.phase == "intermission" ? 0 : 1);
+    if (round_now%4===0){
+      toggleScoreboard(true);
+    }
 
     $("#round_timer_text").css("color", COLOR_GRAY);
     //#region Which Team Won
@@ -540,14 +648,7 @@ function updateStateDefuse(phase, bomb, players) {
 
 function updateStateLive(phase, bomb, players, previously) {
   if (phase) {
-    if ($("#live_page").hasClass("animated fadeOut")){
-      $("#live_page").removeClass("animated fadeOut");
-      $("#live_page").addClass("animated fadeIn");
-    } 
-    if ($("#scoreboard").hasClass("animated fadeIn")){
-      $("#scoreboard").removeClass("animated fadeIn");
-    } 
-    $("#scoreboard").addClass("animated fadeOut");
+    toggleScoreboard(false)
     removeRoundTimeGraphics();
     forceRemoveAlerts();
     resetBomb();
@@ -896,13 +997,37 @@ function fillPlayer(player, nr, side, observed, phase, previously) {
   let $top = $player.find(".player_section_top");
   let $bottom = $player.find(".player_section_bottom");
   let $kda_money = $player.find(".player_stats_holder");
+
+  //  scoreboard 
+
   if (side == "players_left") {
-    var scoreboard_side = "s_team";
+    scoreboard_players_left[nr][0] = player.name.toUpperCase();
+    scoreboard_players_left[nr][1] = stats.kills;
+    scoreboard_players_left[nr][2] = stats.assists;
+    scoreboard_players_left[nr][3] = stats.deaths;
+    if (stats.deaths == 0) {
+      scoreboard_players_left[nr][4] = (stats.kills).toFixed(1);
+    }
+    else {
+      scoreboard_players_left[nr][4] = (stats.kills / stats.deaths).toFixed(1);
+    }
+    scoreboard_players_left[nr][5] = stats.mvps;
+    scoreboard_players_left[nr][6] = stats.score;
   }
   else {
-    var scoreboard_side = "s_team2";
+    scoreboard_players_right[nr][0] = player.name.toUpperCase();
+    scoreboard_players_right[nr][1] = stats.kills;
+    scoreboard_players_right[nr][2] = stats.assists;
+    scoreboard_players_right[nr][3] = stats.deaths;
+    if (stats.deaths == 0) {
+      scoreboard_players_right[nr][4] = (stats.kills).toFixed(1);
+    }
+    else {
+      scoreboard_players_right[nr][4] = (stats.kills / stats.deaths).toFixed(1);
+    }
+    scoreboard_players_right[nr][5] = stats.mvps;
+    scoreboard_players_right[nr][6] = stats.score;
   }
-  let $scoreboard = $("#scoreboard " + "#s_teams "+ "#" + scoreboard_side + " #s_player" + (nr + 1));
 
   $top.find("#player_alias_text").css("color", dead ? COLOR_WHITE_HALF : COLOR_WHITE);
 
@@ -919,20 +1044,15 @@ function fillPlayer(player, nr, side, observed, phase, previously) {
   $kda_money.find("#player_kills_k").css("color", side_color);
   $kda_money.find("#player_kills_text").text(stats.kills);
   $player.find("#player_dead_kills_text").text(stats.kills);
-  $scoreboard.find("#s_p_kills").text(stats.kills);
+
   $kda_money.find("#player_assists_a").css("color", side_color);
   $kda_money.find("#player_assists_text").text(stats.assists);
   $player.find("#player_dead_assists_text").text(stats.assists);
-  $scoreboard.find("#s_p_assists").text(stats.assists);
+
   $kda_money.find("#player_deaths_d").css("color", side_color);
   $kda_money.find("#player_deaths_text").text(stats.deaths);
   $player.find("#player_dead_deaths_text").text(stats.deaths);
-  $scoreboard.find("#s_p_deaths").text(stats.deaths);
-  $scoreboard.find("#s_p_killdeath").text((stats.kills / stats.deaths).toFixed(1));
-  $scoreboard.find("#s_p_mvps").text(stats.mvps);
-  $scoreboard.find("#s_p_score").text(stats.score);
-  $scoreboard.find("#s_p_nickname").text(player.name.toUpperCase());
-  console.log(stats)
+
 
   if (dead) {
     $bottom.find("#player_bomb_kit_image").css("opacity", 0);
