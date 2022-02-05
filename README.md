@@ -6,6 +6,7 @@
 
 ![Ex1](https://i.imgur.com/AjcRIqK.png)
 ![Ex2](https://i.imgur.com/WqrJQzf.png)
+![Ex3](https://i.imgur.com/VArEbLC.png)
 
 ## How does it work?
 
