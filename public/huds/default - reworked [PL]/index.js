@@ -17,19 +17,19 @@ const PLAYER_PURPLE = "rgba(128, 60, 161, 1.0)";
 const DEV_PURPLE = "rgba(200, 0, 255, 1.0)";
 
 var scoreboard_players_left = [
-  ["Nickname", "3", "4", "2", "2.13", "1", 11],
-  ["Nickname", "3", "4", "2", "2.13", "1", 12],
-  ["Nickname", "3", "4", "2", "2.13", "1", 13],
-  ["Nickname", "3", "4", "2", "2.13", "1", 14],
-  ["Nickname", "3", "4", "2", "2.13", "1", 15]
+  ["Nickname1", "3", "4", "2", "2.13", "1", 11],
+  ["Nickname2", "3", "4", "2", "2.13", "1", 12],
+  ["Nickname3", "3", "4", "2", "2.13", "1", 14],
+  ["Nickname4", "3", "4", "2", "2.13", "1", 13],
+  ["Nickname5", "3", "4", "2", "2.13", "1", 15]
 ]
 
 var scoreboard_players_right = [
-  ["Nickname", "3", "4", "2", "2.13", "1", 11],
-  ["Nickname", "3", "4", "2", "2.13", "1", 12],
-  ["Nickname", "3", "4", "2", "2.13", "1", 13],
-  ["Nickname", "3", "4", "2", "2.13", "1", 14],
-  ["Nickname", "3", "4", "2", "2.13", "1", 15]
+  ["Nickname1", "3", "4", "2", "2.13", "1", 15],
+  ["Nickname2", "3", "4", "2", "2.13", "1", 12],
+  ["Nickname3", "3", "4", "2", "2.13", "1", 13],
+  ["Nickname4", "3", "4", "2", "2.13", "1", 11],
+  ["Nickname5", "3", "4", "2", "2.13", "1", 14]
 ]
 
 var teams = {
@@ -296,6 +296,15 @@ function toggleScoreboard(toggle) {
       $("#scoreboard").removeClass("animated fadeIn");
     }
     $("#scoreboard").addClass("animated fadeOut");
+  }
+}
+
+function toggleRadar(toggle) {
+  if (toggle == true) {
+    $("#radar_border").css("opacity", 1);
+  }
+  else {
+    $("#radar_border").css("opacity", 0);
   }
 }
 
@@ -648,7 +657,7 @@ function updateStateDefuse(phase, bomb, players) {
 
 function updateStateLive(phase, bomb, players, previously) {
   if (phase) {
-    toggleScoreboard(false)
+    //toggleScoreboard(false)
     removeRoundTimeGraphics();
     forceRemoveAlerts();
     resetBomb();

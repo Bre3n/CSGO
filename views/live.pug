@@ -1,5 +1,29 @@
 .row
-	.row.col.s12
-		.center-align
-			i.medium
-				| Work in progress...
+	table
+		thead
+			tr(style="font-size:35px;")
+				th Function
+				th Status
+		tbody(style="font-size:20px;")
+			tr
+				th Show Scoreboard
+				td
+					.switch
+						label
+							span(style="font-size:20px;")
+								| Off
+							input(type='checkbox' id="scoreboard")
+							span.lever
+							span(style="font-size:20px;")
+								| On
+			tr
+				th Show Radar border
+				td
+					.switch
+						label
+							span(style="font-size:20px;")
+								| Off
+							input(type='checkbox' id="radar" checked)
+							span.lever
+							span(style="font-size:20px;")
+								| On

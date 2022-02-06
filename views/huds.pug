@@ -6,7 +6,6 @@
 				th Name
 				th Delay Time
 				th URL
-				th Enable?
 				th Options
 				th Status
 		tbody
@@ -17,7 +16,7 @@
 				td
 					.col.s10
 						input#delay.validate(placeholder='Delay in seconds', type='number', min=0)
-				td(colspan="2")
+				td
 				td
 					a.waves-effect.waves-light.btn.add_hud Add instance
 				td#warnings
@@ -29,14 +28,7 @@
 				td
 					.col.s10
 						input#delay.delay.validate(placeholder='Delay in seconds', type='number', min=0)
-				td URL
 				td
-					.switch
-						label
-							| Off
-							input(type='checkbox')
-							span.lever
-							| On
 				td
 					a.waves-effect.waves-light.btn.delete_hud Delete
 				td#warnings

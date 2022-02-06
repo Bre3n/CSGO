@@ -2,7 +2,7 @@ $(document).ready(() => {
 	function listener() {
 		let names_listen = {};
 		let delay_listen = {};
-		$("input[type='checkbox']").change(function(e){
+		$("input[type='checkbox'][id$='huds']").change(function(e){
 			let container = $($(e.target).parents()[3]);
 			let hud = {
 				id: container.attr("data-hid"),
@@ -38,7 +38,7 @@ $(document).ready(() => {
 			names_listen[id] = setTimeout(function() {
 				let hud = {
 					id: id,
-					enabled: container.find("input[type='checkbox']").is(":checked"),
+					enabled: container.find("input[type='checkbox'][id$='huds']").is(":checked"),
 					name:container.find("#name").val(),
 					delay:container.find("#delay").val() != "" ? parseInt(container.find("#delay").val()) : 0
 				}

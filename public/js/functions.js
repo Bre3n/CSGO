@@ -243,7 +243,7 @@ function listHUDs(cb) {
                     $temp.find("td:eq(3)").html("<a href='/huds/" + inst._id + "'>/huds/" + inst._id + "</a>");
                     $temp.find("#warnings").html('<i class="material-icons">done</i>')
 
-                    if (inst.enabled == true) $temp.find("input[type='checkbox']").prop("checked", "true");
+                    if (inst.enabled == true) $temp.find("input[type='checkbox'][id$='huds']").prop("checked", "true");
                 }, this);
             }
             let $status = $hudRow.find("#warnings i");

@@ -260,6 +260,12 @@ $(document).ready(function () {
       location.reload();
     });
     io.emit("ready", true);
+    io.on("toggleScoreboard", function(data) {
+      toggleScoreboard(data);
+    });
+    io.on("toggleRadar", function(data) {
+      toggleRadar(data);
+    });
   }
   load(listener);
 });

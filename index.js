@@ -181,6 +181,12 @@ io.on("connection", socket => {
   socket.on("refresh", data => {
     io.emit("refresh", data);
   });
+  socket.on("toggleScoreboard", data => {
+    io.emit("toggleScoreboard", data)
+  });
+  socket.on("toggleRadar", data => {
+    io.emit("toggleRadar", data)
+  });
 });
 
 express.listen(config.ServerPort, address || "localhost", () => {
