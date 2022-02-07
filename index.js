@@ -216,8 +216,32 @@ server = http.createServer((req, res) => {
   });
 });
 
+sad = [];
+
 function update(json) {
   io.emit("update", json);
+  //console.log(json);
+
+  /*
+  fss.readFile('results.json', function (err, data) {
+      var jsonn = JSON.parse(data)
+      jsonn.push("sadsad")
+      fss.writeFile("results.json", JSON.stringify(jsonn))
+  })
+  */
+  /*
+  sad.push(json);
+  const data = JSON.stringify(json);
+
+    // write JSON string to a file
+    fs.writeFile('user.json', data, (err) => {
+        if (err) {
+            throw err;
+        }
+        console.log("JSON data is saved.");
+    });
+
+    */
 }
 
 server.listen(config.GameStateIntegrationPort);
