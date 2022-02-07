@@ -463,7 +463,7 @@ function updateStateFreezetime(phase, previously) {
 function updateStateOver(phase, map, round, previously) {
   if (phase) {
     round_now = map.round + (round.phase == "over" || round.phase == "intermission" ? 0 : 1);
-    if (round_now%4===0){
+    if (round_now % 4 === 0) {
       //toggleScoreboard(true);
     }
 
