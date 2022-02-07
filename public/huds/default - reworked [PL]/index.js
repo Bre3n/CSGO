@@ -464,7 +464,7 @@ function updateStateOver(phase, map, round, previously) {
   if (phase) {
     round_now = map.round + (round.phase == "over" || round.phase == "intermission" ? 0 : 1);
     if (round_now%4===0){
-      toggleScoreboard(true);
+      //toggleScoreboard(true);
     }
 
     $("#round_timer_text").css("color", COLOR_GRAY);
