@@ -14,6 +14,7 @@ body {
 }
 
 #radar_border {
+  opacity:0;
   margin-left: 39px;
   margin-top: 89px;
   width: 330px;
