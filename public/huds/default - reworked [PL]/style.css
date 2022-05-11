@@ -14,13 +14,18 @@ body {
 }
 
 #radar_border {
-  opacity:0;
+  opacity: 0;
   margin-left: 39px;
   margin-top: 89px;
   width: 330px;
   height: 328px;
   border: solid 5px;
-  border-image: linear-gradient(to right, rgba(0, 102, 255, 1.0), rgba(255, 0, 102, 1.0)) 1;
+  border-image: linear-gradient(
+      to right,
+      rgba(0, 102, 255, 1),
+      rgba(255, 0, 102, 1)
+    )
+    1;
 }
 
 #scoreboard {

@@ -40,6 +40,7 @@ var start_money = {};
 var round_now = 0;
 var last_round = 0;
 var freezetime = false;
+var radarToggle = null;
 
 function updatePage(data) {
   var matchup = data.getMatchType();
@@ -202,9 +203,25 @@ function updateTopPanel() {
 }
 
 function updateLeague() {
-  $("#players_left #box_image").attr("src", _left_image);
-  $("#players_left #box_image2").attr("src", _left_image2);
-  $("#players_left #box_image3").attr("src", _left_image3);
+  if (_displayRadar && radarToggle == null) {
+    toggleRadar(true)
+  }
+  if (_displayOnlyMainImage) {
+    $("#players_left #box_image").css("width", "405px");
+    $("#players_left #box_image").css("height", "85px");
+    $("#players_left #box_image").css("top", "0px");
+    $("#players_left #box_image").css("right", "-5px");
+    $("#players_left #box_image").css("top", "-5px");
+    $("#players_left #box_image").attr("src", _leftOneImage);
+    $("#players_left #box_image").css("border", "none");
+    $("#players_left #box_image2").css("opacity", 0);
+    $("#players_left #box_image3").css("opacity", 0);
+  } else {
+    $("#players_left #box_image").attr("src", _left_image);
+    $("#players_left #box_image2").attr("src", _left_image2);
+    $("#players_left #box_image3").attr("src", _left_image3);
+  }
+
   $("#players_left #main_primary").text(_left_primary);
   $("#players_left #main_secondary").text(_left_secondary);
   $("#players_right #box_image").attr("src", _right_image);
@@ -301,9 +318,11 @@ function toggleScoreboard(toggle) {
 
 function toggleRadar(toggle) {
   if (toggle == true) {
+    radarToggle = true
     $("#radar_border").css("opacity", 1);
   }
   else {
+    radarToggle = false
     $("#radar_border").css("opacity", 0);
   }
 }
@@ -463,8 +482,10 @@ function updateStateFreezetime(phase, previously) {
 function updateStateOver(phase, map, round, previously) {
   if (phase) {
     round_now = map.round + (round.phase == "over" || round.phase == "intermission" ? 0 : 1);
-    if (round_now % 4 === 0) {
-      //toggleScoreboard(true);
+    if (_displayScoreboard) {
+      if (round_now % 4 === 0) {
+        toggleScoreboard(true);
+      }
     }
 
     $("#round_timer_text").css("color", COLOR_GRAY);
@@ -657,7 +678,9 @@ function updateStateDefuse(phase, bomb, players) {
 
 function updateStateLive(phase, bomb, players, previously) {
   if (phase) {
-    //toggleScoreboard(false)
+    if (_displayScoreboard) {
+      toggleScoreboard(false)
+    }
     removeRoundTimeGraphics();
     forceRemoveAlerts();
     resetBomb();

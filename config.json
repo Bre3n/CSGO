@@ -13,6 +13,13 @@
   "LeftImage2": "/files/league/supearmiceklogo.png",
   "LeftImage3": "/files/league/turniej_logo.png",
 
+  "LeftOneImage": "/files/league/turniej_logo_kopia.png",
+  "DisplayOnlyMainImage": false,
+  "_onlyComment": " this image ^^^ (LeftOneImage) should be 405px x 85px ",
+
+  "DisplayScoreboard": false,
+  "DisplayRadar": false,
+
   "LeftPrimary": "",
   "LeftSecondary": "",
   "RightImage": "/files/league/miceklogo.png",

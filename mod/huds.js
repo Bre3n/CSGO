@@ -26,7 +26,13 @@ module.exports = {
       config.LeftImage = "";
       config.LeftImage2 = "";
       config.LeftImage3 = "";
-      config.LeftImage4 = "";
+
+      config.LeftOneImage = "";
+      config.DisplayOnlyMainImage = "";
+
+      config.DisplayScoreboard = true;
+      config.DisplayRadar = false;
+
       config.LeftPrimary = "";
       config.LeftSecondary = "";
       config.RightImage = "";
@@ -41,7 +47,7 @@ module.exports = {
   addHUD: (req, res) => {
     if (!fs.existsSync("./public/huds")) return res.sendStatus(500);
 
-    let existingHUDs = fs.readdirSync("./public/huds").filter(function(file) {
+    let existingHUDs = fs.readdirSync("./public/huds").filter(function (file) {
       return fs.statSync("./public/huds/" + file).isDirectory();
     });
 
@@ -62,7 +68,7 @@ module.exports = {
   getHUDs: (req, res) => {
     if (!fs.existsSync("./public/huds")) return res.sendStatus(500);
 
-    let existingHUDs = fs.readdirSync("./public/huds").filter(function(file) {
+    let existingHUDs = fs.readdirSync("./public/huds").filter(function (file) {
       return fs.statSync("./public/huds/" + file).isDirectory();
     });
 
@@ -167,6 +173,13 @@ module.exports = {
         left_image: config.LeftImage,
         left_image2: config.LeftImage2,
         left_image3: config.LeftImage3,
+
+        leftOneImage: config.LeftOneImage,
+        displayOnlyMainImage: config.DisplayOnlyMainImage,
+
+        displayScoreboard: config.DisplayScoreboard,
+        displayRadar: config.DisplayRadar,
+
         left_primary: config.LeftPrimary,
         left_secondary: config.LeftSecondary,
         right_image: config.RightImage,
