@@ -37,7 +37,17 @@ Basically, CS:GO is streaming data to local app-server, that transforms data and
     "DisplayAvatars": false, // true for yes, false for no
     "AvatarDirectory":"./public/files/avatars/", // Local storage for avatars
     "SpecialEvent": "SHOWMATCH", // If create match type is set to NONE, it will use this text - used for something else, just leave alone
-    "LeftImage": "/files/league/blah.png", // Left Section Image
+    "LeftImage": "/files/league/miceklogo.png", // Left Section Image
+    "LeftImage2": "/files/league/supearmiceklogo.png", // Left Section Image
+    "LeftImage3": "/files/league/turniej_logo.png", // Left Section Image
+    
+    "LeftOneImage": "/files/league/turniej_logo_kopia.png", // Left section, one big image for the entire container
+    "DisplayOnlyMainImage": false, // Check this to display only one big image instead 3 smaller
+    "_onlyComment": " this image ^^^ (LeftOneImage) should be 405px x 85px ",
+    
+    "DisplayScoreboard": true, // Scoreboard appears at the end of the round (once in 4 rounds)
+    "DisplayRadar": true, // Show radar border (if RUN_RADAR didnt work)
+    
     "LeftPrimary": "Left Primary Text", // left Section Top Words
     "LeftSecondary": "Left Secondary Text", // Left Section Bottom Words
     "RightImage": "/files/img/elements/icon_microphone.png", // Right Section Image
@@ -96,6 +106,12 @@ This tab shows local HUDs. They are not validated whether or not they actually w
 You can enable/disable each HUD to make it accessible or not. There is also HUD URL information - if you click it, it will redirect you to local webpage, that's serving as a HUD. It is useful if streamer wants to stream HUD separately - for example it can be added in OBS as Browser Source, then you just need to set it to HUD's URL.
 It might be useful for bigger streaming workspaces, like for setups with different PC dedicated to replays - one server app will manage every HUD on local network, because all HUDs are available all the time, if they are not disabled.
 ![Ex4](https://i.imgur.com/HbdH4Ia.png)
+
+### LIVE PAGE
+
+In this tab you can easily show/hide scoreboard and radar border while HUD running
+
+![Ex5](https://i.imgur.com/cyg5Ws4.png)
 
 ## Credits
 
