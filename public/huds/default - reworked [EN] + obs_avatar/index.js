@@ -95,6 +95,7 @@ function updatePage(data) {
   updateTopPanel();
   updateLeague();
   updateRoundNow(round, map);
+  updateScoreboard();
   updateRoundState(phase, round, map, previously, bomb, players);
   updateObserved(observed);
   updatePlayers(players, observed, phase, previously);
@@ -292,7 +293,6 @@ function sortFunctionScoreboard(a, b) {
 
 function toggleScoreboard(toggle) {
   if (toggle == true) {
-    updateScoreboard();
     if ($("#live_page").hasClass("animated fadeIn")) {
       $("#live_page").removeClass("animated fadeIn");
     }
