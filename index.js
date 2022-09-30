@@ -114,10 +114,9 @@ app.delete("/api/players_avatar", players.deleteAvatar);
 
 app.get("/av/:sid([0-9]+)", (req, res) => {
   let steam_id = req.params.sid;
-
+  
   let filename = steam_id + ".png";
   let filepath = config.AvatarDirectory + filename;
-
   let bodyChunks = [];
   let data;
 
@@ -138,7 +137,6 @@ app.get("/av/:sid([0-9]+)", (req, res) => {
     };
     let endCallback = () => {
       let body = Buffer.concat(bodyChunks);
-
       try {
         data = JSON.parse(body).response;
         if (data && data.players) {

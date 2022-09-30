@@ -808,9 +808,9 @@ function fillObserved(obs) {
   let weapons = obs.weapons;
   team_color = obs.team == "CT" ? COLOR_NEW_CT : COLOR_NEW_T;
 
-  loadAvatar(obs.steamid, function(){
-    $("#obs_img").attr("src", "/storage/" + obs.steamid);
-});
+  loadAvatar(obs.steamid, function () {
+    $("#obs_img").attr("src", "/files/avatars/" + obs.steamid + ".png");
+  });
 
   //#region Poles
   $("#obs_lane3_left_pole").css("background-color", team_color);
@@ -1043,9 +1043,9 @@ function fillPlayer(player, nr, side, observed, phase, previously) {
       // Custom Set Avatar
       if (player.avatar)
         $player
-        .find("#player_image")
-        .attr("src", "/storage/" + player.avatar)
-        .addClass(dead ? "dead" : "");
+          .find("#player_image")
+          .attr("src", "/storage/" + player.avatar)
+          .addClass(dead ? "dead" : "");
     } else {
       // Just Use Team Logo
       if (team == "ct") {
