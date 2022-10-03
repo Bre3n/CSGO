@@ -16,14 +16,22 @@ body {
 
 #radar_border {
   opacity: 0;
-  margin-left: 39px;
-  margin-top: 89px;
+  margin-left: 0px;
+  margin-top: 50px;
   width: 330px;
   height: 328px;
+  /*
   border: solid 5px;
   border-image: linear-gradient(to right,
       rgba(0, 102, 255, 1),
-      rgba(255, 0, 102, 1)) 1;
+      rgba(255, 0, 102, 1)) 1;*/
+}
+
+#iframe{
+  margin-left: -30px;
+  margin-top: -25px;
+  width: 140%;
+  height: 140%;
 }
 
 #scoreboard {
