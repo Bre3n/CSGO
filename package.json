@@ -1,11 +1,11 @@
 {
-  "name": "CSGO-CUSTOM-HUD",
+  "name": "CSGO-OBSERVER",
   "version": "1.0.0",
   "private": true,
   "description": "CSGO_HUD",
-  "author": "osztenkurden",
+  "author": "Bre3n",
   "maintainers": [
-    "osztenkurden <osztenkurden@gmail.com>"
+    "Bre3n <mwgoinda@gmail.com>"
   ],
   "dependencies": {
     "body-parser": "latest",

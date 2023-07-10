@@ -1,7 +1,7 @@
 {
   "GameStateIntegrationPort": 1337,
   "ServerPort": 2626,
-  "SteamApiKey": "A48D5274449E35489B015F43A8BF85D3",
+  "SteamApiKey": "",
   "PrintPlayerData": false,
   "DisplayAvatars": true,
   "DisplayPlayerAvatars": true,

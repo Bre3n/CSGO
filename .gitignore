@@ -38,6 +38,7 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+radar/node_modules/
 
 # Typescript v1 declaration files
 typings/
@@ -67,6 +68,7 @@ typings/
 !.vscode/launch.json
 !.vscode/extensions.json
 .history
+
 
 # End of https://www.gitignore.io/api/node,visualstudiocode
 CSGO Observer.exe.WebView2
