@@ -23,6 +23,10 @@
     "pug": "latest",
     "request": "latest",
     "socket.io": "^4.4.1",
-    "ws": "^7.2.3"
+    "ws": "^7.2.3",
+    "nodemon": "latest"
+  },
+  "nodemonConfig": {
+    "ext": "js,json,pug,css,png"
   }
 }

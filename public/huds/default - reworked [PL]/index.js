@@ -5,7 +5,9 @@ const COLOR_NEW_T = "rgba(255, 0, 102, 1.0)";
 const COLOR_RED = "rgba(242, 34, 34, 1.0)";
 const COLOR_MAIN_PANEL = "rgba(12, 15, 18, 0.75)";
 const COLOR_SUB_PANEL = "rgba(12, 15, 18, 0.6)";
-const COLOR_GRAY = "rgba(191, 191, 191, 1.0)";
+const COLOR_GRAY = "rgba(191, 191, 191, 0.7)";
+const COLOR_GRAY_DARK = "rgba(12, 15, 18, 0.7)"
+const COLOR_YELLOW = "rgba(255,255,0,1.0)"
 const COLOR_WHITE = "rgba(250, 250, 250, 1.0)";
 const COLOR_WHITE_HALF = "rgba(250, 250, 250, 0.5)";
 const COLOR_WHITE_DULL = "rgba(250, 250, 250, 0.25)";
@@ -45,6 +47,7 @@ var radarToggle = null;
 function updatePage(data) {
   var matchup = data.getMatchType();
   var match = data.getMatch();
+
   var team_one = data.getTeamOne();
   var team_two = data.getTeamTwo();
   var team_ct = data.getCT();
@@ -54,7 +57,7 @@ function updatePage(data) {
   var players = data.getPlayers();
   var round = data.round();
   var map = data.map();
-  live_map = map
+  live_map = map;
   var previously = data.previously();
   var bomb = data.bomb();
 
@@ -95,7 +98,9 @@ function updatePage(data) {
   updateTopPanel();
   updateLeague();
   updateRoundNow(round, map);
-  updateScoreboard();
+  updateScoreboard(match);
+  mapPicked(match, map);
+  updateSponsors();
   updateRoundState(phase, round, map, previously, bomb, players);
   updateObserved(observed);
   updatePlayers(players, observed, phase, previously);
@@ -105,6 +110,28 @@ function updatePage(data) {
   last_round = round_now;
 }
 
+function updateSponsors(){
+  if(_displaySponsorsUnderObs){
+    $("#obs_sponsors").css("opacity",1);
+    $("#obs_sponsors_image").attr("src", _displaySponsorsUnderObsImage);
+  }else{
+    $("#obs_sponsors").css("opacity",0);
+  }
+}
+
+function mapPicked(match, map){
+  var mapName = map.name.replace("de_", "");
+  mapName = mapName.replace("_", " ");
+  mapName = mapName.charAt(0).toUpperCase() + mapName.slice(1);
+  var teamName = match.maptype;
+  if(teamName===undefined){
+    $("#mapPicked").css("opacity",0);
+  }else{
+  $("#mapPicked #m_text").text(mapName +" | Picked by " + match.maptype);
+  }
+}
+
+//15
 function setupBestOf(matchup, match) {
   if (matchup && matchup.toLowerCase() != "none") {
     if (matchup == "bo1") {
@@ -204,8 +231,14 @@ function updateTopPanel() {
 }
 
 function updateLeague() {
-  if (_displayRadar && radarToggle == null) {
-    toggleRadar(true)
+  if (_displayPickedMap == true) {
+    $("#mapPicked").css("opacity", 1);
+  }
+  if (_displayRadar) {
+    $("#radar_border").css("opacity", 1);
+  }
+  if (_displayAliveCounter == true) {
+    $("#players_alive").css("opacity", 1);
   }
   if (_displayOnlyMainImage) {
     $("#players_left #box_image").css("width", "405px");
@@ -221,6 +254,11 @@ function updateLeague() {
     $("#players_left #box_image").attr("src", _left_image);
     $("#players_left #box_image2").attr("src", _left_image2);
     $("#players_left #box_image3").attr("src", _left_image3);
+  }
+
+  if (_displaySponsorsUnderObs){
+    $("#obs_sponsors #obs_sponsors_image").attr("src", _displaySponsorsUnderObsImage);
+    $("#obs_sponsors").css("opacity", 1);
   }
 
   $("#players_left #main_primary").text(_left_primary);
@@ -316,18 +354,7 @@ function toggleScoreboard(toggle) {
   }
 }
 
-function toggleRadar(toggle) {
-  if (toggle == true) {
-    radarToggle = true
-    $("#radar_border").css("opacity", 1);
-  }
-  else {
-    radarToggle = false
-    $("#radar_border").css("opacity", 0);
-  }
-}
-
-function updateScoreboard() {
+function updateScoreboard(match) {
   var today = new Date();
   var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
   var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -807,6 +834,11 @@ function fillObserved(obs) {
   let stats = obs.getStats();
   let weapons = obs.weapons;
   team_color = obs.team == "CT" ? COLOR_NEW_CT : COLOR_NEW_T;
+
+  loadAvatar(obs.steamid, function () {
+    $("#obs_img").attr("src", "/files/avatars/" + obs.steamid + ".png");
+  });
+
   //#region Poles
   $("#obs_lane3_left_pole").css("background-color", team_color);
   $("#obs_lane3_right_pole").css("background-color", team_color);
@@ -849,7 +881,7 @@ function fillObserved(obs) {
       }
     } else {
       loadAvatar(obs.steamid, function () {
-        $("#obs_img").attr("src", "/av/" + obs.steamid);
+        $("#obs_img").attr("src", "/files/avatars/" + obs.steamid + ".png");
       });
     }
   } else {
@@ -1379,14 +1411,14 @@ function showAlertSlide(side, color, text) {
     .css("color", color);
   if (side == "#left_team") {
     $(side + " #alert")
-      .css("opacity", 1)
-      .addClass("animated fadeInRight");
+      .css("opacity", 1);
   } else if (side == "#right_team") {
-    $(side + " #alert")
-      .css("opacity", 1)
-      .addClass("animated fadeInLeft");
+      $(side + " #alert")
+      .css("opacity", 1);
   }
 }
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! nie wiem kurde jak zrobi fadeInDown dlatego nie ma :'(
 
 function hideAlert(side) {
   let element = side + " #alert";

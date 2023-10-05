@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 	<head>
-		<title>Boltobserv - Waiting for CSGO</title>
+		<title>Radar - Waiting for CSGO</title>
 		<meta charset="utf-8">
+		<link rel="icon" href="/img/icon-64x64.png" sizes="64x64" type="image/png">
 
 		<link rel="stylesheet" href="/css/main.css">
 		<link rel="stylesheet" href="/css/waiting.css">
@@ -13,15 +14,46 @@
 	<body>
 		<div id="dragarea"></div>
 
-		<div id="game">
-			<div id="cfgs"></div>
+		<div id="container">
 
-			<div id="noconnection">
-				Waiting for CSGO to connect...
+			<div id="topbar">
+				<span>
+					<img src="/img/icon.svg">
+					Radar
+				</span>
+				<button id="openconfig">open config</button>
+
+				<section id="donate">
+				</section>
 			</div>
+
+			<div>
+				<div id="connectbolt" class="statusbox">
+					<strong>Radar</strong>
+					<span>Disconnected</span>
+					<div>Connecting to socket</div>
+				</div>
+
+				<div id="connectgameline" class="statusline">&rsaquo;</div>
+
+				<div id="connectgame" class="statusbox">
+					<strong>CSGO</strong>
+					<span>Disconnected</span>
+					<div>Still waiting for Boltobserv</div>
+				</div>
+
+				<div id="connectserverline" class="statusline">&rsaquo;</div>
+
+				<div id="connectserver" class="statusbox">
+					<strong>Match server</strong>
+					<span>Disconnected</span>
+					<div>Waiting for CSGO to connect first</div>
+				</div>
+			</div>
+
+			<div id="cfgs"></div>
 		</div>
 
-		<span id="version"></span>
 
 		<script>
 			if (navigator.userAgent.toLowerCase().indexOf(" electron/") > -1) {
@@ -52,13 +84,13 @@
 
 				function install(elem, path) {
 					localSocket.send("install", path)
-					elem.parentNode.parentNode.parentNode.removeChild(elem.parentNode.parentNode)
+					elem.parentNode.parentNode.removeChild(elem.parentNode)
 				}
 
 				let version = require("../package.json").version
-				document.getElementById("version").innerHTML = "Running version " + version
+				document.getElementById("version").innerHTML = version
 
-				require("https").get("https://raw.githubusercontent.com/boltgolt/boltobserv/master/package.json", (resp) => {
+				require("https").get("https://raw.githubusercontent.com/boltgolt/boltobserv/master/src/package.json", (resp) => {
 					let data = ""
 
 					resp.on("data", (chunk) => {data += chunk})
@@ -66,7 +98,7 @@
 						let newVersion = JSON.parse(data).version
 
 						if (version != newVersion) {
-							document.getElementById("version").innerHTML += ` - <small onclick="releases()">Version ${newVersion} is available on github!</small>`
+							document.getElementById("version").innerHTML += ` <a onclick="releases()">Version ${newVersion} available!</a>`
 						}
 					})
 				})
@@ -76,27 +108,46 @@
 				}
 
 				// Catch for missed GSI event, will check if we should actually be seeing map
-				setTimeout(() =>  {
-					fetch(`http://127.0.0.1:${config.browser.ports.static}/doorknock`)
+				setInterval(() =>  {
+					fetch(`http://127.0.0.1:${global.config.browser.ports.static}/doorknock`)
 					.then(resp => resp.json())
 					.then(data => {
 						if (data.activePage != "waiting") {
 							window.location.href = `${data.activePage}.html`
 						}
+
+						let openButton = document.getElementById("openconfig")
+						if (data.configPath && openButton.style.display != "block") {
+							openButton.style.display = "block"
+							openButton.addEventListener("click", () => {
+								electron.shell.openPath(data.configPath)
+							})
+						}
 					})
 				}, 500)
+
+				// If electron, make the donate button open a browser tab and not a window
+				document.getElementById("donate").querySelector("a").href = ""
+				document.getElementById("donate").querySelector("a").target = ""
+				document.getElementById("donate").addEventListener("click", event => {
+					event.preventDefault()
+					electron.shell.openExternal("https://ko-fi.com/boltgolt")
+				})
 			}
 
+			// Listen for a GSI packet coming in and update status
 			socket.element.addEventListener("connection", event => {
-				let output = "CSGO instance "
+				let playername = event.data.player
+				if (!playername) playername = "Observer"
 
-				if (event.data.player) {
-					output += `from ${event.data.player} `
-				}
+				let connectgame = document.getElementById("connectgame")
+				connectgame.classList.add("connected")
+				connectgame.querySelector("span").innerHTML = "Connected"
+				connectgame.querySelector("div").innerHTML = `<span>${playername}</span> choosing server`
 
-				output += "connected. <br /> Waiting for map..."
-
-				document.getElementById("noconnection").innerHTML = output
+				document.getElementById("connectgameline").classList.add("connected")
+				document.getElementById("connectbolt").querySelector("div").innerHTML = "Receiving GSI packets"
+				document.getElementById("connectserver").querySelector("div").innerHTML = "Waiting for game to connect"
 			})
 		</script>
 	</body>

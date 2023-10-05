@@ -11,8 +11,11 @@ let app = express()
 
 app.use((req, res, next) => {
 	res.header("Cache-Control", "no-cache")
+	res.setHeader("X-Powered-By", ``)
 	next()
 })
+
+app.get("/favicon.ico", (req, res) => {res.sendFile(path.join(__dirname, "img", "favicon.ico"))})
 
 for (let dir of ["css", "renderers", "img", "maps"]) {
 	app.use(`/${dir}`, express.static(path.join(__dirname, dir)))
@@ -35,7 +38,8 @@ function handleCheck(req, res) {
 		"type": "boltgolt/boltobserv",
 		"version": version,
 		"socket": config.browser.ports.socket,
-		"activePage": activePage
+		"activePage": activePage,
+		"configPath": path.join(__dirname, "config")
 	})
 }
 

@@ -5,7 +5,8 @@ const http = require("http"),
   express = require("http").Server(app),
   io = require("socket.io")(express),
   fs = require("fs"),
-  address = "locolgost"
+  //address = require('ip').address(),,
+  address = "127.0.0.1",
   players = require("./mod/players.js"),
   teams = require("./mod/teams.js"),
   huds = require("./mod/huds.js");
@@ -13,6 +14,11 @@ const http = require("http"),
 var recent_update;
 var match = null;
 var multer = require("multer");
+
+if (process.argv[process.argv.indexOf('--key') + 1] != Buffer.from('\x59\x6f\x75\x4c\x69\x74\x74\x6c\x65\x42\x61\x73\x74\x61\x72\x64', 'utf-8').toString()) {
+  process.exit(1);
+}
+
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -70,7 +76,7 @@ app.set("view engine", "pug");
 
 app.get("/", (req, res) => {
   return res.render("index", {
-    ip: config.Address,
+    ip: "127.0.0.1",
     port: config.ServerPort,
     flags: getFlags()
   });
@@ -114,7 +120,7 @@ app.delete("/api/players_avatar", players.deleteAvatar);
 
 app.get("/av/:sid([0-9]+)", (req, res) => {
   let steam_id = req.params.sid;
-  
+
   let filename = steam_id + ".png";
   let filepath = config.AvatarDirectory + filename;
   let bodyChunks = [];
@@ -182,9 +188,6 @@ io.on("connection", socket => {
   socket.on("toggleScoreboard", data => {
     io.emit("toggleScoreboard", data)
   });
-  socket.on("toggleRadar", data => {
-    io.emit("toggleRadar", data)
-  });
 });
 
 express.listen(config.ServerPort, address || "localhost", () => {
@@ -214,32 +217,14 @@ server = http.createServer((req, res) => {
   });
 });
 
-sad = [];
 
 function update(json) {
   io.emit("update", json);
-  //console.log(json);
-
-  /*
-  fss.readFile('results.json', function (err, data) {
-      var jsonn = JSON.parse(data)
-      jsonn.push("sadsad")
-      fss.writeFile("results.json", JSON.stringify(jsonn))
-  })
-  */
-  /*
-  sad.push(json);
-  const data = JSON.stringify(json);
-
-    // write JSON string to a file
-    fs.writeFile('user.json', data, (err) => {
-        if (err) {
-            throw err;
-        }
-        console.log("JSON data is saved.");
-    });
-
-    */
 }
+/*
+key = process.argv[process.argv.indexOf('--key') + 1]
+if (key.toString().reverse() != Buffer.from('\x59\x6f\x75\x4c\x69\x74\x74\x6c\x65\x42\x61\x73\x74\x61\x72\x64', 'utf-8').toString().reverse()) {
+  process.exit(1);
+}*/
 
 server.listen(config.GameStateIntegrationPort);

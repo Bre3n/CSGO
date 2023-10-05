@@ -27,11 +27,9 @@ let socket = {
 
 				// If we're on the waiting screen with a version element, insert the version we got
 				if (document.getElementById("version") && document.getElementById("version").innerHTML == "") {
-					document.getElementById("version").innerHTML = "version " + data.version
+					document.getElementById("version").innerHTML = data.version
 				}
 
-				// Add a nice line in the console <3
-				console.info(`%cBoltobserv %cv${data.version}%c, at your service ❤ `, "font-weight: bold", "font-weight: bold; color:red", "font-weight: bold", "https://github.com/boltgolt/boltobserv/")
 			})
 			.catch((err) => {
 				console.error(err)
@@ -43,6 +41,16 @@ let socket = {
 				}, 25)
 			})
 		}
+
+		window.addEventListener("DOMContentLoaded", () => {
+			let connectbox = document.getElementById("connectbolt")
+			if (connectbox) {
+				connectbox.classList.add("connected")
+				connectbox.querySelector("span").innerHTML = "Connected"
+				connectbox.querySelector("div").innerHTML = "Listening and ready"
+				document.getElementById("connectgame").querySelector("div").innerHTML = "Not sending GSI packets"
+			}
+		})
 
 		function attachEvents(websocket) {
 			// Called when the socket is started

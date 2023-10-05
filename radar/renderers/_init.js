@@ -48,7 +48,7 @@ socket.element.addEventListener("welcome", event => {
 		document.body.style.cursor = "default"
 
 		if (!global.config.browser.transparent) {
-			document.body.style.background = "#000"
+			document.body.style.background = "#FF"
 		}
 	}
 

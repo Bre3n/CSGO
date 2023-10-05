@@ -13,6 +13,47 @@ body {
   opacity: 1;
 }
 
+#mapPicked{
+  opacity:0;
+  margin-left: 20px;
+  margin-top: 10px;
+  width: 330px;
+  height: 25px;
+}
+
+#mapPicked #m_box{
+  font-family: 'B612', sans-serif;
+  background: rgb(60,60,60);
+  background-image: url("/files/hud/m_box_image.png");
+  background: -moz-linear-gradient(0deg, rgba(60,60,60,1) 0%, rgba(0,12,117,1) 5%, rgba(80,80,80,1) 100%);
+  background: -webkit-linear-gradient(0deg, rgba(60,60,60,1) 0%, rgba(0,12,117,1) 5%, rgba(80,80,80,1) 100%);
+  background: linear-gradient(0deg, rgba(60,60,60,1) 0%, rgba(0,12,117,1) 5%, rgba(80,80,80,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#3c3c3c",endColorstr="#505050",GradientType=1);
+}
+
+#mapPicked #m_box #m_text {
+  padding-top: 4px;
+  color: white;
+  font-size: 15px;
+  text-align: center;
+  background-image: url("/files/hud/m_box_image.png");
+  border:none;
+}
+
+#obs_sponsors {
+  opacity:0;
+  bottom: 70px;
+  left: 50%;
+  width:610px;
+  height: 60px;
+  padding: 5px;
+}
+
+#obs_sponsors_image {
+  width:100%;
+  height: 100%;
+}
+
 #radar_border {
   opacity: 0;
   margin-left: 0px;
@@ -27,8 +68,8 @@ body {
 }
 
 #iframe{
-  margin-left: -30px;
-  margin-top: -25px;
+  margin-left: -45px;
+  margin-top: -120px;
   width: 140%;
   height: 140%;
 }
@@ -796,14 +837,23 @@ body {
   position: absolute;
 }
 
-#obs_img {
-  position: relative;
+#obs_img_mid{
   width: 140px;
   height: 140px;
+  margin-left: 100px;
+  margin-right: 100px;
+  bottom:50px;
+  position: relative;
+}
+
+#obs_img {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 #obs_lane1 {
-  width: 480px;
+  width: 340px;
   height: 90px;
   position: relative;
   left: 140px;
@@ -1249,7 +1299,7 @@ body {
 }
 
 #players_left > #box_section > #box_top > #box_img {
-  right: 0;
+  right: 50;
 }
 
 #players_left > #box_section > #box_top > #box_img2 {
@@ -1257,7 +1307,7 @@ body {
 }
 
 #players_left > #box_section > #box_top > #box_img3 {
-  right: 140;
+  right: 70;
 }
 
 #players_left > #box_section > #box_top > #box_img4 {
@@ -1273,8 +1323,10 @@ body {
 }
 
 #box_image {
-  width: 50px;
-  height: 50px;
+  display: block;
+  max-height:50px;
+  width: auto;
+  height: auto;
   position: absolute;
   top: 10px;
   opacity: 1;
@@ -1293,8 +1345,10 @@ body {
 }
 
 #box_image2 {
-  width: 50px;
-  height: 50px;
+  display: block;
+  max-height:50px;
+  width: auto;
+  height: auto;
   position: absolute;
   top: 10px;
   opacity: 1;
@@ -1305,8 +1359,10 @@ body {
 }
 
 #box_image3 {
-  width: 50px;
-  height: 50px;
+  display: block;
+  max-height:50px;
+  width: auto;
+  height: auto;
   position: absolute;
   top: 10px;
   opacity: 1;
@@ -2533,6 +2589,7 @@ body {
 }
 
 #players_alive {
+  opacity:0;
   width: 200px;
   height: 50px;
   left: 87%;

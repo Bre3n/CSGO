@@ -54,7 +54,7 @@ function updatePage(data) {
   var players = data.getPlayers();
   var round = data.round();
   var map = data.map();
-  live_map = map
+  live_map = map;
   var previously = data.previously();
   var bomb = data.bomb();
 

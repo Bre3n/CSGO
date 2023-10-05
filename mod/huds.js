@@ -23,6 +23,7 @@ module.exports = {
       config.DisplayPlayerAvatars = false;
       config.DisplayTeamFlags = false;
       config.DisplayPlayerFlags = false;
+      config.DisplayPlayerAvatarOnMid = false;
       config.LeftImage = "";
       config.LeftImage2 = "";
       config.LeftImage3 = "";
@@ -32,6 +33,13 @@ module.exports = {
 
       config.DisplayScoreboard = true;
       config.DisplayRadar = false;
+      config.DisplayPickedMap = true;
+      config.DisplayMVPs = true;
+      config.DisplayScoreboard = false;
+      config.DisplayAliveCounter = true;
+
+      config.DisplaySponsorsUnderObs = false;
+      config.DisplaySponsorsUnderObsImage = "";
 
       config.LeftPrimary = "";
       config.LeftSecondary = "";
@@ -170,6 +178,7 @@ module.exports = {
         display_team_flags: config.DisplayTeamFlags,
         display_player_flags: config.DisplayPlayerFlags,
         special_event: config.SpecialEvent,
+        displayPlayerAvatarOnMid: config.DisplayPlayerAvatarOnMid,
         left_image: config.LeftImage,
         left_image2: config.LeftImage2,
         left_image3: config.LeftImage3,
@@ -179,6 +188,12 @@ module.exports = {
 
         displayScoreboard: config.DisplayScoreboard,
         displayRadar: config.DisplayRadar,
+        displayPickedMap: config.DisplayPickedMap,
+        DisplayMVPs: config.DisplayMVPs,
+        displayAliveCounter: config.DisplayAliveCounter,
+
+        displaySponsorsUnderObs: config.DisplaySponsorsUnderObs,
+        displaySponsorsUnderObsImage: config.DisplaySponsorsUnderObsImage,
 
         left_primary: config.LeftPrimary,
         left_secondary: config.LeftSecondary,

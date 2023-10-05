@@ -1,4 +1,4 @@
-var io = io("http://" + ip + ":" + port + "/");
+var io = io("http://" + "127.0.0.1" + ":" + port + "/");
 var avatars = {};
 
 function load(cb) {
@@ -262,9 +262,6 @@ $(document).ready(function () {
     io.emit("ready", true);
     io.on("toggleScoreboard", function(data) {
       toggleScoreboard(data);
-    });
-    io.on("toggleRadar", function(data) {
-      toggleRadar(data);
     });
   }
   load(listener);

@@ -39,13 +39,16 @@ socket.element.addEventListener("map", event => {
 		// Show the radar backdrop
 		document.getElementById("radarBackground").src = `/maps/${mapName}/radar.png`
 
+		if (global.config.radar.showLogos) {
+			document.getElementById("radarLogos").src = `/maps/${mapName}/overlay_logos.png`
+		}
 		if (global.config.radar.showBuyzones != "never") {
 			document.getElementById("radarBuyZones").src = `/maps/${mapName}/overlay_buyzones.png`
 		}
 
 		// Set the map as the current map and in the window title
 		global.currentMap = mapName
-		document.title = "Boltobserv - " + mapName
+		document.title = "Radar - " + mapName
 
 		// Hide advisories if you've been disabled in the config
 		if (global.config.radar.hideAdvisories) {

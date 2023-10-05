@@ -10,6 +10,7 @@ html
       disp_player_avatars = #{display_player_avatars},
       disp_team_flags = #{display_team_flags},
       disp_player_flags = #{display_player_flags},
+      _displayPlayerAvatarOnMid = #{displayPlayerAvatarOnMid},
       _left_image = "#{left_image}",
       _left_image2 = "#{left_image2}",
       _left_image3 = "#{left_image3}",
@@ -19,6 +20,11 @@ html
 
       _displayScoreboard = #{displayScoreboard},
       _displayRadar = #{displayRadar},
+      _displayPickedMap = #{displayPickedMap},
+      _displayAliveCounter = #{displayAliveCounter},
+
+      _displaySponsorsUnderObs = #{displaySponsorsUnderObs},
+      _displaySponsorsUnderObsImage = "#{displaySponsorsUnderObsImage}",
 
       _left_primary = "#{left_primary}",
       _left_secondary = "#{left_secondary}",
@@ -31,8 +37,14 @@ html
     script(src=hud)
     link(rel='stylesheet', href=css)
     link(rel='stylesheet', href=anim)
+    link(rel="preconnect" href="https://fonts.googleapis.com")
+    link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
   body
     section
+      #mapPicked 
+        #m_box 
+          #m_text Mirage | Wybrane przez NAVI
+      
       #scoreboard
 
         #s_top
@@ -215,6 +227,8 @@ html
             #pole_2_middle
         #observed
           #obs_lane1
+            #obs_img_mid
+              img#obs_img
           #obs_lane2
             #obs_team
               img#obs_team_img
@@ -268,6 +282,8 @@ html
                 #obs_reserve
                   |/300
             #obs_lane3_right_pole
+          #obs_sponsors 
+            img#obs_sponsors_image
         #players_left
           #box_section
             #box_top

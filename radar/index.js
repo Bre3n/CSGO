@@ -11,7 +11,7 @@ const path = require("path")
 const child_process = require("child_process")
 
 const config = require("./loadconfig")
-//const window = require("./window")
+const window = require("./window")
 
 let hasMap = false
 let connTimeout = false
@@ -21,19 +21,24 @@ let gsi = child_process.fork(`${__dirname}/gsi.js`)
 let http = child_process.fork(`${__dirname}/http.js`)
 let socket = child_process.fork(`${__dirname}/socket.js`)
 
-
 function setActivePage(page, win) {
-	//if (window.win !== false && !config.window.disable) {
-	//	window.win.loadFile(`html/${page}.html`)
-	//}
+	if (window.win !== false && !config.window.disable) {
+		window.win.loadFile(`html/${page}.html`)
+	}
 
 	http.send(page)
 
 	socket.send({
 		type: "pageUpdate"
 	})
-}
 
+	// Make sure no race condition occured
+	setTimeout(() => {
+		socket.send({
+			type: "pageUpdate"
+		})
+	}, 200)
+}
 
 gsi.on("message", (message) => {
 	socket.send(message)
@@ -61,7 +66,6 @@ gsi.on("message", (message) => {
 	}
 })
 
-/*
 if (!config.debug.terminalOnly) {
 	window.gsi = gsi
 	window.http = http
@@ -71,13 +75,12 @@ if (!config.debug.terminalOnly) {
 else {
 	console.info("Not opening window, terminal only mode is enabled")
 }
-*/
 
 function cleanup() {
 	gsi.kill()
 	http.kill()
-	//socket.kill()
-	//window.app.quit()
+	socket.kill()
+	window.app.quit()
 }
 
 for (let signal of ["exit", "SIGINT", "SIGUSR1", "SIGUSR2"]) {
