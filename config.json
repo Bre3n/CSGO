@@ -21,7 +21,7 @@
   "DisplayPickedMap": true,
   "DisplayMVPs": true,
   "DisplayAliveCounter": true,
-  "DisplaySponsorsUnderObs": false,
+  "DisplaySponsorsUnderObs": true,
   "DisplaySponsorsUnderObsImage": "/files/league/sponsors.png",
   "LeftPrimary": "",
   "LeftSecondary": "",

@@ -1,0 +1,23 @@
+doctype html
+html
+    head
+    script(src="/socket.io/socket.io.js")
+    script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+    script.
+        var ip = "#{ip}",
+        port = "#{port}";
+    script(src="/js/panel.js")
+    script(src="/js/functions.js")
+    script(src="/js/teams.js")
+    script(src="/js/players.js")
+    script(src="/js/huds.js")
+    script(src="/js/live.js")
+    script(src="/js/materialize.min.js")
+    link(rel='stylesheet', href='/css/materialize.min.css')
+    link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+
+    body(style="background-color: #1F1F1F")
+        .lContainer
+            .lSpan Counter Strike Observer HUD

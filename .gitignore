@@ -69,6 +69,11 @@ typings/
 !.vscode/extensions.json
 .history
 
-
 # End of https://www.gitignore.io/api/node,visualstudiocode
 CSGO Observer.exe.WebView2
+
+# HUDS 
+public/huds/BlinkEntertainment
+public/huds/BlinkEntertainment/
+public/huds/Experimental
+public/huds/Experimental/

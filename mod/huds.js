@@ -1,7 +1,6 @@
 const db = require("./database.js").huds;
 const fs = require("fs");
 const address = require("ip").address();
-const child_process = require("child_process")
 
 db.loadDatabase();
 module.exports = {
@@ -164,10 +163,7 @@ module.exports = {
       let hud_dir = "/huds/" + hud.hud + "/index.js";
       let css_dir = "/huds/" + hud.hud + "/style.css";
       let anim_dir = "/huds/" + hud.hud + "/animate.css";
-
-      //let radar_index = child_process.fork(`./public/huds/${hud.hud}/radar/index.js`)
-
-      //var worker = new Worker('./public/huds/${hud.hud}/radar/index.js');
+      let css_folder = "/huds/" + hud.hud + "/css/init.css";
 
       return res.render("../public/huds/" + hud.hud + "/template.pug", {
         ip: config.Address,
@@ -202,6 +198,7 @@ module.exports = {
         right_secondary: config.RightSecondary,
         hud: hud_dir,
         css: css_dir,
+        css_folder: css_folder,
         anim: anim_dir,
         hud_path: hud.hud,
         delay: hud.delay > 0 ? hud.delay : 0
@@ -220,5 +217,3 @@ module.exports = {
     return res.render("list.pug");
   }
 };
-
-//s

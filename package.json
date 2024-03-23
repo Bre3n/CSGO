@@ -10,7 +10,6 @@
   "dependencies": {
     "body-parser": "latest",
     "browserify": "^17.0.0",
-    "csgogsi": "^2.5.1",
     "express": "^4.17.2",
     "fs": "latest",
     "http": "latest",
@@ -19,12 +18,12 @@
     "multer": "latest",
     "nedb": "latest",
     "node-csgo-gsi": "0.0.4-alpha.3",
+    "nodemon": "latest",
     "path": "^0.12.7",
     "pug": "latest",
     "request": "latest",
     "socket.io": "^4.4.1",
-    "ws": "^7.2.3",
-    "nodemon": "latest"
+    "ws": "^7.2.3"
   },
   "nodemonConfig": {
     "ext": "js,json,pug,css,png"

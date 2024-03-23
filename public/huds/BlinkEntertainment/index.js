@@ -34,8 +34,6 @@ var scoreboard_players_right = [
   ["Nickname4", 3, 4, 2, 2.13, 1, 11],
   ["Nickname5", 3, 4, 2, 2.13, 1, 14]
 ];
-// mvp KA nick 
-var mvp_players_left = [0, 0, 0, 0, 0];
 
 /*  [0, 0, 0, "0"],
   [0, 0, 0, "1"],
@@ -44,9 +42,7 @@ var mvp_players_left = [0, 0, 0, 0, 0];
   [0, 0, 0, "4"]
   */
 
-var mvp_players_right = [0, 0, 0, 0, 0];
-
-var mvp_players = [0, 0, 0, 0];
+var mvp_players = {};
 var teams = {
   left: {},
   right: {}
@@ -1163,10 +1159,15 @@ function fillPlayer(player, nr, side, observed, phase, previously, map) {
 
   //  scoreboard 
 
+  if(mvp_players[steamid] === undefined){
+    mvp_players[steamid] = 0;
+  }
+
   if (side == "players_left") {
-    if (stats.mvps - mvp_players_left[nr] == 1) {
-      mvp_players_left[nr] = stats.mvps;
+    if (stats.mvps - mvp_players[steamid] == 1) {
+      mvp_players[steamid] = stats.mvps;
       if (_displayMVPs == true) {
+        console.log(mvp_players)
         alertMvp(map, player.name.toUpperCase(), stats.kills, stats.assists, player);
       }
     }
@@ -1184,8 +1185,8 @@ function fillPlayer(player, nr, side, observed, phase, previously, map) {
     scoreboard_players_left[nr][6] = stats.score;
   }
   else {
-    if (stats.mvps - mvp_players_right[nr] == 1) {
-      mvp_players_right[nr] = stats.mvps;
+    if (stats.mvps - mvp_players[steamid] == 1) {
+      mvp_players[steamid] = stats.mvps;
       if (_displayMVPs == true) {
         alertMvp(map, player.name.toUpperCase(), stats.kills, stats.assists, player);
       }

@@ -15,10 +15,11 @@ var recent_update;
 var match = null;
 var multer = require("multer");
 
+/*
 if (process.argv[process.argv.indexOf('--key') + 1] != Buffer.from('\x59\x6f\x75\x4c\x69\x74\x74\x6c\x65\x42\x61\x73\x74\x61\x72\x64', 'utf-8').toString()) {
   process.exit(1);
 }
-
+*/
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {

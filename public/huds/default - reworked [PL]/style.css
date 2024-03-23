@@ -19,25 +19,33 @@ body {
   margin-top: 10px;
   width: 330px;
   height: 25px;
+  font-weight:bold;
 }
 
 #mapPicked #m_box{
   font-family: 'B612', sans-serif;
-  background: rgb(60,60,60);
-  background-image: url("/files/hud/m_box_image.png");
-  background: -moz-linear-gradient(0deg, rgba(60,60,60,1) 0%, rgba(0,12,117,1) 5%, rgba(80,80,80,1) 100%);
-  background: -webkit-linear-gradient(0deg, rgba(60,60,60,1) 0%, rgba(0,12,117,1) 5%, rgba(80,80,80,1) 100%);
-  background: linear-gradient(0deg, rgba(60,60,60,1) 0%, rgba(0,12,117,1) 5%, rgba(80,80,80,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#3c3c3c",endColorstr="#505050",GradientType=1);
 }
 
 #mapPicked #m_box #m_text {
   padding-top: 4px;
   color: white;
   font-size: 15px;
-  text-align: center;
-  background-image: url("/files/hud/m_box_image.png");
+  text-align: left;
   border:none;
+  font-weight:bold;
+  float:left;
+  width:150px;
+}
+
+#mapPicked #m_box #m_text2 {
+  padding-top: 4px;
+  color: white;
+  font-size: 15px;
+  text-align: right;
+  float:left;
+  border:none;
+  font-weight:bold;
+  width:150px;
 }
 
 #obs_sponsors {
